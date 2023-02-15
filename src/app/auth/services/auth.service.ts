@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
-import { Logged } from '../../interfaces/Response.interface';
+
+import { Logged, Registered } from '../../interfaces/Response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,8 @@ export class AuthService {
     }, this.httpOptions);
   }
 
-  register(name: string, username: string, email: string, password: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/auth/register`, {
+  register(name: string, username: string, email: string, password: string): Observable<Registered> {
+    return this.http.post<Registered>(`${this.baseUrl}/auth/register`, {
       name: name,
       username: username,
       email: email,

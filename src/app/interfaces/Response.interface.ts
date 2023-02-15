@@ -33,3 +33,9 @@ export interface Logged {
     success: string;
     token:   string;
 }
+
+export interface Registered {
+    message: string;
+    user:    User;
+    token:   string;
+}

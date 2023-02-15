@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { AuthService } from '../../services/auth.service';
 import { Logged } from '../../../interfaces/Response.interface';
 
@@ -12,13 +14,17 @@ export class LoginComponent {
   usernameEmail: string;
   password: string;
 
-  constructor( private as: AuthService ) { }
+  constructor( private as: AuthService,
+               private router: Router ) { }
   
   submit(): void {
     if( this.usernameEmail === undefined || this.password === undefined ) return;
     if( this.usernameEmail.trim().length === 0 || this.password.trim().length === 0) return;
     
     this.as.login(this.usernameEmail, this.password)
-    .subscribe( (data: Logged) => console.log(data.token) );
+    .subscribe( (data: Logged) => {
+      localStorage.setItem('access_token', data.token);
+      this.router.navigate(['']);
+    });
   }
 }
