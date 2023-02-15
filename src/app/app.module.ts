@@ -4,19 +4,24 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './shared/shared.module';
+import { ChatModule } from './chats/chat.module';
+
 import { AppComponent } from './app.component';
-import { GetUsernamePipe } from '../app/pipes/get-username.pipe';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GetUsernamePipe
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule,
+    ChatModule
   ],
   providers: [],
   bootstrap: [AppComponent]

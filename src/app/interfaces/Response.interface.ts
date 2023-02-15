@@ -1,4 +1,4 @@
-export interface MsgResponse {
+export interface Response {
     data: Data;
 }
 
@@ -16,15 +16,20 @@ export interface Chat {
 }
 
 export interface Message {
-    user_id:    number;
+    id?:         number;
     chat_id:    number;
     message:    string;
-    created_at: Date;
-    updated_at: Date;
+    user:       User;
 }
 
 export interface User {
-    id:         number;
-    username: string;
-    email:    string;
+    id?:                number;
+    username:          string;
+    email?:             string;
+    image?:             string;
+}
+
+export interface Logged {
+    success: string;
+    token:   string;
 }
