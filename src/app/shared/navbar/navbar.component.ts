@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
@@ -14,7 +14,9 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
+  @ViewChild('menuButton') menuButton: ElementRef;
   menuVisible: boolean = false;
+  clickListenerAdded: boolean = false;
   
   user: AuthUser;
 
@@ -22,7 +24,7 @@ export class NavbarComponent {
                private router: Router,
                private as: AuthService ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.http.get<AuthUser>(`${environment.baseUrl}/auth/who`, { headers: environment.headers })
     .subscribe( data => {
       console.log(data);
@@ -30,15 +32,43 @@ export class NavbarComponent {
     });
   }
 
-  toggleMenu(): void {
-    this.menuVisible = !this.menuVisible;
+  ngOnDestroy() {
+    document.removeEventListener('click', this.onDocumentClick.bind(this));
   }
 
   logout() {
-    this.as.logout().subscribe(_ => {
+    this.as.logout().subscribe( _ => {
       localStorage.removeItem('auth-token');
       this.router.navigate(['./auth/login']);
     });
   }
 
+  
+  // Dropdown Menu
+  toggleMenu(): void {
+    this.menuVisible = !this.menuVisible;
+    document.removeEventListener('click', this.onDocumentClick.bind(this));
+    if (this.menuVisible) {
+      document.addEventListener('click', this.onDocumentClick.bind(this));
+      document.querySelector('.menu-icon').classList.add('open');
+    } else {
+      document.querySelector('.menu-icon').classList.remove('open');
+    }
+  }
+
+  onDocumentClick(event: MouseEvent) {
+    const menu = document.getElementById('menu-dropdown');
+    if (this.menuVisible) {
+      if (
+        menu &&
+        !menu.contains(event.target as Node) &&
+        !menu.contains((event.target as Node).parentNode) &&
+        !this.menuButton.nativeElement.contains(event.target)
+      ) {
+        this.menuVisible = false;
+        document.removeEventListener('click', this.onDocumentClick.bind(this));
+        document.querySelector('.menu-icon').classList.remove('open');
+      }
+    }
+  }
 }
