@@ -14,6 +14,8 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
+  menuVisible: boolean = false;
+  
   user: AuthUser;
 
   constructor( private http: HttpClient,
@@ -28,13 +30,15 @@ export class NavbarComponent {
     });
   }
 
+  toggleMenu(): void {
+    this.menuVisible = !this.menuVisible;
+  }
+
   logout() {
     this.as.logout().subscribe(_ => {
       localStorage.removeItem('auth-token');
       this.router.navigate(['./auth/login']);
     });
   }
-
-
 
 }
