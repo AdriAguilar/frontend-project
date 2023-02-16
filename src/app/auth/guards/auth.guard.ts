@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanLoad, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
 @Injectable({
@@ -14,16 +14,19 @@ export class AuthGuard implements CanActivate, CanLoad {
   
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
       console.log('Bloqueado por AuthGuard: canActivate');
-      return false;
+      return true;
   }
   canLoad(
     route: Route,
-    segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
 
-      console.log('Bloqueado por AuthGuard: canLoad');
-      return false;
+      if( !localStorage.getItem('auth-token') ) {
+        return of(false);
+      }
+
+      return true;
   }
 }

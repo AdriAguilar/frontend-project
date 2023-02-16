@@ -13,6 +13,7 @@ export class LoginComponent {
 
   usernameEmail: string;
   password: string;
+  errorMessage: string;
 
   constructor( private as: AuthService,
                private router: Router ) { }
@@ -23,8 +24,7 @@ export class LoginComponent {
     
     this.as.login(this.usernameEmail, this.password)
     .subscribe( (data: Logged) => {
-      localStorage.setItem('auth-token', data.token);
-      this.router.navigate(['']);
+      this.router.navigate(['./']);
     });
   }
 }

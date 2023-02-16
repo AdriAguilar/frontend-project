@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { User } from 'src/app/interfaces/Response.interface';
 import { Router } from '@angular/router';
 import { AuthUser } from '../../interfaces/Response.interface';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,7 +17,8 @@ export class NavbarComponent {
   user: AuthUser;
 
   constructor( private http: HttpClient,
-               private router: Router ) {}
+               private router: Router,
+               private as: AuthService ) {}
 
   ngOnInit(): void {
     this.http.get<AuthUser>(`${environment.baseUrl}/auth/who`, { headers: environment.headers })
@@ -27,9 +29,10 @@ export class NavbarComponent {
   }
 
   logout() {
-    this.http.post
-    localStorage.removeItem('auth-token');
-    this.router.navigate(['./auth/login']);
+    this.as.logout().subscribe(_ => {
+      localStorage.removeItem('auth-token');
+      this.router.navigate(['./auth/login']);
+    });
   }
 
 

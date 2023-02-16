@@ -25,7 +25,7 @@ export class RegisterComponent {
     this.as.register( this.name, this.username, this.email, this.password )
     .subscribe((data: Registered) => {
       localStorage.setItem('auth-token', data.token);
-      this.router.navigate(['']);
+      this.router.navigate(['./']);
     });
   }
 }

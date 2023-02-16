@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/guards/auth.guard';
 import { ErrorPageComponent } from './shared/error-page/error-page.component';
 import { HomeComponent } from './home/home.component';
+import { ChatsComponent } from './chats/pages/chats/chats.component';
 
 const routes: Routes = [
   {
@@ -11,8 +12,9 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule ),
   },
   {
-    path: 'chat',
-    loadComponent: () => import('./chats/chat.module').then( m => m.ChatModule ),
+    path: 'c',
+    loadChildren: () => import('./chats/chats.module').then( m => m.ChatsModule ),
+    canLoad: [ AuthGuard ],
   },
   {
     path: '',
