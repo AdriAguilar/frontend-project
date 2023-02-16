@@ -23,7 +23,7 @@ export class LoginComponent {
     
     this.as.login(this.usernameEmail, this.password)
     .subscribe( (data: Logged) => {
-      localStorage.setItem('access_token', data.token);
+      localStorage.setItem('auth-token', data.token);
       this.router.navigate(['']);
     });
   }

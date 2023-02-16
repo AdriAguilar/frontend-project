@@ -1,4 +1,11 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { environment } from 'src/environments/environment';
+
+import { User } from 'src/app/interfaces/Response.interface';
+import { Router } from '@angular/router';
+import { AuthUser } from '../../interfaces/Response.interface';
 
 @Component({
   selector: 'app-navbar',
@@ -6,15 +13,25 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  username: string;
+  user: AuthUser;
 
-  constructor() {}
+  constructor( private http: HttpClient,
+               private router: Router ) {}
 
   ngOnInit(): void {
-    // this.username = this.authService.getUsername();
+    this.http.get<AuthUser>(`${environment.baseUrl}/auth/who`, { headers: environment.headers })
+    .subscribe( data => {
+      console.log(data);
+      this.user = data
+    });
   }
 
   logout() {
-    // this.authService.logout();
+    this.http.post
+    localStorage.removeItem('auth-token');
+    this.router.navigate(['./auth/login']);
   }
+
+
+
 }

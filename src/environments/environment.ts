@@ -9,4 +9,7 @@ export const environment = {
           'Accept': '*/*'
         })
     },
+    headers: new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('auth-token')}`
+    })
 }
