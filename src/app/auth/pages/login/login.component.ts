@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
@@ -9,25 +9,39 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
-
-  usernameEmail: string;
-  password: string;
-  errorMessage: string;
+export class LoginComponent implements OnInit {
+  myForm: FormGroup;
 
   constructor( private as: AuthService,
-               private router: Router ) { }
+               private router: Router,
+               private fb: FormBuilder ) { }
+  
+  ngOnInit(): void {
+    this.myForm =  this.createForm();
+  }
+
+  private createForm(): FormGroup {
+    return this.fb.group({
+      username: [ , [ Validators.required, Validators.minLength(3)]],
+      password: [ , [ Validators.required, Validators.minLength(6)]]
+    })
+  }
+
+  notValid( field: string ) {
+    return this.myForm.controls[ field ].errors
+        && this.myForm.controls[ field ].touched;
+  }
   
   submit(): void {
-    if( this.usernameEmail === undefined || this.password === undefined ) return;
-    if( this.usernameEmail.trim().length === 0 || this.password.trim().length === 0) return;
-    
-    this.as.login(this.usernameEmail, this.password).subscribe( 
-      _ => {
-      this.router.navigate(['./']);
-      },
-      ( data: HttpErrorResponse ) => {
-        console.error(data.error.error);
-      });
+    if( this.myForm.invalid ) {
+      this.myForm.markAllAsTouched();
+      return;
+    }
+    console.log(this.myForm.value);
+
+    this.as.login( this.myForm.value )
+    .subscribe( _ => {
+        this.router.navigate(['./']);
+    });
   }
 }
