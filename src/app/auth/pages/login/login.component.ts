@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
-import { Logged } from '../../../interfaces/Response.interface';
 
 @Component({
   selector: 'app-login',
@@ -22,9 +22,12 @@ export class LoginComponent {
     if( this.usernameEmail === undefined || this.password === undefined ) return;
     if( this.usernameEmail.trim().length === 0 || this.password.trim().length === 0) return;
     
-    this.as.login(this.usernameEmail, this.password)
-    .subscribe( (data: Logged) => {
+    this.as.login(this.usernameEmail, this.password).subscribe( 
+      _ => {
       this.router.navigate(['./']);
-    });
+      },
+      ( data: HttpErrorResponse ) => {
+        console.error(data.error.error);
+      });
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, map, Observable, of, switchMap, tap } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
@@ -10,24 +10,25 @@ import { Logged, Registered, User } from '../../interfaces/Response.interface';
   providedIn: 'root'
 })
 export class AuthService {
-  private userAuthSubject: BehaviorSubject<User>;
-  public userAuth: Observable<User>;
+  private userAuthSubject = new BehaviorSubject<User>(null);
+  userAuth$ = this.userAuthSubject.asObservable();
+  token: string = '';
   
   private baseUrl: string = environment.baseUrl;
   private httpOptions = environment.httpOptions;
-  private headers = environment.headers;
+  private headers = new HttpHeaders({
+    Authorization: `Bearer ${this.token}`
+  });
 
-  constructor( private http: HttpClient ) {
-    this.userAuthSubject = new BehaviorSubject<User>(null);
-    this.userAuth = this.userAuthSubject.asObservable();
-  }
+  constructor( private http: HttpClient ) { }
 
   get userAuthValue(): User {
-    return this.userAuthSubject.value;
+    return this.userAuthSubject.getValue()
   }
 
-  who(): Observable<User> {
-    return this.http.post<User>(`${this.baseUrl}/auth/who`, this.httpOptions, {
+  getUserInfo(): Observable<User> {
+    console.log(this.token);
+    return this.http.get<User>(`${this.baseUrl}/auth/who`, {
       headers: this.headers
     });
   }
@@ -36,18 +37,11 @@ export class AuthService {
     return this.http.post<Logged>(`${this.baseUrl}/auth/login`, {
       username: usernameEmail,
       password: password
-    }, this.httpOptions)
-    .pipe(
+    }, this.httpOptions).pipe(
       tap( (response: Logged) => {
-        localStorage.setItem('auth-token', response.token);
-      }),
-      switchMap( (response: Logged) => {
-        return this.who().pipe(
-          map((user: User) => {
-            this.userAuthSubject.next(user);
-            return response;
-          })
-        );
+        this.token = response.token;
+        localStorage.setItem('auth-token', this.token);
+        this.userAuthSubject.next( response.user );
       })
     );
   }
@@ -64,6 +58,10 @@ export class AuthService {
   logout() {
     return this.http.post<any>(`${this.baseUrl}/auth/logout`, this.httpOptions, {
       headers: this.headers
-    });
+    }).pipe(
+      tap( _ => {
+        this.userAuthSubject.next( null );
+      })
+    );
   }
 }

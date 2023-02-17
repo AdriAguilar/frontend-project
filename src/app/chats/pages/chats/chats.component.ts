@@ -16,8 +16,8 @@ export class ChatsComponent {
   constructor( private http: HttpClient ) { }
 
   ngOnInit(): void {
-    this.http.get<User[]>(`${environment.baseUrl}/users`, { headers: environment.headers })
-    .subscribe(data => this.users = data);
+    // this.http.get<User[]>(`${environment.baseUrl}/users`, { headers: environment.headers })
+    // .subscribe(data => this.users = data);
   }
   
   openChat(user: User): void {

@@ -31,6 +31,7 @@ export interface User {
 
 export interface Logged {
     success: string;
+    user:    User;
     token:   string;
 }
 

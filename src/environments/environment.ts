@@ -8,8 +8,5 @@ export const environment = {
           'Content-Type': 'application/json',
           'Accept': '*/*'
         })
-    },
-    headers: new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('auth-token')}`
-    })
+    }
 }

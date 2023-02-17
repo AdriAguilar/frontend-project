@@ -7,6 +7,7 @@ import { User } from 'src/app/interfaces/Response.interface';
 import { Router } from '@angular/router';
 import { AuthUser } from '../../interfaces/Response.interface';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -18,18 +19,13 @@ export class NavbarComponent {
   menuVisible: boolean = false;
   clickListenerAdded: boolean = false;
   
-  user: AuthUser;
+  user$: Observable<User>;
 
-  constructor( private http: HttpClient,
-               private router: Router,
+  constructor( private router: Router,
                private as: AuthService ) {}
 
   ngOnInit(): void {    
-    this.http.get<AuthUser>(`${environment.baseUrl}/auth/who`, { headers: environment.headers })
-    .subscribe( data => {
-      console.log(data);
-      this.user = data
-    });
+    this.user$ = this.as.userAuth$;
   }
 
   ngOnDestroy() {

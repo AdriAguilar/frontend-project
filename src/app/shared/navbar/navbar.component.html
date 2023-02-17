@@ -8,7 +8,7 @@
       <div class="text-gray-700">
 
         <!-- Autenticado -->
-        <div *ngIf="user; else Auth">
+        <div *ngIf="user$ | async as user; else Auth">
 
           <!-- Botón Dropdown -->
           <div class="flex">
