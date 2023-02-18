@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
 import { Registered } from '../../../interfaces/Response.interface';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -10,22 +11,37 @@ import { Registered } from '../../../interfaces/Response.interface';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-  name: string;
-  username: string;
-  email: string;
-  password: string;
+  myForm: FormGroup;
 
   constructor( private as: AuthService,
-               private router: Router ) { }
+               private router: Router,
+               private fb: FormBuilder ) { }
+  
+  ngOnInit(): void {
+    this.myForm =  this.createForm();
+  }
 
+  private createForm(): FormGroup {
+    return this.fb.group({
+      name: [ , [ Validators.required, Validators.minLength(3)]],
+      username: [ , [ Validators.required, Validators.minLength(3)]],
+      email: [ , [ Validators.required, Validators.email]],
+      password: [ , [ Validators.required, Validators.minLength(6)]]
+    })
+  }
+
+  notValid( field: string ) {
+    return this.myForm.controls[ field ].errors
+        && this.myForm.controls[ field ].touched;
+  }
+  
   submit() {
-    if( this.name === undefined || this.username === undefined || this.email === undefined || this.password === undefined ) return;
-    if( this.name.trim().length === 0 || this.username.trim().length === 0 || this.email.trim().length === 0 || this.password.trim().length === 0 ) return;
-
-    this.as.register( this.name, this.username, this.email, this.password )
-    .subscribe((data: Registered) => {
-      localStorage.setItem('auth-token', data.token);
-      this.router.navigate(['./']);
+    this.as.register( this.myForm.value ).subscribe(
+    _ => {
+      this.router.navigate(['']);
+    },
+    error => {
+      this.as.handleError(error);
     });
   }
 }

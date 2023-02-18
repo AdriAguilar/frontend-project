@@ -12,7 +12,7 @@
                formControlName="username"
                class="w-full rounded-md px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
         <span class="text-xs text-red-500"  *ngIf="notValid('username')">
-          El username o email debe de tener al menos 3 caractéres
+          El username o email debe tener al menos 3 caractéres
         </span>
       </div>
       <div>
@@ -24,7 +24,7 @@
                formControlName="password"
                class="w-full rounded-md px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
         <span class="text-xs text-red-500" *ngIf="notValid('password')">
-          La contraseña debe de tener al menos 6 caractéres
+          La contraseña debe tener al menos 6 caractéres
         </span>
       </div>
       <button type="submit" class="w-full bg-orange-600 text-white rounded-md py-2 font-medium hover:bg-orange-700">Iniciar sesión</button>

@@ -37,11 +37,13 @@ export class LoginComponent implements OnInit {
       this.myForm.markAllAsTouched();
       return;
     }
-    console.log(this.myForm.value);
 
-    this.as.login( this.myForm.value )
-    .subscribe( _ => {
-        this.router.navigate(['./']);
+    this.as.login( this.myForm.value ).subscribe( 
+    _ => {
+      this.router.navigate(['']);
+    },
+    error => {
+      this.as.handleError(error);
     });
   }
 }
