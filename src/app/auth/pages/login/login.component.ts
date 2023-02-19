@@ -1,30 +1,49 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
-import { Logged } from '../../../interfaces/Response.interface';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
-
-  usernameEmail: string;
-  password: string;
+export class LoginComponent implements OnInit {
+  myForm: FormGroup;
 
   constructor( private as: AuthService,
-               private router: Router ) { }
+               private router: Router,
+               private fb: FormBuilder ) { }
+  
+  ngOnInit(): void {
+    this.myForm =  this.createForm();
+  }
+
+  private createForm(): FormGroup {
+    return this.fb.group({
+      username: [ , [ Validators.required, Validators.minLength(3)]],
+      password: [ , [ Validators.required, Validators.minLength(6)]]
+    })
+  }
+
+  notValid( field: string ) {
+    return this.myForm.controls[ field ].errors
+        && this.myForm.controls[ field ].touched;
+  }
   
   submit(): void {
-    if( this.usernameEmail === undefined || this.password === undefined ) return;
-    if( this.usernameEmail.trim().length === 0 || this.password.trim().length === 0) return;
-    
-    this.as.login(this.usernameEmail, this.password)
-    .subscribe( (data: Logged) => {
-      localStorage.setItem('auth-token', data.token);
+    if( this.myForm.invalid ) {
+      this.myForm.markAllAsTouched();
+      return;
+    }
+
+    this.as.login( this.myForm.value ).subscribe( 
+    _ => {
       this.router.navigate(['']);
+    },
+    error => {
+      this.as.handleError(error);
     });
   }
 }

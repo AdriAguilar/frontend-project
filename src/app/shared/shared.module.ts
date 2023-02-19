@@ -1,23 +1,32 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
-import { NavbarComponent } from './navbar/navbar.component';
+import { MaterialModule } from '../material/material.module';
+
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { LoaderComponent } from './loader/loader.component';
 
 
 
 @NgModule({
   declarations: [
+    ErrorPageComponent,
+    LoaderComponent,
     NavbarComponent,
-    ErrorPageComponent
   ],
   exports: [
-    NavbarComponent
+    ErrorPageComponent,
+    LoaderComponent,
+    NavbarComponent,
   ],
   imports: [
     CommonModule,
-    RouterModule
+    MaterialModule,
+    HttpClientModule,
+    RouterModule,
   ]
 })
 export class SharedModule { }
