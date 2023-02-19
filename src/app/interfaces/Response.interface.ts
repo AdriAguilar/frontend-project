@@ -22,31 +22,22 @@ export interface Message {
     user:       User;
 }
 
-export interface User {
-    id?:                number;
-    username:          string;
-    email?:             string;
-    image?:             string;
-}
-
 export interface Logged {
-    success: string;
     user:    User;
     token:   string;
 }
 
 export interface Registered {
-    message: string;
     user:    User;
     token:   string;
 }
 
-export interface AuthUser {
+export interface User {
     id?:                number;
     role_id?:           number;
-    name:              string;
+    name?:              string;
     username:          string;
-    email:             string;
+    email?:             string;
     email_verified_at?: Date;
     image?:             string;
     created_at?:        Date;

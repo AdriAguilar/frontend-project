@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
+import { MaterialModule } from '../material/material.module';
+
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { MaterialModule } from '../material/material.module';
 import { LoaderComponent } from './loader/loader.component';
 
 
@@ -13,11 +14,13 @@ import { LoaderComponent } from './loader/loader.component';
 @NgModule({
   declarations: [
     ErrorPageComponent,
+    LoaderComponent,
     NavbarComponent,
-    LoaderComponent
   ],
   exports: [
-    NavbarComponent
+    ErrorPageComponent,
+    LoaderComponent,
+    NavbarComponent,
   ],
   imports: [
     CommonModule,

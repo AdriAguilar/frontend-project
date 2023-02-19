@@ -1,13 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
-import { environment } from 'src/environments/environment';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, map, filter, shareReplay } from 'rxjs';
 
 import { User } from 'src/app/interfaces/Response.interface';
-import { Router } from '@angular/router';
-import { AuthUser } from '../../interfaces/Response.interface';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -22,19 +18,18 @@ export class NavbarComponent {
   user$: Observable<User>;
 
   constructor( private router: Router,
-               private as: AuthService ) {}
+               private as: AuthService ) { }
 
-  ngOnInit(): void {    
-    this.user$ = this.as.userAuth$;
+  ngOnInit(): void {
+    this.user$ = this.as.getUser(this.as.getToken());
   }
 
   ngOnDestroy() {
     document.removeEventListener('click', this.onDocumentClick.bind(this));
   }
 
-  logout() {
-    this.as.logout().subscribe( _ => {
-      localStorage.removeItem('auth-token');
+  logout(): void {
+    this.as.logout().subscribe( () => {
       this.router.navigate(['./auth/login']);
     });
   }

@@ -1,4 +1,4 @@
-<nav class="bg-gray-100 py-4 fixed top-0 w-full z-50">
+<nav class="bg-gray-100 bg-opacity-80 backdrop-blur py-4 fixed top-0 w-full z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
       <!-- Logo -->
       <div class="text-lg font-semibold text-gray-800">
@@ -8,7 +8,7 @@
       <div class="text-gray-700">
 
         <!-- Autenticado -->
-        <div *ngIf="user$ | async as user; else Auth">
+        <div *ngIf="(user$ | async) as user; else Auth">
 
           <!-- Botón Dropdown -->
           <div class="flex">
@@ -27,11 +27,11 @@
           <!-- Menu Dropdown -->
           <div id="menu-dropdown" class="relative" *ngIf="menuVisible">
             <div class="absolute right-0 z-50 mt-2 py-2 w-48 bg-white rounded-md shadow-lg">
-              <a class="block px-4 py-2 text-gray-800 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-gray-900 hover:font-medium" routerLink=",/404" routerLinkActive="active" role="button">Perfil</a>
-              <a class="block px-4 py-2 text-gray-800 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-gray-900 hover:font-medium" routerLink="./c" routerLinkActive="active" role="button">Chats</a>
+              <a class="block px-4 py-2 text-gray-800 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-gray-900 hover:font-medium" routerLink="auth/profile" routerLinkActive="active" role="button">Perfil</a>
+              <a class="block px-4 py-2 text-gray-800 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-gray-900 hover:font-medium" routerLink="c" routerLinkActive="active" role="button">Chats</a>
               <a class="block px-4 py-2 text-gray-800 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-gray-900 hover:font-medium" role="button">Modo oscuro/claro</a>
               <div class="h-px w-11/12 mx-auto my-2 bg-gray-200"></div>
-              <a class="block px-4 py-2 font-medium text-orange-600 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-orange-700" routerLink="./auth/logout" routerLinkActive="active" role="button">Logout</a>
+              <a class="block px-4 py-2 font-medium text-orange-600 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-orange-700" (click)="logout()" routerLinkActive="active" role="button">Logout</a>
             </div>
           </div>
 

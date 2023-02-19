@@ -1,9 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
-import { environment } from 'src/environments/environment';
-
 import { User } from 'src/app/interfaces/Response.interface';
+import { UsersService } from '../../data/users.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-chats',
@@ -11,16 +10,16 @@ import { User } from 'src/app/interfaces/Response.interface';
   styleUrls: ['./chats.component.scss']
 })
 export class ChatsComponent {
-  users: User[] = [];
+  users$: Observable<User[]>;
 
-  constructor( private http: HttpClient ) { }
+  constructor( private us: UsersService ) { }
 
   ngOnInit(): void {
-    // this.http.get<User[]>(`${environment.baseUrl}/users`, { headers: environment.headers })
-    // .subscribe(data => this.users = data);
+    this.us.init();
+    this.users$ = this.us.users$;
   }
   
-  openChat(user: User): void {
-
+  openChat( user: User): void {
+    
   }
 }

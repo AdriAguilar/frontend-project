@@ -2,7 +2,7 @@
 <div class="max-w-4xl mx-auto mt-24 sm:max-w-lg">
     <h5 class="text-lg font-medium mb-4">Lista de Usuarios:</h5>
     <ul>
-      <li *ngFor="let user of users" class="flex items-center justify-between border-b py-2">
+      <li *ngFor="let user of (users$ | async)" class="flex items-center justify-between border-b py-2">
         <div class="flex items-center">
           <img *ngIf="user.image; else default" src="" class="rounded-full w-12 h-12 object-cover mr-4">
           <ng-template #default>

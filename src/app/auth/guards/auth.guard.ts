@@ -12,21 +12,18 @@ export class AuthGuard implements CanActivate, CanLoad {
     private router: Router,
     private authService: AuthService) { }
   
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-
-      console.log('Bloqueado por AuthGuard: canActivate');
-      return true;
-  }
-  canLoad(
-    route: Route,
-    segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
-
-      if( !localStorage.getItem('auth-token') ) {
-        return of(false);
+  canActivate(): boolean {
+      if (this.authService.isLoggedIn()) {
+        return true;
       }
-
+      this.router.navigate(['/auth/login']);
+      return false;
+  }
+  
+  canLoad(): boolean {
+      if( !this.authService.isLoggedIn() ) {
+        return false;
+      }
       return true;
   }
 }
