@@ -3,6 +3,7 @@ import { io } from 'socket.io-client';
 
 import { ChatService } from '../../services/chat.service';
 import { Message, User } from '../../../interfaces/Response.interface';
+import { SocketService } from '../../services/socket.service';
 
 @Component({
   selector: 'app-chat',
@@ -10,15 +11,17 @@ import { Message, User } from '../../../interfaces/Response.interface';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
-  private socket: any;
   chatId: number = 1;
   msg: string = '';
   messages: Message[] = [];
 
-  constructor( private cs: ChatService ) { }
+  constructor( private ss: SocketService,
+               private cs: ChatService ) { }
   
   ngOnInit(): void {
-
+    this.ss.joinChat(this.chatId);
+    this.cs.getMessages(this.chatId).subscribe(console.log);
+    this.messages = this.ss.messages;
   }
 
   lastMessage(message: Message): Message {
@@ -31,10 +34,7 @@ export class ChatComponent implements OnInit {
   }
 
   submit(): void {
-    if( this.msg.trim() === '' ) return;
-    
-    // this.cs.sendMessage(this.msg, this.username, this.chatId).subscribe(
-    //   _ => this.msg = ''
-    // );
+    // if( this.msg.trim() === '' ) return;
+    // this.ss.sendMessage(this.msg, this.chatId)
   }
 }

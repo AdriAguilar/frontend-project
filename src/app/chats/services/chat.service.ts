@@ -2,9 +2,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Observable, map } from 'rxjs';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 import { environment } from 'src/environments/environment';
-import { Response, User } from '../../interfaces/Response.interface';
+import { Response, Message } from '../../interfaces/Response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,20 +14,27 @@ export class ChatService {
 
   private httpOptions = environment.httpOptions;
   private baseUrl: string = environment.baseUrl;
-  private wsUrl: string = environment.wsUrl;
 
-  constructor( private http: HttpClient ) { }
+  constructor( private http: HttpClient,
+               private as: AuthService ) { }
 
-  sendMessage(message: string, username: string, chatId: number) {
+  sendMessage(message: string, chatId: number) {
     return this.http.post(`${this.baseUrl}/messages`, {
-      username: username,
       message: message,
       chat: chatId,
     }, this.httpOptions);
   }
 
-  getMessages(chatId: number): Observable<Response> {
-    return this.http.get<Response>(`${this.wsUrl}/chat/${chatId}`, this.httpOptions);
+  getMessages(chatId: number): Observable<Message[]> {
+    return this.http.get<Response>(`${this.baseUrl}/chats/${chatId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': '*/*',
+        'Authorization': `Bearer ${this.as.getToken()}`
+      }
+    }).pipe(
+      map( resp => resp.data.messages)
+    );
   }
   
 }

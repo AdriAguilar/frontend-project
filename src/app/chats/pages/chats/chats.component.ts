@@ -4,6 +4,7 @@ import { map, Observable } from 'rxjs';
 
 import { UsersService } from '../../data/users.service';
 import { User } from 'src/app/interfaces/Response.interface';
+import { SocketService } from '../../services/socket.service';
 
 @Component({
   selector: 'app-chats',
