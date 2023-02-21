@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs';
-
-import Pusher from 'pusher-js';
+import { io } from 'socket.io-client';
 
 import { ChatService } from '../../services/chat.service';
 import { Message, User } from '../../../interfaces/Response.interface';
@@ -12,7 +10,7 @@ import { Message, User } from '../../../interfaces/Response.interface';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
-  username: string = 'username';
+  private socket: any;
   chatId: number = 1;
   msg: string = '';
   messages: Message[] = [];
@@ -20,44 +18,23 @@ export class ChatComponent implements OnInit {
   constructor( private cs: ChatService ) { }
   
   ngOnInit(): void {
-    Pusher.logToConsole = true;
-    
-    const pusher = new Pusher('946df37c47de4150e3ba', {
-      cluster: 'eu'
-    });
-  
-    const channel = pusher.subscribe(`chat.${this.chatId}`);
-  
-    channel.bind('message-sent', (data: string) => {
-      // TODO: Obtener el id del usuario que envia el mensaje y ya estaría listo el chat.
-      let user: User = {
-        username: this.username,
-      }
-      let msg: Message = {
-        user: user,
-        chat_id: this.chatId,
-        message: data,
-      }
-      this.messages.push(msg);
-    });
-    
-    this.cs.getMessages(this.chatId)
-    .pipe(
-      map(response => response.data.messages)
-    )
-    .subscribe(
-      (messages) => {
-        console.log(messages);
-        this.messages = messages;
-      }
-    );
+
+  }
+
+  lastMessage(message: Message): Message {
+    if (this.messages.length > 0) {
+      const sortedMessages = this.messages.sort((a, b) => b.created_at.getTime() - a.created_at.getTime());
+      return sortedMessages[0];
+    } else {
+      return null;
+    }
   }
 
   submit(): void {
     if( this.msg.trim() === '' ) return;
     
-    this.cs.sendMessage(this.msg, this.username, this.chatId).subscribe(
-      _ => this.msg = ''
-    );
+    // this.cs.sendMessage(this.msg, this.username, this.chatId).subscribe(
+    //   _ => this.msg = ''
+    // );
   }
 }

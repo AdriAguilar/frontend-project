@@ -13,6 +13,7 @@ export class ChatService {
 
   private httpOptions = environment.httpOptions;
   private baseUrl: string = environment.baseUrl;
+  private wsUrl: string = environment.wsUrl;
 
   constructor( private http: HttpClient ) { }
 
@@ -25,7 +26,7 @@ export class ChatService {
   }
 
   getMessages(chatId: number): Observable<Response> {
-    return this.http.get<Response>(`${this.baseUrl}/chats/${chatId}`, this.httpOptions);
+    return this.http.get<Response>(`${this.wsUrl}/chat/${chatId}`, this.httpOptions);
   }
   
 }
