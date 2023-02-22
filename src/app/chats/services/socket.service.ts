@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { concatMap, Observable } from 'rxjs';
 import { io } from "socket.io-client";
 import { Message } from '../interfaces/Chat.interface';
 import { ChatService } from './chat.service';
@@ -19,23 +19,20 @@ export class SocketService {
   }
 
   sendMessage(message: string, chatId: number) {
-    this.cs.sendMessage(message, chatId).subscribe( () => {
-      this.socket.emit('sendMessage', chatId, message);
-    });
+    return this.cs.sendMessage(message, chatId).pipe(
+      concatMap(async () => this.socket.emit('sendMessage', chatId, message))
+    );
   }
 
   listenForMessages(chatId: number): Observable<any> {
     return new Observable((observer) => {
-      console.log('listening for messages...');
       this.socket.on('receiveMessage', (message: any) => {
-        if (message.chat === chatId) {
-          observer.next(message);
-        }
+        observer.next(message);
       });
     });
   }
 
   joinChat(chatId: number) {
-    this.socket.emit( 'joinChat', chatId );
+    this.socket.emit( 'join', chatId );
   }
 }

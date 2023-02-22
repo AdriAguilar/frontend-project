@@ -24,13 +24,13 @@ export class ChatComponent implements OnInit {
     this.route.params.subscribe( params => this.chatId = params['id'] );
     this.ss.joinChat(this.chatId);
     this.cs.getMessages(this.chatId).subscribe( msgs => this.messages = msgs );
-    this.ss.listenForMessages(this.chatId).subscribe( msg => {
-      console.log(msg);
-    });
+    this.ss.listenForMessages(this.chatId).subscribe( msg => this.messages.push(msg) );
   }
 
   submit(): void {
     if( this.msg.trim() === '' ) return;
-    this.ss.sendMessage(this.msg, this.chatId);
+    this.ss.sendMessage(this.msg, this.chatId).subscribe( () => {
+      this.msg = '';
+    });
   }
 }
