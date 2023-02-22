@@ -5,20 +5,16 @@
         <div class="flex justify-end">
           <div class="bg-gray-200 rounded-lg px-4 py-2">
             <p class="text-sm text-gray-700">{{ message.message }}</p>
-            <p class="text-xs text-gray-500">{{ message.created_at| date: 'shortTime' }}</p>
+            <p class="text-xs text-gray-500">{{ message.created_at| date: 'HH:mm':'GMT+1' }}</p>
           </div>
-        </div>
-        <!-- Este separador solo se muestra si hay más mensajes después del actual -->
-        <div class="flex justify-center" *ngIf="!lastMessage(message)">
-          <div class="w-3 h-3 bg-gray-500 rounded-full mt-2"></div>
         </div>
       </ng-container>
     </div>
   </div>
   <div class="p-12 pt-4 bg-white">
-    <form class="flex rounded-full border border-gray-300" (submit)="submit()">
-      <input class="w-full py-2 px-4" type="text" placeholder="Escribe un mensaje...">
-      <button class="bg-blue-500 text-white font-medium py-2 px-4 rounded-full ml-2" type="submit">Enviar</button>
+    <form class="flex rounded-full border border-gray-300" (submit)="submit()" autocomplete="off">
+      <input class="w-full py-2 px-4" name="msg" type="text" placeholder="Escribe un mensaje..." [(ngModel)]="msg">
+      <button class="bg-blue-500 text-white font-medium py-2 px-4 rounded-full ml-2">Enviar</button>
     </form>
   </div>
 </div>

@@ -3,11 +3,20 @@ export interface Response {
 }
 
 export interface Data {
-    chat:     Chat[];
+    chat:       Chat;
+    users:     User[];
     messages: Message[];
 }
 
 export interface Chat {
+    id:         number;
+    user_1:     number;
+    user_2:     number;
+    created_at?: Date;
+    updated_at?: Date;
+}
+
+export interface User {
     id:                number;
     role_id:           number;
     name:              string;
@@ -26,5 +35,5 @@ export interface Message {
     message:    string;
     created_at: Date;
     updated_at: Date;
-    user:       Chat;
+    user:       User;
 }

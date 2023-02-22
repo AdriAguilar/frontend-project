@@ -5,14 +5,12 @@ import { Observable, map } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 import { environment } from 'src/environments/environment';
-import { Response, Message } from '../../interfaces/Response.interface';
+import { Response, Message, User } from '../interfaces/Chat.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
-
-  private httpOptions = environment.httpOptions;
   private baseUrl: string = environment.baseUrl;
 
   constructor( private http: HttpClient,
@@ -22,7 +20,13 @@ export class ChatService {
     return this.http.post(`${this.baseUrl}/messages`, {
       message: message,
       chat: chatId,
-    }, this.httpOptions);
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': '*/*',
+        'Authorization': `Bearer ${this.as.getToken()}`
+      }
+    });
   }
 
   getMessages(chatId: number): Observable<Message[]> {
@@ -34,6 +38,18 @@ export class ChatService {
       }
     }).pipe(
       map( resp => resp.data.messages)
+    );
+  }
+
+  getUsers(chatId: number): Observable<User[]> {
+    return this.http.get<Response>(`${this.baseUrl}/chats/${chatId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': '*/*',
+        'Authorization': `Bearer ${this.as.getToken()}`
+      }
+    }).pipe(
+      map( resp => resp.data.users)
     );
   }
   

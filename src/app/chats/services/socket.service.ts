@@ -13,21 +13,24 @@ export class SocketService {
 
   constructor( private cs: ChatService ) {
     this.socket = io('http://localhost:3000');
-    this.socket.on('message', (messages: Message[]) => {
-      this.messages = messages;
-    })
-  }
-
-  sendMessage(message: string, chatId: number) {
-    this.cs.sendMessage(message, chatId).subscribe( data => {
-      this.socket.emit('sendMessage', data); 
+    this.socket.on("connect_error", (err) => {
+      console.log(`connect_error due to ${err.message}`);
     });
   }
 
-  onMessageReceived() {
+  sendMessage(message: string, chatId: number) {
+    this.cs.sendMessage(message, chatId).subscribe( () => {
+      this.socket.emit('sendMessage', chatId, message);
+    });
+  }
+
+  listenForMessages(chatId: number): Observable<any> {
     return new Observable((observer) => {
-      this.socket.on('messageReceived', (message) => {
-        observer.next(message);
+      console.log('listening for messages...');
+      this.socket.on('receiveMessage', (message: any) => {
+        if (message.chat === chatId) {
+          observer.next(message);
+        }
       });
     });
   }
