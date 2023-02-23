@@ -14,7 +14,7 @@ const routes: Routes = [
       },
       {
         path: ':id',
-        loadComponent: () => import('./components/chat/chat.component').then(c => c.ChatComponent),
+        component: ChatComponent,
       }
     ]
   }

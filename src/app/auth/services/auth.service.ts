@@ -64,7 +64,7 @@ export class AuthService {
     return this.getToken() !== null;
   }
 
-  getUser(token: string): Observable<User> {
+  getUser(token: string = this.getToken()): Observable<User> {
     return this.http.get<User>(`${this.baseUrl}/auth/who`, {
       headers: {
         'Cache-Control': 'max-age=600, public',
