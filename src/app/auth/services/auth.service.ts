@@ -18,6 +18,12 @@ export class AuthService {
   private httpOptions = environment.httpOptions;
 
   constructor( private http: HttpClient ) {
+    const token = localStorage.getItem('auth-token');
+    if (token) {
+      this.getUser(token).subscribe(user => {
+        this.userSubject.next(user);
+      });
+    }
     this.userSubject = new BehaviorSubject<User>(null);
     this.user$ = this.userSubject.asObservable();
   }
