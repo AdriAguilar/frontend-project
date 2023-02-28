@@ -8,10 +8,13 @@ import { GamesResponse, Result } from '../interfaces/Games.interface';
   providedIn: 'root'
 })
 export class GamesService {
-  url = "https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199e&dates=2019-09-01,2019-09-30&platforms=18,1,7";
 
-  constructor(private http: HttpClient 
-    
+  url = "https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199e&dates=2019-09-01,2019-09-30&platforms=18,1,7";
+  urlSearch = "https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199e&search={term}&page_size=5";
+  urlPag = "https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199e&ordering=-released";
+
+  constructor(private http: HttpClient
+
     ) {}
 
     httpOptions = {
@@ -19,10 +22,21 @@ export class GamesService {
     };
 
     getAllGames(): Observable<Result[]> {
-      return this.http.get<GamesResponse>(this.url).pipe(
+      return this.http.get<GamesResponse>(this.urlPag).pipe(
         map((response) => response.results )
       );
-        ; 
-        
+    }
+
+    onSearchGames(term: string): Observable<Result[]> {
+      if (!term.trim()) {
+        return of([]);
+      }
+      return this.http.get(`${this.urlSearch.replace('{term}', term)}`).pipe(
+        map((data: any) => {
+          console.log(data.results);
+          return data.results;
+        })
+      );
     }
 }
+

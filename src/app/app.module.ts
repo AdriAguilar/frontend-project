@@ -9,12 +9,14 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GamesListComponent } from './games/pages/games-list/games-list.component';
+import { SearcherComponent } from './games/searcher/searcher.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     GamesListComponent,
+    SearcherComponent,
   ],
   imports: [
     BrowserModule,
