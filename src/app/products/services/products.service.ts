@@ -21,5 +21,13 @@ export class ProductsService {
       }
     });
   }
+
+  createProduct( data: FormData  ) {
+    return this.http.post<Product>(`${this.baseUrl}/products/create`, data, {
+      headers: {
+        Authorization: `Bearer ${this.as.getToken()}`
+      }
+    });
+  }
   
 }
