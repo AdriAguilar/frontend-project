@@ -16,6 +16,8 @@ export class GamesListComponent implements OnInit {
 
   ngOnInit(): void {
     this.games$ = this.gamesService.getAllGames();
+    
+    
   }
 
   
