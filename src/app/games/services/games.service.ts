@@ -12,6 +12,7 @@ export class GamesService {
   url = "https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199e&dates=2019-09-01,2019-09-30&platforms=18,1,7";
   urlSearch = "https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199e&search={term}&page_size=5";
   urlPag = "https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199e&ordering=-released";
+  NUM_GAMES = 40;
 
   constructor(private http: HttpClient
 
@@ -38,5 +39,17 @@ export class GamesService {
         })
       );
     }
+
+    getGames(id: number): Observable<Result> {
+      const url = `${this.url}/${id}${this.api}`;
+      return this.http.get<Result>(url);
+
+    }
+
+
+
+
+
+
 }
 
