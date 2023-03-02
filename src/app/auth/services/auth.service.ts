@@ -18,6 +18,12 @@ export class AuthService {
   private httpOptions = environment.httpOptions;
 
   constructor( private http: HttpClient ) {
+    const token = localStorage.getItem('auth-token');
+    if (token) {
+      this.getUser(token).subscribe(user => {
+        this.userSubject.next(user);
+      });
+    }
     this.userSubject = new BehaviorSubject<User>(null);
     this.user$ = this.userSubject.asObservable();
   }
@@ -64,7 +70,7 @@ export class AuthService {
     return this.getToken() !== null;
   }
 
-  getUser(token: string): Observable<User> {
+  getUser(token: string = this.getToken()): Observable<User> {
     return this.http.get<User>(`${this.baseUrl}/auth/who`, {
       headers: {
         'Cache-Control': 'max-age=600, public',

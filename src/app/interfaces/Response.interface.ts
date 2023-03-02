@@ -1,8 +1,13 @@
 export interface Response {
-    data: Data;
+    data: ChatData;
 }
 
-export interface Data {
+export interface ChatResponse {
+    message: string;
+    data:    Chat;
+}
+
+export interface ChatData {
     chat:     Chat;
     messages: Message[];
 }
@@ -11,8 +16,8 @@ export interface Chat {
     id:         number;
     user_1:     number;
     user_2:     number;
-    created_at: Date;
-    updated_at: Date;
+    created_at?: Date;
+    updated_at?: Date;
 }
 
 export interface Message {
@@ -20,6 +25,8 @@ export interface Message {
     chat_id:    number;
     message:    string;
     user:       User;
+    created_at?: Date;
+    updated_at?: Date;
 }
 
 export interface Logged {
