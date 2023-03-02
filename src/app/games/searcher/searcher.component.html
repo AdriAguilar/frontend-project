@@ -7,8 +7,10 @@
       </svg>
     </div>
     <div class="absolute z-10 top-12 bg-white rounded-md shadow-lg w-96">
+
       <ul class="search-result text-black" *ngFor="let game of games$ | async">
-        {{game.name}}
+        <a routerLink="{{game.id}}">{{game.name}}</a>
+
       </ul>
     </div>
   </div>

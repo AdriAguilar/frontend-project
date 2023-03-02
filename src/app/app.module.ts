@@ -8,15 +8,13 @@ import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { GamesListComponent } from './games/pages/games-list/games-list.component';
-import { SearcherComponent } from './games/searcher/searcher.component';
-import { GamesDetailComponent } from './games/pages/games-detail/games-detail.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    GamesListComponent,
+
   ],
   imports: [
     BrowserModule,
