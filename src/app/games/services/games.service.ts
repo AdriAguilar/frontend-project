@@ -8,8 +8,11 @@ import { GamesResponse, Result } from '../interfaces/Games.interface';
   providedIn: 'root'
 })
 export class GamesService {
-  url = "https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199e&dates=2019-09-01,2019-09-30&platforms=18,1,7";
+  NUM_GAMES = 40;
 
+  url = `https://api.rawg.io/api/games`;
+  api = `?key=2d592714bd91467cad84f2655700199e&dates=2019-09-01,2019-09-30&platforms=18,1,7&page_size=${this.NUM_GAMES}`;
+  prueba = `https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199e&dates=2019-09-01,2019-09-30&platforms=18,1,7&page_size=${this.NUM_GAMES}`;
   constructor(private http: HttpClient 
     
     ) {}
@@ -19,10 +22,22 @@ export class GamesService {
     };
 
     getAllGames(): Observable<Result[]> {
-      return this.http.get<GamesResponse>(this.url).pipe(
+      return this.http.get<GamesResponse>(this.url + this.api).pipe(
         map((response) => response.results )
       );
-        ; 
+        
         
     }
+
+    getGames(id: number): Observable<Result> {
+      const url = `${this.url}/${id}${this.api}`;
+      return this.http.get<Result>(url);
+      
+    }
+
+
+
+
+
+
 }

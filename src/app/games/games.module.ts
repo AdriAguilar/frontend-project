@@ -4,8 +4,11 @@ import { CommonModule } from '@angular/common';
 import { GamesRoutingModule } from './games-routing.module';
 
 
+
 @NgModule({
-  declarations: [],
+  declarations: [
+    
+  ],
   imports: [
     CommonModule,
     GamesRoutingModule
