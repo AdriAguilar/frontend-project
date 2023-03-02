@@ -21,7 +21,7 @@ export class NavbarComponent {
                private as: AuthService ) { }
 
   ngOnInit(): void {
-    this.user$ = this.as.getUser(this.as.getToken());
+    this.user$ = this.as.user$;
   }
 
   ngOnDestroy() {

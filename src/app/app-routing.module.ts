@@ -12,7 +12,7 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule ),
   },
   {
-    path: 'c',
+    path: 'chat',
     loadChildren: () => import('./chats/chats.module').then( m => m.ChatsModule ),
     canLoad: [ AuthGuard ],
   },
