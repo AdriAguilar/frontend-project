@@ -1,13 +1,9 @@
 
 <div class="flex flex-col md:flex-row max-w-4xl mx-auto items-center justify-center">
-    <ngx-dropzone class="w-full md:w-1/3 flex flex-col items-center justify-center py-8 px-4" (change)="onSelect($event)">
-        <ngx-dropzone-label>Arrastra una imagen</ngx-dropzone-label>
-        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)"></ngx-dropzone-image-preview>
-    </ngx-dropzone>
-    <div class="w-full md:w-2/3 px-4 py-8">
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-              [formGroup]="myForm"
-              (submit)="submit()">
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+    [formGroup]="myForm"
+    (submit)="submit()">
+        <div class="w-full px-4 py-4">
             <div class="mb-4">
                 <label class="block text-gray-700 font-bold mb-2" for="name">
                     Nombre del producto
@@ -81,11 +77,15 @@
                     Debes agregar una categoría a la que pertenezca el producto
                 </span>
             </div>
-            <div class="flex items-center justify-center">
-                <button type="submit" class="bg-orange-600 hover:bg-orange-700 text-white font-bold w-2/5 mt-3 py-2 rounded-lg">
-                    Crear
-                </button>
-            </div>
-        </form>
-    </div>
+        </div>    
+        <ngx-dropzone accept="image/jpeg,image/jpg,image/png" class="w-full flex flex-col items-center justify-center px-4" (change)="onSelect($event)">
+            <ngx-dropzone-label>Arrastra las imágenes del producto</ngx-dropzone-label>
+            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)"></ngx-dropzone-image-preview>
+        </ngx-dropzone>
+        <div class="flex items-center justify-center mt-4">
+            <button type="submit" class="bg-orange-600 hover:bg-orange-700 text-white font-bold w-2/5 mt-3 py-2 rounded-lg">
+                Crear
+            </button>
+        </div>
+    </form>
 </div>

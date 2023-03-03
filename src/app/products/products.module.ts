@@ -8,6 +8,7 @@ import { ProductListComponent } from './pages/product-list/product-list.componen
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { ProductCreateComponent } from './pages/product-create/product-create.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     CommonModule,
     ProductsRoutingModule,
     ReactiveFormsModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    SharedModule
   ]
 })
 export class ProductsModule { }

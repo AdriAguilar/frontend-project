@@ -2,10 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/auth/services/auth.service';
-import { Category } from '../../interfaces/Categories.interface';
+
+import { NgxDropzoneChangeEvent } from 'ngx-dropzone';
+
 import { CategoriesService } from '../../services/categories.service';
 import { ProductsService } from '../../services/products.service';
+
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { Category } from '../../interfaces/Categories.interface';
 
 @Component({
   selector: 'app-product-create',
@@ -37,7 +41,8 @@ export class ProductCreateComponent implements OnInit {
       price: [ , Validators.required ],
       quantity: [ , Validators.required ],
       category_id: [ , Validators.required ],
-      user_id: []
+      user_id: [],
+      images: [],
     })
   }
 
@@ -46,12 +51,12 @@ export class ProductCreateComponent implements OnInit {
         && this.myForm.controls[ field ].touched;
   }
 
-  onSelect(event: any) {
+  onSelect(event: NgxDropzoneChangeEvent) {
     console.log(event);
     this.files.push(...event.addedFiles);
   }
   
-  onRemove(event: any) {
+  onRemove(event: File) {
     console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
   }
@@ -61,9 +66,14 @@ export class ProductCreateComponent implements OnInit {
       this.myForm.markAllAsTouched();
       return;
     }
-
-    this.myForm.controls['user_id'].setValue( this.userId );
+    const images: string[] = [];
+    this.files.forEach( file => {
+      images.push( file.name );
+    });
     
+    this.myForm.controls['user_id'].setValue( this.userId );
+    this.myForm.controls['images'].setValue( images );
+    console.log(this.myForm.value);
     this.ps.createProduct( this.myForm.value ).subscribe(
       () => {
         this.router.navigate(['/product']);
