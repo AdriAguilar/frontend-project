@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GamesListComponent } from './pages/games-list/games-list.component';
 import { GamesDetailComponent } from './pages/games-detail/games-detail.component';
+import { HomeComponent } from '../home/home.component';
 
 const routes: Routes = [
   {

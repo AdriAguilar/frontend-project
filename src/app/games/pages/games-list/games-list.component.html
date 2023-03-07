@@ -1,4 +1,31 @@
 <app-searcher></app-searcher>
+<form (submit)="submit()" [formGroup]="myForm">
+    <select
+        formControlName="tags"
+        class="block appearance-none w-full bg-gray-300 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+        id="category">
+        <option [defaultSelected]="true">Selecciona una categoría</option>
+        <option value="open-world">Mundo Abierto</option>
+        <option value="steam-achievements">Archivos de Steam</option>
+        <option value="rpg">Rpg</option>
+        <option value="singleplayer">Un jugador</option>
+        <option value="multiplayer">MultiJugador</option>
+        <option value="co-op">Coperativo</option>
+        <option value="third-person-shooter">Shoter 3ºPersona</option>
+        <option value="first-person-shooter">Shoter 1ºPersona</option>
+        <option value="vr-mod">Vr Mod</option>
+    </select>
+
+    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+        <svg class="w-5 mx-0.5 text-orange-500 menu-icon" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clip-rule="evenodd"></path>
+        </svg>
+    </div>
+    <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-black font-bold py-2 px-4 mt-8 rounded-full transition-colors duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-md">Aplicar Filtros</button>
+</form>
 <div class="px-6 py-4">
     <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         <li *ngFor="let game of (games$ | async)" routerLink="{{game.id}}" class="shadow-md rounded-md overflow-hidden transition-all hover:bg-gray-200 hover:scale-95 hover:border-gray-500 hover:border">

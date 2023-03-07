@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+
 import { HttpClient } from '@angular/common/http';
-
 import { User } from '../interfaces/Response.interface';
-
 import { environment } from 'src/environments/environment';
+import { Component, OnInit } from '@angular/core';
+import { GamesService } from '../games/services/games.service'; 
+import { Result } from '../games/interfaces/Games.interface';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -11,5 +13,25 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+  daily : number;
+  games$: Observable<Result[]>;
+  
+  constructor(private gamesService: GamesService) { }
 
-}
+  ngOnInit(): void {
+
+
+    this.getRandom();
+    this.games$ = this.gamesService.getGames5(this.daily);
+    setInterval(() => {
+      this.getRandom();
+      this.games$ = this.gamesService.getGames5(this.daily);
+      
+    }, 86400000);
+
+  }
+  getRandom(): void {
+    this.daily = Math.floor(Math.random() * 5000) + 1;
+
+  }
+} 
