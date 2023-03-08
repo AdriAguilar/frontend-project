@@ -1,6 +1,9 @@
 <div id="search-component" class="flex justify-center items-center">
   <div class="relative mt-4 ml-10">
+
     <input #inputSearch id="inputSearch" class=" pr-14 py-2 pl-10 rounded-full w-96 border border-gray-400" autocomplete=off placeholder="Buscar..." (input)="onSearchGames(inputSearch.value)" >
+    <input #inputSearch id="inputSearch" autocomplete="off" class=" pr-14 py-2 pl-10 rounded-full w-96 border border-gray-400" placeholder="Buscar..." (input)="onSearchGames(inputSearch.value)" >
+
     <div class="absolute inset-y-0 left-0 flex items-center pl-3">
       <svg class="w-5 h-5 text-orange-400 absolute " viewBox="0 0 24 24" fill="none" stroke="currentColor">
         <path d="M21 21L15.5 15.5M15.5 15.5C17.1569 13.8431 18 11.5786 18 9C18 4.58172 14.4183 1 10 1C5.58172 1 2 4.58172 2 9C2 13.4183 5.58172 17 10 17C12.5786 17 14.8431 16.1569 16.5 14.5L21 19" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -14,6 +17,11 @@
             <img src="{{ game.background_image }}" alt="" class="w-10 h-10 object-cover">{{game.name}}
           </div>
         </a>
+      <ul class="search-result text-orange-500" *ngFor="let game of games$ | async">
+          <li>
+            <a routerLink="{{game.id}}">{{game.name}}</a>
+          </li>
+
       </ul>
     </div>
   </div>
