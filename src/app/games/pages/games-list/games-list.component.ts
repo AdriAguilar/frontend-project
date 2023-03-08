@@ -20,14 +20,6 @@ export class GamesListComponent implements OnInit {
   pageSize = 1;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private gamesService: GamesService) { }
-
-  ngOnInit(): void {
-    this.games$ = this.gamesService.getAllGames();
-  game$: Observable<Result[]>;
-
-  
-  
   constructor(private gamesService: GamesService,
               private fb: FormBuilder) { }
 
@@ -57,4 +49,4 @@ export class GamesListComponent implements OnInit {
       this.loadGames();
   }
 
-
+}
