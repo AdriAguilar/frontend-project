@@ -33,6 +33,13 @@ export class GamesService {
         map((response) => response.results )
       );
     }
+    getOneTag(): Observable<Result[]> {
+      const url = `${this.prueba2}&page_size=1`;
+      return this.http.get<GamesResponse>(url).pipe(
+        map((response) => response.results )
+      );
+    }
+    
 
     getGames5(random:number): Observable<Result[]> {
       const Url = `${this.url + this.prueba}&page=${random}&page_size=5`; 
@@ -67,7 +74,7 @@ export class GamesService {
       );
     }
     getGamesFilterP(platforms: string): Observable<Result[]> {
-      const url = `${this.prueba2}&tags=${platforms}&page_size=40`;
+      const url = `${this.prueba2}&platforms=${platforms}&page_size=40`;
       return this.http.get<GamesResponse>(url)
       .pipe(
         map((response) => response.results )

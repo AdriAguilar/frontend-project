@@ -15,11 +15,12 @@ import { Observable } from 'rxjs';
 export class HomeComponent {
   daily : number;
   games$: Observable<Result[]>;
+  game$: Observable<Result[]>;
   
   constructor(private gamesService: GamesService) { }
 
   ngOnInit(): void {
-
+    
 
     this.getRandom();
     this.games$ = this.gamesService.getGames5(this.daily);
@@ -29,6 +30,7 @@ export class HomeComponent {
       
     }, 86400000);
 
+    this.game$ = this.gamesService.getOneTag();
   }
   getRandom(): void {
     this.daily = Math.floor(Math.random() * 5000) + 1;

@@ -30,6 +30,7 @@ export class GamesListComponent implements OnInit {
     const tags = this.myForm.controls["tags"].value;
     this.games$ = this.gamesService.getGamesFilter(tags);
     console.log(tags);
+    
   }
 
 

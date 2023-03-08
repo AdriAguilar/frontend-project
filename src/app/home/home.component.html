@@ -1,4 +1,9 @@
 
+<div class="bg-orange-500 py-4" *ngFor="let game of (game$ | async)">
+  <p  class="text-white text-center">¡Descuento del 10% en el {{game.name}} hasta 10/04/2023  !</p>
+</div>
+
+
 <div class="max-w-4xl mx-auto mt-32 sm:max-w-lg">
   <h5 class="text-3xl text-center font-bold mb-4">Home</h5>
 </div>
