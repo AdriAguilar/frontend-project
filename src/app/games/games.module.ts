@@ -5,6 +5,7 @@ import { GamesRoutingModule } from './games-routing.module';
 import { GamesListComponent } from './pages/games-list/games-list.component';
 import { SearcherComponent } from './searcher/searcher.component';
 import { GamesDetailComponent } from './pages/games-detail/games-detail.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 
@@ -18,7 +19,10 @@ import { GamesDetailComponent } from './pages/games-detail/games-detail.componen
   ],
   imports: [
     CommonModule,
-    GamesRoutingModule
+    GamesRoutingModule,
+    MatPaginatorModule
+
+
   ]
 })
 export class GamesModule { }
