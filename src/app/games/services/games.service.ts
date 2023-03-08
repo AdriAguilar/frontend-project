@@ -9,11 +9,14 @@ import { GamesResponse, Result } from '../interfaces/Games.interface';
 })
 export class GamesService {
   NUM_GAMES = 40;
+  pageSize = 40;
+  page = 1;
   url = `https://api.rawg.io/api/games`;
   api = `?key=2d592714bd91467cad84f2655700199e&dates=2019-09-01,2019-09-30&platforms=18,1,7&page_size=${this.NUM_GAMES}`;
-  prueba = `https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199e&dates=2019-09-01,2019-09-30&platforms=18,1,7&page_size=${this.NUM_GAMES}`;
+  prueba = `?key=2d592714bd91467cad84f2655700199e&dates=2019-09-01,2019-09-30&page_size=`;
+  prueba3 = `https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199e`;
   urlSearch = "https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199e&search={term}&page_size=5";
-  urlPag = "https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199e&ordering=-released";
+  public total: number = 0;
 
 
   constructor(private http: HttpClient
@@ -48,10 +51,13 @@ export class GamesService {
 
     }
 
+    getAll(page: number, page_size: number ): Observable<any> {
+      let urlPag = `${this.prueba3}&page=${page}&page_size=${this.pageSize}`
+      return this.http.get<GamesResponse>(urlPag).pipe(
+        map((response) => response.results )
+      );
 
-
-
-
+    }
 
 }
 
