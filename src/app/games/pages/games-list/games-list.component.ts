@@ -1,6 +1,9 @@
+
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { GamesService } from '../../services/games.service';
+
 import { Result } from '../../interfaces/Games.interface';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -12,6 +15,15 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class GamesListComponent implements OnInit {
   myForm: FormGroup;
   games$: Observable<Result[]>;
+  totalGames: number = 0;
+  page = 1;
+  pageSize = 1;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  constructor(private gamesService: GamesService) { }
+
+  ngOnInit(): void {
+    this.games$ = this.gamesService.getAllGames();
   game$: Observable<Result[]>;
 
   
@@ -31,9 +43,18 @@ export class GamesListComponent implements OnInit {
     this.games$ = this.gamesService.getGamesFilter(tags);
     console.log(tags);
     
+
   }
 
 
-}
+  loadGames(): void{
+    this.games$ = this.gamesService.getAll(this.page, this.pageSize);
+  }
+
+  onPageChange(event: PageEvent): void {
+      this.page = event.pageIndex + 1;
+      this.pageSize = event.pageSize;
+      this.loadGames();
+  }
 
 

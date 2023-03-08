@@ -36,4 +36,5 @@
         </li>
         <!-- Repetir el elemento li para cada juego en el arreglo games$ -->
     </ul>
+    <mat-paginator class="flex items-center justify-between bg-orange-500 rounded-lg shadow-md text-white" length="5715" [pageSize]="40" (page)="onPageChange($event)" aria-label="Select page"></mat-paginator>
 </div>
