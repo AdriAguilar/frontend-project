@@ -65,11 +65,14 @@ export interface Genre {
     id:   number;
     name: string;
     slug: string;
+
 }
 
 export interface Platform {
     platform: Genre;
 }
+
+
 
 export interface Rating {
     id:      number;

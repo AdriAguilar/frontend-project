@@ -1,6 +1,9 @@
 
 <div class="bg-orange-500 py-4" *ngFor="let game of (game$ | async)">
-  <p  class="text-white text-center">¡Descuento del 10% en el {{game.name}} hasta 10/04/2023  !</p>
+  <p  class="text-white text-center">¡Descuento del 10% en el {{game.name}} hasta {{temp| date}}  !</p>
+</div>
+<div>
+  <img src="assets\banner\bannerweb_template2022.jpg" alt="" width="1920px" class="my-10  rounded-md ">
 </div>
 
 
@@ -25,3 +28,4 @@
       <!-- Repetir el elemento li para cada juego en el arreglo games$ -->
   </ul>
 </div>
+

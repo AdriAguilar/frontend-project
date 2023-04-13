@@ -28,5 +28,5 @@ export class GamesDetailComponent implements OnInit {
     this.location.back();
   }
 
-  
+
 }

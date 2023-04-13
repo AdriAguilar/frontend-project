@@ -16,7 +16,7 @@ export class GamesService {
   arca = `?key=2d592714bd91467cad84f2655700199e&dates=2019-09-01,2019-09-30&platforms=18,1,7&page_size=${this.NUM_GAMES}`;
   api = `?key=2d592714bd91467cad84f2655700199e&page_size=${this.NUM_GAMES}`;
   prueba = `?key=2d592714bd91467cad84f2655700199e&page=4666&page_size=5`;
-  prueba3 = `https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199e`;
+  prueba3 = `https://api.rawg.io/api/games?key=2d592714bd91467cad84f655700199e`;
   urlSearch = "https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199e&search={term}&page_size=5";
   prueba2 = "https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199e";
   public total: number = 0;

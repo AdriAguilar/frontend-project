@@ -10,12 +10,12 @@ import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GamesDetailComponent } from './games/pages/games-detail/games-detail.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    GamesDetailComponent
+    GamesDetailComponent,
+    
 
   ],
   imports: [

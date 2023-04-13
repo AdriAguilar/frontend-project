@@ -8,6 +8,7 @@ import { MaterialModule } from '../material/material.module';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoaderComponent } from './loader/loader.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -16,11 +17,13 @@ import { LoaderComponent } from './loader/loader.component';
     ErrorPageComponent,
     LoaderComponent,
     NavbarComponent,
+    FooterComponent,
   ],
   exports: [
     ErrorPageComponent,
     LoaderComponent,
     NavbarComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
