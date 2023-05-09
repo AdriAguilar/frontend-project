@@ -61,23 +61,30 @@ export class ProductCreateComponent implements OnInit {
     this.files.splice(this.files.indexOf(event), 1);
   }
 
-  submit() {
-    if( this.myForm.invalid ) {
-      this.myForm.markAllAsTouched();
-      return;
-    }
-    const images: string[] = [];
-    this.files.forEach( file => {
-      images.push( file.name );
-    });
-    
-    this.myForm.controls['user_id'].setValue( this.userId );
-    this.myForm.controls['images'].setValue( images );
-    console.log(this.myForm.value);
-    this.ps.createProduct( this.myForm.value ).subscribe(
-      () => {
-        this.router.navigate(['/product']);
-      }
-    );
+submit() {
+  if (this.myForm.invalid) {
+    this.myForm.markAllAsTouched();
+    return;
   }
+
+  this.myForm.controls['user_id'].setValue(this.userId);
+
+  const formData = new FormData();
+  for (let file of this.files) {
+    formData.append('images[]', file, file.name);
+  }
+  formData.append('name', this.myForm.get('name').value);
+  formData.append('description', this.myForm.get('description').value);
+  formData.append('price', this.myForm.get('price').value);
+  formData.append('quantity', this.myForm.get('quantity').value);
+  formData.append('category_id', this.myForm.get('category_id').value);
+  formData.append('user_id', this.myForm.get('user_id').value);
+
+  this.ps.createProduct(formData).subscribe(
+    () => {
+      this.router.navigate(['/product']);
+    }
+  );
+}
+
 }
