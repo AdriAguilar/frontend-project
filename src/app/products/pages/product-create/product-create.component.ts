@@ -71,7 +71,7 @@ submit() {
 
   const formData = new FormData();
   for (let file of this.files) {
-    formData.append('images[]', file, file.name);
+    formData.append('images', file, file.name);
   }
   formData.append('name', this.myForm.get('name').value);
   formData.append('description', this.myForm.get('description').value);

@@ -11,11 +11,13 @@ import { ProductsService } from '../../services/products.service';
 export class ProductListComponent implements OnInit {
   products$: Observable<Product[]>;
   defaultImg: string;
+  productImg$: Observable<string>;
 
   constructor( private ps: ProductsService ) { }
   
   ngOnInit(): void {
     this.products$ = this.ps.getProducts();
+    this.productImg$ = this.ps.getProductImages(11);
   }
 
 }
