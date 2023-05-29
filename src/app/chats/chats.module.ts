@@ -1,24 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { ChatsRoutingModule } from './chats-routing.module';
 
 import { ChatComponent } from './components/chat/chat.component';
 import { ChatsComponent } from './pages/chats/chats.component';
-import { FormsModule } from '@angular/forms';
-import { SharedModule } from '../shared/shared.module';
+import { MenuComponent } from './menu/menu.component';
 
 
 @NgModule({
   declarations: [
     ChatComponent,
-    ChatsComponent
+    ChatsComponent,
+    MenuComponent,
+  ],
+  exports: [
+    MenuComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
-    ChatsRoutingModule,
-    SharedModule
+    ChatsRoutingModule
   ]
 })
 export class ChatsModule { }
