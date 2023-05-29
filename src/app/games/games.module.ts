@@ -5,6 +5,9 @@ import { GamesRoutingModule } from './games-routing.module';
 import { GamesListComponent } from './pages/games-list/games-list.component';
 import { SearcherComponent } from './searcher/searcher.component';
 import { GamesDetailComponent } from './pages/games-detail/games-detail.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 
 
@@ -12,13 +15,14 @@ import { GamesDetailComponent } from './pages/games-detail/games-detail.componen
 @NgModule({
   declarations: [
     GamesListComponent,
-    GamesDetailComponent,
-    SearcherComponent
-
+    SearcherComponent,
   ],
   imports: [
     CommonModule,
-    GamesRoutingModule
+    GamesRoutingModule,
+    MatPaginatorModule,
+    ReactiveFormsModule
+
   ]
 })
 export class GamesModule { }

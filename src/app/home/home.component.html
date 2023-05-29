@@ -1,4 +1,27 @@
 
+<div class="bg-orange-500 py-4" *ngFor="let game of (game$ | async)">
+  <p  class="text-white text-center">¡Descuento del 10% en el {{game.name}} hasta 10/04/2023  !</p>
+</div>
+
+
 <div class="max-w-4xl mx-auto mt-32 sm:max-w-lg">
   <h5 class="text-3xl text-center font-bold mb-4">Home</h5>
+</div>
+
+  <h1 class=" text-2xl text-center font-bold mb-4">Juegos Random del Dia</h1>
+
+<div class="px-6 py-4">
+  <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+      <li *ngFor="let game of (games$ | async)" routerLink="games/{{game.id}}" class="shadow-md rounded-md overflow-hidden transition-all hover:bg-gray-200 hover:scale-95 hover:border-gray-500 hover:border">
+          <img src="{{ game.background_image }}" alt="" class="w-full h-48 object-cover">
+          <div class="px-4 py-2">
+              <h3 class="font-medium text-lg mb-2">{{ game.name }}</h3>
+              <p class="text-orange-500 font-medium flex items-center">{{ game.rating }}/{{ game.rating_top }} <img src="assets\ratings\icons8-pixel-star-48.png" alt="" width="16px" height="16px" class="ml-1"> </p>
+              <div class="flex gap-3">
+                  <p *ngFor="let genero of game.genres" class="px-3  rounded-xl bg-zinc-200 text-gray-800">{{genero.name}}</p>
+              </div>
+          </div>
+      </li>
+      <!-- Repetir el elemento li para cada juego en el arreglo games$ -->
+  </ul>
 </div>
