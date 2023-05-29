@@ -29,13 +29,5 @@ export class ProductsService {
       }
     });
   }
-
-  getProductImages( id: number ) {
-    return this.http.get<string>(`${this.baseUrl}/products/${id}/images`, {
-      headers: {
-        Authorization: `Bearer ${this.as.getToken()}`
-      }
-    });
-  }
   
 }

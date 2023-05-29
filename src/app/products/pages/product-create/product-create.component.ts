@@ -53,7 +53,9 @@ export class ProductCreateComponent implements OnInit {
 
   onSelect(event: NgxDropzoneChangeEvent) {
     console.log(event);
-    this.files.push(...event.addedFiles);
+    if( this.files.length < 1 ) {
+      this.files.push(...event.addedFiles);
+    }
   }
   
   onRemove(event: File) {

@@ -9,5 +9,6 @@ export const environment = {
           'Content-Type': 'application/json',
           'Accept': '*/*'
         })
-    }
+    },
+    hostname: 'http://localhost:8000'
 }
