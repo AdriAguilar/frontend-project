@@ -7,6 +7,7 @@ import { SearcherComponent } from './searcher/searcher.component';
 import { GamesDetailComponent } from './pages/games-detail/games-detail.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -21,8 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     GamesRoutingModule,
     MatPaginatorModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class GamesModule { }

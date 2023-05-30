@@ -22,6 +22,14 @@ export class ProductsService {
     });
   }
 
+  getProductById( id: number ) {
+    return this.http.get<Product>(`${this.baseUrl}/products/${id}`, {
+      headers: {
+        Authorization: `Bearer ${this.as.getToken()}`
+      }
+    });
+  }
+
   createProduct( data: FormData  ) {
     return this.http.post<Product>(`${this.baseUrl}/products/create`, data, {
       headers: {
