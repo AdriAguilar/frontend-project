@@ -1,13 +1,13 @@
 <nav class="bg-gray-100 bg-opacity-80 backdrop-blur py-4 fixed top-0 w-full z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
       <!-- Logo -->
-      <div class=" flex items-center gap-8 text-md font-medium text-gray-600 hover:text-gray-800">
+      <div class=" flex items-center gap-8 text-md font-medium text-gray-600">
         <a routerLink=""><img src="assets/logo/logo-white.png" alt="" class="w-24"></a>
-        <a routerLink="games" class="ml-6">Juegos</a>
-        <a href="https://discord.gg/4CjeaVBMzZ" class="ml-6">Discord</a>
-        <a routerLink="aboutUs" class="ml-6">About Us</a>
-        <a routerLink="shopping" class="ml-6"><mat-icon>shopping_cart</mat-icon></a>
-
+        <a routerLink="product" class="rounded-full px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800">Productos</a>
+        <a routerLink="games" class="rounded-full px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800">Juegos</a>
+        <a href="https://discord.gg/4CjeaVBMzZ" class="rounded-full px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800">Discord</a>
+        <a routerLink="aboutUs" class="rounded-full px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800">About Us</a>
+        <a routerLink="shopping" class="rounded-full px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800"><mat-icon>shopping_cart</mat-icon></a>
       </div>
 
       <div class="text-gray-700 ">
@@ -37,7 +37,7 @@
           <div id="menu-dropdown" class="relative" *ngIf="menuVisible">
             <div class="absolute right-0 z-50 mt-2 py-2 w-48 bg-white rounded-md shadow-lg">
               <a class="block px-4 py-2 text-gray-800 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-gray-900 hover:font-medium" routerLink="auth/profile" routerLinkActive="active" role="button">Perfil</a>
-              <a class="block px-4 py-2 text-gray-800 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-gray-900 hover:font-medium" routerLink="chat" routerLinkActive="active" role="button">Chats</a>
+              <a class="block px-4 py-2 text-gray-800 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-gray-900 hover:font-medium" routerLink="chat" routerLinkActive="active" role="button">Mensajes</a>
               <a class="block px-4 py-2 text-gray-800 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-gray-900 hover:font-medium" role="button">Modo oscuro/claro</a>
               <div class="h-px w-11/12 mx-auto my-2 bg-gray-200"></div>
               <a class="block px-4 py-2 font-medium text-orange-600 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-orange-700" (click)="logout()" routerLinkActive="active" role="button">Logout</a>
@@ -48,7 +48,7 @@
         <!-- Sin Autenticar -->
         <ng-template #Auth>
           <div class="text-sm">
-            <div class="flex items-center  fixed right-0 ">
+            <div class="flex items-center">
               <a class="mr-6 text-orange-600 hover:text-orange-700 " routerLink="./auth/login" routerLinkActive="active" role="button">Iniciar sesión</a>
               <a class="text-orange-600 hover:text-orange-700" routerLink="./auth/register" routerLinkActive="active" role="button">Registrarse</a>
             </div>

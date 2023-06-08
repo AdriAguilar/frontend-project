@@ -1,3 +1,4 @@
+
 <app-searcher></app-searcher>
 <div class="px-6 py-4 ">
     <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -23,3 +24,9 @@
     </ul>
     <mat-paginator class="flex items-center justify-between bg-orange-500 rounded-lg shadow-md text-white" length="5715" [pageSize]="40" (page)="onPageChange($event)" aria-label="Select page"></mat-paginator>
 </div>
+
+<ng-template #load>
+    <app-loader></app-loader>
+</ng-template>
+
+

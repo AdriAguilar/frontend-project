@@ -1,5 +1,8 @@
+<div *ngIf="!game">
+    <app-loader></app-loader>
+</div>
 
-*ngIf="game" class="bg-gray-100 min-h-screen">
+<div *ngIf="game" class="pt-20 bg-gray-100 min-h-screen">
     <div class="container mx-auto py-8">
         <div class="grid md:grid-cols-2 gap-4">
             <div class="md:order-2">
