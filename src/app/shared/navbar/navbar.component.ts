@@ -18,7 +18,8 @@ export class NavbarComponent {
   user$: Observable<User>;
 
   constructor( private router: Router,
-              private as: AuthService ) { }
+              private as: AuthService,
+              ) { }
 
   ngOnInit(): void {
     this.user$ = this.as.user$;
@@ -63,3 +64,10 @@ export class NavbarComponent {
     }
   }
 }
+
+
+
+
+
+
+
