@@ -21,7 +21,8 @@ export class GamesListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
-  constructor(private gamesService: GamesService) { }
+  constructor( private gamesService: GamesService,
+               private fb: FormBuilder ) { }
 
 
 
@@ -54,7 +55,4 @@ export class GamesListComponent implements OnInit {
   addToCart(game:Result){
     return this.gamesService.addGame(game);
   }
-}
-
-
 }
