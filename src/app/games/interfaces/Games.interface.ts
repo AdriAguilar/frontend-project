@@ -7,10 +7,12 @@ export interface GamesResponse {
 }
 
 export interface Result {
+    cantidad:           number;
     slug:               string;
     name:               string;
     playtime:           number;
     platforms:          Platform[];
+    description:        string;
     stores:             Store[];
     released:           Date;
     tba:                boolean;

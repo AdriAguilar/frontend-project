@@ -18,6 +18,7 @@ export class GamesListComponent implements OnInit {
   pageSize = 1;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+
   constructor(private gamesService: GamesService) { }
 
   ngOnInit(): void {
@@ -33,6 +34,10 @@ export class GamesListComponent implements OnInit {
       this.page = event.pageIndex + 1;
       this.pageSize = event.pageSize;
       this.loadGames();
+  }
+
+  addToCart(game:Result){
+    return this.gamesService.addGame(game);
   }
 }
 

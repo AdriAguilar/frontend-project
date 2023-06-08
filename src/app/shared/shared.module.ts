@@ -8,6 +8,7 @@ import { MaterialModule } from '../material/material.module';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoaderComponent } from './loader/loader.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -27,6 +28,7 @@ import { LoaderComponent } from './loader/loader.component';
     MaterialModule,
     HttpClientModule,
     RouterModule,
+    MatIconModule
   ]
 })
 export class SharedModule { }
