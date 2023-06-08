@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { GamesService } from '../../services/games.service';
 
 import { Result } from '../../interfaces/Games.interface';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Observable } from 'rxjs';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-games-list',
@@ -11,7 +13,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./games-list.component.scss']
 })
 export class GamesListComponent implements OnInit {
-
+  myForm: FormGroup;
   games$: Observable<Result[]>;
   totalGames: number = 0;
   page = 1;
@@ -21,8 +23,21 @@ export class GamesListComponent implements OnInit {
 
   constructor(private gamesService: GamesService) { }
 
+
+
   ngOnInit(): void {
     this.games$ = this.gamesService.getAllGames();
+    this.myForm = this.fb.group({
+      tags: []
+    });
+  }
+
+  submit(): void{
+    const tags = this.myForm.controls["tags"].value;
+    this.games$ = this.gamesService.getGamesFilter(tags);
+    console.log(tags);
+    
+
   }
 
 
@@ -41,3 +56,5 @@ export class GamesListComponent implements OnInit {
   }
 }
 
+
+}
