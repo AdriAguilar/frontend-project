@@ -14,11 +14,15 @@ import { MatIconModule } from '@angular/material/icon';
 
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ShoppingComponent,
+    GamesDetailComponent,
+
   ],
   imports: [
     BrowserModule,
