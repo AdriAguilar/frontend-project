@@ -7,6 +7,7 @@ export interface GamesResponse {
 }
 
 export interface Result {
+    id:                 number;
     slug:               string;
     name:               string;
     description:        string;
@@ -26,7 +27,6 @@ export interface Result {
     metacritic:         number | null;
     suggestions_count:  number;
     updated:            Date;
-    id:                 number;
     score:              null;
     clip:               null;
     tags:               Tag[];
@@ -38,6 +38,7 @@ export interface Result {
     short_screenshots:  ShortScreenshot[];
     parent_platforms:   Platform[];
     genres:             Genre[];
+    price:              30;
 }
 
 export interface AddedByStatus {

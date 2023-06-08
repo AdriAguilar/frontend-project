@@ -11,7 +11,7 @@
         <option value="rpg">Rpg</option>
         <option value="singleplayer">Un jugador</option>
         <option value="multiplayer">MultiJugador</option>
-        <option value="co-op">Coperativo</option>
+        <option value="co-op">Cooperativo</option>
         <option value="sandbox">Sandbox</option>
         <option value="war">War</option>
         <option value="short">Short</option>
@@ -23,7 +23,7 @@
         <option value="first-person-shooter">Shoter 1ºPersona</option>
         <option value="vr-mod">Vr Mod</option>
     </select>
-
+    
     <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-black font-bold py-2 px-4 rounded-full transition-colors duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-md ml-4">Aplicar Filtros</button>
 </form>
 </div>
@@ -37,9 +37,12 @@
                 <div class="flex gap-3">
                     <p *ngFor="let genero of game.genres" class="px-3  rounded-xl bg-zinc-200 text-gray-800">{{genero.name}}</p>
                 </div>
+                
             </div>
+            
         </li>
         <!-- Repetir el elemento li para cada juego en el arreglo games$ -->
     </ul>
     <mat-paginator class="flex items-center justify-between bg-orange-500 rounded-lg shadow-md text-white" length="5715" [pageSize]="40" (page)="onPageChange($event)" aria-label="Select page"></mat-paginator>
 </div>
+

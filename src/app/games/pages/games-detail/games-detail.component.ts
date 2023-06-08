@@ -12,6 +12,7 @@ import { Location } from '@angular/common';
 })
 export class GamesDetailComponent implements OnInit {
   @Input() game?: Result;
+  gamebuy: any[] = [];
   constructor(
     private route: ActivatedRoute,
     private gamesService: GamesService,
@@ -27,6 +28,16 @@ export class GamesDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+
+  agregarJuego(boton: HTMLButtonElement) {
+    const id = boton.id;
+    this.gamesService.getJuegoPorId(id).subscribe((juego: any) => {
+      const nuevoJuego = { nombre: juego.name };
+      this.gamebuy.push(nuevoJuego);
+      console.log(nuevoJuego);
+    });
+  }
+  
 
 
 }

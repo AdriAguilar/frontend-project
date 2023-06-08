@@ -19,6 +19,9 @@ export class GamesService {
   prueba3 = `https://api.rawg.io/api/games?key=2d592714bd91467cad84f655700199e`;
   urlSearch = "https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199e&search={term}&page_size=5";
   prueba2 = "https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199e";
+
+
+
   public total: number = 0;
 
   
@@ -38,6 +41,7 @@ export class GamesService {
         map((response) => response.results )
       );
     }
+    
     getOneTag(): Observable<Result[]> {
       const url = `${this.prueba2}&page_size=1`;
       return this.http.get<GamesResponse>(url).pipe(
@@ -68,7 +72,6 @@ export class GamesService {
     getGames(id: number): Observable<Result> {
       const url = `${this.url}/${id}${this.api}`;
       return this.http.get<Result>(url);
-
     }
 
 
@@ -77,8 +80,8 @@ export class GamesService {
       return this.http.get<GamesResponse>(urlPag).pipe(
         map((response) => response.results )
       );
-
     }
+
     getGamesFilter(tags: string): Observable<Result[]> {
       const url = `${this.prueba2}&tags=${tags}&page_size=40`;
       return this.http.get<GamesResponse>(url)
@@ -87,5 +90,20 @@ export class GamesService {
       );
     }
 
+    getJuegoPorId(id: string) {
+      return this.http.get(`${this.url}/${id}${this.api}`);
+    }
+
+    getPlatforms(): Observable<any> {
+      return this.http.get<any>('https://api.rawg.io/api/platforms?key=2d592714bd91467cad84f2655700199e');
+    }
+    
+    getGamesByPlatform(platformId: string): Observable<any> {
+      return this.http.get<any>(`https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199eplatforms=${platformId}`);
+    }
+    
+    
+    
+    
 }
 
