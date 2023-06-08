@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { GamesResponse, Result } from '../interfaces/Games.interface';
 
@@ -28,9 +28,7 @@ export class GamesService {
 
   
 
-  constructor(private http: HttpClient
-
-    ) {}
+  constructor(private http: HttpClient) {}
 
     httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -90,6 +88,7 @@ export class GamesService {
       );
     }
 
+
     getJuegoPorId(id: string) {
       return this.http.get(`${this.url}/${id}${this.api}`);
     }
@@ -102,8 +101,40 @@ export class GamesService {
       return this.http.get<any>(`https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199eplatforms=${platformId}`);
     }
     
-    
-    
-    
+    private myList:Result[]=[];
+
+    private myCart = new BehaviorSubject<Result[]>([]);
+    myCart$ = this.myCart.asObservable();
+
+    addGame(game:Result){
+      if(this.myList.length === 0){
+        game.cantidad = 1
+        this.myList.push(game)
+        this.myCart.next(this.myList);
+      }else{
+        const gameMod = this.myList.find((element)=>{
+          return element.id === game.id
+        })
+        if(gameMod){
+          gameMod.cantidad = gameMod.cantidad + 1;
+        }else{
+          game.cantidad = 1;
+          this.myList.push(game);
+          this.myCart.next(this.myList)
+        }
+      }
+    }
+    deleteGames(id:number){
+      this.myList = this.myList.filter((game)=>{
+        return game.id != id
+      })
+      this.myCart.next(this.myList)
+    }
+    findGamesbyId(id:number){
+      return this.myList.find((element)=>{
+        return element.id === id
+      })
+    }
+
 }
 

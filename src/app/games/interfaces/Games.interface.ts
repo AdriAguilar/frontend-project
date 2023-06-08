@@ -8,11 +8,12 @@ export interface GamesResponse {
 
 export interface Result {
     id:                 number;
+    cantidad:           number;
     slug:               string;
     name:               string;
-    description:        string;
     playtime:           number;
     platforms:          Platform[];
+    description:        string;
     stores:             Store[];
     released:           Date;
     tba:                boolean;

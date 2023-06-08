@@ -19,7 +19,7 @@ export class GamesDetailComponent implements OnInit {
     private location: Location) { }
   ngOnInit(): void {
     this.getGames();
-  } 
+  }
   getGames(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.gamesService.getGames(id)
@@ -28,16 +28,7 @@ export class GamesDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
-
-  agregarJuego(boton: HTMLButtonElement) {
-    const id = boton.id;
-    this.gamesService.getJuegoPorId(id).subscribe((juego: any) => {
-      const nuevoJuego = { nombre: juego.name };
-      this.gamebuy.push(nuevoJuego);
-      console.log(nuevoJuego);
-    });
+  addToCart(game:Result){
+    return this.gamesService.addGame(game);
   }
-  
-
-
 }

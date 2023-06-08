@@ -1,18 +1,26 @@
 <nav class="bg-gray-100 bg-opacity-80 backdrop-blur py-4 fixed top-0 w-full z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
       <!-- Logo -->
-      <div class=" flex items-center gap-8 text-md font-medium text-gray-600 hover:text-gray-800">
-        <a routerLink=""><img src="assets/logo/logo-white.png" alt="" class="w-24  fixed left-0 top-0 z-10 p-4"></a>
-        <a routerLink="games" class="ml-4">Juegos</a>
+      <div class=" flex items-center gap-8 text-md font-medium text-gray-600">
+        <a routerLink=""><img src="assets/logo/logo-white.png" alt="" class="w-24"></a>
+        <a routerLink="product" class="rounded-full px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800">Productos</a>
+        <a routerLink="games" class="rounded-full px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800">Juegos</a>
+        <a href="https://discord.gg/4CjeaVBMzZ" class="rounded-full px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800">Discord</a>
+        <a routerLink="aboutUs" class="rounded-full px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800">About Us</a>
+        <a routerLink="shopping" class="rounded-full px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800"><mat-icon>shopping_cart</mat-icon></a>
       </div>
 
       <div class="text-gray-700 ">
 
-        <!-- Autenticado --> 
+        <!-- Autenticado -->
         <div *ngIf="(user$ | async) as user; else Auth">
 
           <!-- Botón Dropdown -->
-          <div class="flex">
+          <div class="flex items-center gap-8">
+            <a class="flex items-center rounded-full px-4 py-2 transition-all text-md font-medium text-gray-600 hover:bg-gray-200 hover:text-gray-800" routerLink="product/create">
+              <svg class="w-4 h-4 mr-1" fill="#ea580c" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" id="memory-plus-circle"><g id="SVGRepo_bgCarrier" stroke-width="0"/><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/><g id="SVGRepo_iconCarrier"><path d="M21 7V15H20V17H19V18H18V19H17V20H15V21H7V20H5V19H4V18H3V17H2V15H1V7H2V5H3V4H4V3H5V2H7V1H15V2H17V3H18V4H19V5H20V7H21M17 6V5H16V4H14V3H8V4H6V5H5V6H4V8H3V14H4V16H5V17H6V18H8V19H14V18H16V17H17V16H18V14H19V8H18V6H17M10 6H12V10H16V12H12V16H10V12H6V10H10V6Z"/></g></svg>
+              Crear Producto
+            </a>
             <button #menuButton (click)="toggleMenu()" class="flex items-center p-1.5 text-sm font-medium text-gray-900 transition-all hover:bg-gray-200 rounded-full md:mr-0 dark:text-white" type="button">
                 <img *ngIf="user.image; else default" src="" class="w-9 mr-3 rounded-full text-gray-700">
                 <ng-template #default>
@@ -29,7 +37,7 @@
           <div id="menu-dropdown" class="relative" *ngIf="menuVisible">
             <div class="absolute right-0 z-50 mt-2 py-2 w-48 bg-white rounded-md shadow-lg">
               <a class="block px-4 py-2 text-gray-800 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-gray-900 hover:font-medium" routerLink="auth/profile" routerLinkActive="active" role="button">Perfil</a>
-              <a class="block px-4 py-2 text-gray-800 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-gray-900 hover:font-medium" routerLink="chat" routerLinkActive="active" role="button">Chats</a>
+              <a class="block px-4 py-2 text-gray-800 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-gray-900 hover:font-medium" routerLink="chat" routerLinkActive="active" role="button">Mensajes</a>
               <a class="block px-4 py-2 text-gray-800 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-gray-900 hover:font-medium" role="button">Modo oscuro/claro</a>
               <div class="h-px w-11/12 mx-auto my-2 bg-gray-200"></div>
               <a class="block px-4 py-2 font-medium text-orange-600 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-orange-700" (click)="logout()" routerLinkActive="active" role="button">Logout</a>
@@ -40,7 +48,7 @@
         <!-- Sin Autenticar -->
         <ng-template #Auth>
           <div class="text-sm">
-            <div class="flex items-center  fixed right-0 ">
+            <div class="flex items-center">
               <a class="mr-6 text-orange-600 hover:text-orange-700 " routerLink="./auth/login" routerLinkActive="active" role="button">Iniciar sesión</a>
               <a class="text-orange-600 hover:text-orange-700" routerLink="./auth/register" routerLinkActive="active" role="button">Registrarse</a>
             </div>
@@ -49,5 +57,4 @@
       </div>
     </div>
   </nav>
-  
-  
+

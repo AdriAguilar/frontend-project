@@ -27,9 +27,15 @@
     <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-black font-bold py-2 px-4 rounded-full transition-colors duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-md ml-4">Aplicar Filtros</button>
 </form>
 </div>
-<div class="px-6 py-4">
-    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-        <li *ngFor="let game of (games$ | async)" routerLink="{{game.id}}" class="shadow-md rounded-md overflow-hidden transition-all hover:bg-gray-200 hover:scale-95 hover:border-gray-500 hover:border">
+
+
+
+<app-searcher></app-searcher>
+<div class="px-6 py-4 ">
+    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <li *ngFor="let game of (games$ | async)"   class="shadow-md rounded-md overflow-hidden transition-all hover:bg-gray-200 hover:scale-95 hover:border-gray-500 hover:border">
+          <div routerLink="{{game.id}}">
+
             <img src="{{ game.background_image }}" alt="" class="w-full h-48 object-cover">
             <div class="px-4 py-2">
                 <h3 class="font-medium text-lg mb-2">{{ game.name }}</h3>
@@ -39,10 +45,20 @@
                 </div>
                 
             </div>
-            
+          </div>
+          <div class="flex justify-center items-end">
+            <button class="bg-orange-400 hover:bg-orange-500 text-white font-bold py-2 px-4 my-6 rounded " (click)="addToCart(game)">
+              Añadir a la cesta
+            </button>
+          </div>
+
         </li>
         <!-- Repetir el elemento li para cada juego en el arreglo games$ -->
     </ul>
     <mat-paginator class="flex items-center justify-between bg-orange-500 rounded-lg shadow-md text-white" length="5715" [pageSize]="40" (page)="onPageChange($event)" aria-label="Select page"></mat-paginator>
 </div>
 
+
+<ng-template #load>
+    <app-loader></app-loader>
+</ng-template>
