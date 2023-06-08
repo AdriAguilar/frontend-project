@@ -1,44 +1,28 @@
-<div class="pt-24" *ngIf="(games$ | async); else load">
-    <app-searcher></app-searcher>
-    <form (submit)="submit()" [formGroup]="myForm">
-        <select
-            formControlName="tags"
-            class="block appearance-none w-full bg-gray-300 hover:border-gray-500 px-4 py-2 pr-8 mt-4 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-            id="category">
-            <option [defaultSelected]="true">Filtro</option>
-            <option value="open-world">Mundo Abierto</option>
-            <option value="steam-achievements">Archivos de Steam</option>
-            <option value="rpg">Rpg</option>
-            <option value="singleplayer">Un jugador</option>
-            <option value="multiplayer">MultiJugador</option>
-            <option value="co-op">Coperativo</option>
-            <option value="third-person-shooter">Shoter 3ºPersona</option>
-            <option value="first-person-shooter">Shoter 1ºPersona</option>
-            <option value="vr-mod">Vr Mod</option>
-        </select>
 
-
-        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-            
-        </div>
-        <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-black font-bold py-2 px-4 mt-8 rounded-full transition-colors duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-md">Aplicar Filtros</button>
-    </form>
-    <div class="px-6 py-4">
-        <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            <li *ngFor="let game of (games$ | async)" routerLink="{{game.id}}" class="shadow-md rounded-md overflow-hidden transition-all hover:bg-gray-200 hover:scale-95 hover:border-gray-500 hover:border">
-                <img src="{{ game.background_image }}" alt="" class="w-full h-48 object-cover">
-                <div class="px-4 py-2">
-                    <h3 class="font-medium text-lg mb-2">{{ game.name }}</h3>
-                    <p class="text-orange-500 font-medium flex items-center">{{ game.rating }}/{{ game.rating_top }} <img src="assets\ratings\icons8-pixel-star-48.png" alt="" width="16px" height="16px" class="ml-1"> </p>
-                    <div class="flex gap-3">
-                        <p *ngFor="let genero of game.genres" class="px-3  rounded-xl bg-zinc-200 text-gray-800">{{genero.name}}</p>
-                    </div>
+<app-searcher></app-searcher>
+<div class="px-6 py-4 ">
+    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <li *ngFor="let game of (games$ | async)"   class="shadow-md rounded-md overflow-hidden transition-all hover:bg-gray-200 hover:scale-95 hover:border-gray-500 hover:border">
+          <div routerLink="{{game.id}}">
+            <img src="{{ game.background_image }}" alt="" class="w-full h-48 object-cover">
+            <div class="px-4 py-2">
+                <h3 class="font-medium text-lg mb-2">{{ game.name }}</h3>
+                <p class="text-orange-500 font-medium flex items-center">{{ game.rating }}/{{ game.rating_top }} <img src="assets\ratings\icons8-pixel-star-48.png" alt="" width="16px" height="16px" class="ml-1"> </p>
+                <div class="flex gap-3">
+                    <p *ngFor="let genero of game.genres" class="px-3  rounded-xl bg-zinc-200 text-gray-800">{{genero.name}}</p>
                 </div>
-            </li>
-            <!-- Repetir el elemento li para cada juego en el arreglo games$ -->
-        </ul>
-        <mat-paginator class="flex items-center justify-between bg-orange-500 rounded-lg shadow-md text-white" length="5715" [pageSize]="40" (page)="onPageChange($event)" aria-label="Select page"></mat-paginator>
-    </div>
+            </div>
+          </div>
+          <div class="flex justify-center items-end">
+            <button class="bg-orange-400 hover:bg-orange-500 text-white font-bold py-2 px-4 my-6 rounded " (click)="addToCart(game)">
+              Añadir a la cesta
+            </button>
+          </div>
+
+        </li>
+        <!-- Repetir el elemento li para cada juego en el arreglo games$ -->
+    </ul>
+    <mat-paginator class="flex items-center justify-between bg-orange-500 rounded-lg shadow-md text-white" length="5715" [pageSize]="40" (page)="onPageChange($event)" aria-label="Select page"></mat-paginator>
 </div>
 
 <ng-template #load>

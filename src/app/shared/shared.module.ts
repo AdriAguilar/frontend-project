@@ -2,14 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 import { MaterialModule } from '../material/material.module';
 
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoaderComponent } from './loader/loader.component';
-import { ChatsModule } from '../chats/chats.module';
-
 
 
 @NgModule({
@@ -27,7 +26,8 @@ import { ChatsModule } from '../chats/chats.module';
     CommonModule,
     MaterialModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    MatIconModule
   ]
 })
 export class SharedModule { }
