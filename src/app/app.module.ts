@@ -21,8 +21,6 @@ import { MatIconModule } from '@angular/material/icon';
     AppComponent,
     HomeComponent,
     ShoppingComponent,
-    GamesDetailComponent,
-
   ],
   imports: [
     BrowserModule,
