@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { io } from 'socket.io-client';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { ChatService } from '../../services/chat.service';
 import { Message, User } from '../../../interfaces/Response.interface';
 import { SocketService } from '../../services/socket.service';
-import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-chat',
@@ -12,19 +12,41 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
+  @Input() chatUser: User;
+  load: boolean;
   chatId: number;
   msg: string = '';
   messages: Message[] = [];
 
-  constructor( private route: ActivatedRoute,
-               private ss: SocketService,
-               private cs: ChatService ) { }
+  constructor( private ss: SocketService,
+               private cs: ChatService,
+               private as: AuthService ) { }
   
   ngOnInit(): void {
-    this.route.params.subscribe( params => this.chatId = params['id'] );
-    this.ss.joinChat(this.chatId);
-    this.cs.getMessages(this.chatId).subscribe( msgs => this.messages = msgs );
-    this.ss.listenForMessages(this.chatId).subscribe( msg => this.messages.push(msg) );
+    this.cs.getChatId().pipe(
+      switchMap( chatId => {
+        const load: boolean = chatId === null ? true : false;
+        this.load = load;
+        
+        if( !load ) {
+          console.log('chat.ts:', this.chatUser.username, chatId);
+
+          this.chatId = chatId;
+          this.as.getUser().pipe(
+            switchMap( user => {
+              console.log('getUser', user);
+              
+              this.ss.joinChat( chatId, user.username );
+              return of( null );
+            })
+          ).subscribe();
+          this.cs.getMessages( chatId ).subscribe( msgs => this.messages = msgs );
+          this.ss.listenForMessages( chatId ).subscribe( msg => this.messages.push(msg) );
+        }
+
+        return of( null );
+      })
+    ).subscribe();
   }
 
   submit(): void {

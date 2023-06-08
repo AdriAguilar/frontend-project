@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 import { environment } from 'src/environments/environment';
@@ -12,6 +12,7 @@ import { Response, Message, User } from '../interfaces/Chat.interface';
 })
 export class ChatService {
   private baseUrl: string = environment.baseUrl;
+  private chatIdSubject: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
 
   constructor( private http: HttpClient,
                private as: AuthService ) { }
@@ -51,6 +52,14 @@ export class ChatService {
     }).pipe(
       map( resp => resp.data.users)
     );
+  }
+
+  setChatId( chatId: number ): void {
+    this.chatIdSubject.next( chatId );
+  }
+
+  getChatId(): Observable<number | null> {
+    return this.chatIdSubject.asObservable();
   }
   
 }

@@ -3,6 +3,7 @@ import { concatMap, Observable } from 'rxjs';
 import { io } from "socket.io-client";
 import { Message } from '../interfaces/Chat.interface';
 import { ChatService } from './chat.service';
+import { User } from 'src/app/interfaces/Response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,7 @@ export class SocketService {
     });
   }
 
-  joinChat(chatId: number) {
-    this.socket.emit( 'join', chatId );
+  joinChat(chatId: number, username: string) {
+    this.socket.emit( 'join', chatId, username );
   }
 }

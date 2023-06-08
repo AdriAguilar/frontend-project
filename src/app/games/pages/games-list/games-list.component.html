@@ -1,4 +1,4 @@
-<div *ngIf="(games$ | async); else load">
+<div class="pt-24" *ngIf="(games$ | async); else load">
     <app-searcher></app-searcher>
     <form (submit)="submit()" [formGroup]="myForm">
         <select

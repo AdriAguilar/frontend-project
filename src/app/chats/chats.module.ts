@@ -6,22 +6,21 @@ import { ChatsRoutingModule } from './chats-routing.module';
 
 import { ChatComponent } from './components/chat/chat.component';
 import { ChatsComponent } from './pages/chats/chats.component';
-import { MenuComponent } from './menu/menu.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
   declarations: [
     ChatComponent,
     ChatsComponent,
-    MenuComponent,
-  ],
-  exports: [
-    MenuComponent
+    UserListComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
-    ChatsRoutingModule
+    ChatsRoutingModule,
+    SharedModule
   ]
 })
 export class ChatsModule { }

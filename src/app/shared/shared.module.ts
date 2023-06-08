@@ -8,7 +8,6 @@ import { MaterialModule } from '../material/material.module';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoaderComponent } from './loader/loader.component';
-import { MenuComponent } from '../chats/menu/menu.component';
 import { ChatsModule } from '../chats/chats.module';
 
 
@@ -22,15 +21,13 @@ import { ChatsModule } from '../chats/chats.module';
   exports: [
     ErrorPageComponent,
     LoaderComponent,
-    NavbarComponent,
-    MenuComponent
+    NavbarComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     HttpClientModule,
-    RouterModule,
-    ChatsModule
+    RouterModule
   ]
 })
 export class SharedModule { }
