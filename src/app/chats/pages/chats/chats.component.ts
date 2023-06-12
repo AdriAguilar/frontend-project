@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { of, switchMap } from 'rxjs';
+import { concatMap, of } from 'rxjs';
 
 import { UsersService } from '../../data/users.service';
 import { User } from 'src/app/interfaces/Response.interface';
@@ -19,7 +19,7 @@ export class ChatsComponent {
   openChat( user: User ): void {
     this.selectedUser = user;    
     this.us.createChat(user.id).pipe(
-      switchMap( chat => {
+      concatMap( chat => {
         const chatId = chat.id;
         this.cs.setChatId( chatId );
         

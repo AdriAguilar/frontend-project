@@ -23,8 +23,12 @@ export interface Chat {
 export interface Message {
     id?:         number;
     chat_id:    number;
+    chat?:      number;
     message:    string;
-    user:       User;
+    user?:       User;
+    username?:  string;
+    date?:      string;
+    isMyMessage?: boolean;
     created_at?: Date;
     updated_at?: Date;
 }
