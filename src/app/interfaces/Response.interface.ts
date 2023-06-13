@@ -44,7 +44,7 @@ export interface Registered {
 }
 
 export interface User {
-    id?:                number;
+    id:                number;
     role_id?:           number;
     name?:              string;
     username:          string;

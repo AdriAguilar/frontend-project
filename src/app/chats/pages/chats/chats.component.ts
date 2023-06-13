@@ -31,8 +31,6 @@ export class ChatsComponent {
 
         return of(chatId);
       })
-    ).subscribe( chatId => {
-      console.log('Suscribe:', chatId);
-    });
+    ).subscribe();
   }
 }

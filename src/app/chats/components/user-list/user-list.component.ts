@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { UsersService } from '../../data/users.service';
-import { Observable } from 'rxjs';
+
 import { User } from 'src/app/interfaces/Response.interface';
+import { ChatService } from '../../services/chat.service';
 
 @Component({
   selector: 'app-user-list',
@@ -10,13 +10,14 @@ import { User } from 'src/app/interfaces/Response.interface';
 })
 export class UserListComponent {
   @Output() userSelected = new EventEmitter<User>();
-  users$: Observable<User[]>;
+  users: User[] = [];
 
-  constructor( private us: UsersService ) { }
+  constructor( private cs: ChatService ) { }
 
   ngOnInit(): void {
-    this.us.init();
-    this.users$ = this.us.users$;
+    this.cs.userList$.subscribe( users => {
+      this.users = users;
+    });
   }
 
   sendUser( user: User ): void {

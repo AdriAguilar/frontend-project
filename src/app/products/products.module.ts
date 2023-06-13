@@ -9,13 +9,17 @@ import { ProductDetailsComponent } from './pages/product-details/product-details
 import { ProductCreateComponent } from './pages/product-create/product-create.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { SharedModule } from '../shared/shared.module';
+import { ShortDescriptionPipe } from './pipes/short-description.pipe';
+import { CapitalizePipe } from './pipes/capitalize.pipe';
 
 
 @NgModule({
   declarations: [
     ProductListComponent,
     ProductDetailsComponent,
-    ProductCreateComponent
+    ProductCreateComponent,
+    ShortDescriptionPipe,
+    CapitalizePipe
   ],
   imports: [
     CommonModule,

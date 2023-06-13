@@ -39,6 +39,14 @@ export class UsersService {
     );
   }
 
+  getUserById( id: number ): Observable<User> {
+    return this.http.get<User>(`${environment.baseUrl}/users/${id}`, {
+      headers: {
+        Authorization: `Bearer ${this.as.getToken()}`
+      }
+    });
+  }
+
   createChat(userId_2: number): Observable<Chat> {
     return this.as.getUser().pipe(
       switchMap( AuthUser => {
