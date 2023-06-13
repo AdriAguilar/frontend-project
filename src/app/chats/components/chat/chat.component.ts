@@ -37,12 +37,12 @@ export class ChatComponent implements OnInit ,AfterViewChecked {
             this.msgSub.unsubscribe();
           }
 
-          console.log('chat.ts:', this.chatUser.username, chatId);
+          // console.log('chat.ts:', this.chatUser.username, chatId);
 
           this.chatId = chatId;
           this.as.getUser().pipe(
             concatMap( user => {
-              console.log('getUser', user);
+              // console.log('getUser', user);
               this.authUser = user;
               
               this.ss.joinChat( chatId, user.username );
@@ -71,10 +71,10 @@ export class ChatComponent implements OnInit ,AfterViewChecked {
 
   submit(): void {
     if( this.msg.trim() === '' ) return;
-    const date = new Date();
-    date.setHours( date.getHours() - 1 );
+    const formattedDate = new Date(Date.now() + 7200000).toISOString().slice(0, 19).replace("T", " ");
+    console.log( formattedDate );
 
-    this.ss.sendMessage(this.msg, this.chatId, this.authUser.username, date.toLocaleString(), this.authUser.id).subscribe( () => {
+    this.ss.sendMessage(this.msg, this.chatId, this.authUser.username, formattedDate, this.authUser.id).subscribe( () => {
       this.msg = '';
     });
   }
