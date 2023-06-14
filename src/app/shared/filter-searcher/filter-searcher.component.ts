@@ -9,6 +9,7 @@ import { FilterSearcherService } from './services/filter-searcher.service';
 })
 export class FilterSearcherComponent implements OnInit {
   @Input() placeholder: string;
+  @Input() estilo: string;
   @Input() array$: Observable<any[]>;
   @Input() filterBy: string;
   private searchTerms = new Subject<string>();
