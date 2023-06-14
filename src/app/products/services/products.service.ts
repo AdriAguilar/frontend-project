@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { Product } from '../interfaces/Products.interface';
+import { User } from 'src/app/chats/interfaces/Chat.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,22 @@ export class ProductsService {
 
   getProductById( id: number ) {
     return this.http.get<Product>(`${this.baseUrl}/products/${id}`, {
+      headers: {
+        Authorization: `Bearer ${this.as.getToken()}`
+      }
+    });
+  }
+
+  getProductsByUserId( userId: number ) {
+    return this.http.get<Product[]>(`${this.baseUrl}/users/${userId}/products`, {
+      headers: {
+        Authorization: `Bearer ${this.as.getToken()}`
+      }
+    });
+  }
+
+  getSeller( id: number ) {
+    return this.http.get<User>(`${this.baseUrl}/products/${id}/seller`, {
       headers: {
         Authorization: `Bearer ${this.as.getToken()}`
       }

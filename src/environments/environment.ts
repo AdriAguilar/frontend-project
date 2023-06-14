@@ -10,5 +10,6 @@ export const environment = {
           'Accept': '*/*'
         })
     },
-    hostname: 'http://localhost:8000'
+    hostname: 'http://localhost:8000',
+    localStorageUserListKey: 'userList'
 }

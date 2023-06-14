@@ -12,13 +12,14 @@ import { Location } from '@angular/common';
 })
 export class GamesDetailComponent implements OnInit {
   @Input() game?: Result;
+  gamebuy: any[] = [];
   constructor(
     private route: ActivatedRoute,
     private gamesService: GamesService,
     private location: Location) { }
   ngOnInit(): void {
     this.getGames();
-  } 
+  }
   getGames(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.gamesService.getGames(id)
@@ -27,6 +28,7 @@ export class GamesDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
-
-  
+  addToCart(game:Result){
+    return this.gamesService.addGame(game);
+  }
 }

@@ -7,11 +7,13 @@ export interface GamesResponse {
 }
 
 export interface Result {
+    id:                 number;
+    cantidad:           number;
     slug:               string;
     name:               string;
-    description:        string;
     playtime:           number;
     platforms:          Platform[];
+    description:        string;
     stores:             Store[];
     released:           Date;
     tba:                boolean;
@@ -26,7 +28,6 @@ export interface Result {
     metacritic:         number | null;
     suggestions_count:  number;
     updated:            Date;
-    id:                 number;
     score:              null;
     clip:               null;
     tags:               Tag[];
@@ -38,6 +39,7 @@ export interface Result {
     short_screenshots:  ShortScreenshot[];
     parent_platforms:   Platform[];
     genres:             Genre[];
+    price:              30;
 }
 
 export interface AddedByStatus {
@@ -65,11 +67,14 @@ export interface Genre {
     id:   number;
     name: string;
     slug: string;
+
 }
 
 export interface Platform {
     platform: Genre;
 }
+
+
 
 export interface Rating {
     id:      number;

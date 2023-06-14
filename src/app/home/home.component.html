@@ -3,7 +3,7 @@
 </div>
 
 <ng-template #load>
-  <div class="py-4 banner" *ngFor="let game of (game$ | async)">
+  <div class="mt-20 py-4 banner" *ngFor="let game of (game$ | async)">
     <p  class="text-white text-center">¡Descuento del 10% en el {{game.name}} hasta 10/04/2023  !</p>
   </div>
   
@@ -29,6 +29,8 @@
         <!-- Repetir el elemento li para cada juego en el arreglo games$ -->
     </ul>
   </div>
+
+  <app-footer></app-footer>
 </ng-template>
 
 
