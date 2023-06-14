@@ -1,28 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Observable, of, startWith, switchMap } from 'rxjs';
 
-import { Product } from '../../interfaces/Products.interface';
 import { ProductsService } from '../../services/products.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { Product } from '../../interfaces/Products.interface';
 import { environment } from 'src/environments/environment';
 import { FilterSearcherService } from 'src/app/shared/filter-searcher/services/filter-searcher.service';
 
 @Component({
-  selector: 'app-product-list',
-  templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.scss']
+  selector: 'app-my-products',
+  templateUrl: './my-products.component.html',
+  styleUrls: ['./my-products.component.scss']
 })
-export class ProductListComponent implements OnInit {
+export class MyProductsComponent implements OnInit {
   products$: Observable<Product[]>;
   filteredProducts$: Observable<Product[]>;
-  defaultImg: string;
   hostname: string = environment.hostname;
 
   constructor( private ps: ProductsService,
+               private as: AuthService,
                private fss: FilterSearcherService ) { }
-  
+
   ngOnInit(): void {
-    this.products$ = this.ps.getProducts();
+    this.products$ = this.as.getUser().pipe(
+      switchMap(user => {
+        const userId = user.id;
+        return this.ps.getProductsByUserId(userId);
+      })
+    );
+
     this.filteredProducts$ = this.fss.filteredArray$.pipe(
       startWith(null),
       switchMap( filteredArray => {
@@ -34,5 +40,4 @@ export class ProductListComponent implements OnInit {
       })
     );
   }
-  
 }

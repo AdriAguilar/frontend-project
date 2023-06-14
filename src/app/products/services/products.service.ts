@@ -31,6 +31,14 @@ export class ProductsService {
     });
   }
 
+  getProductsByUserId( userId: number ) {
+    return this.http.get<Product[]>(`${this.baseUrl}/users/${userId}/products`, {
+      headers: {
+        Authorization: `Bearer ${this.as.getToken()}`
+      }
+    });
+  }
+
   getSeller( id: number ) {
     return this.http.get<User>(`${this.baseUrl}/products/${id}/seller`, {
       headers: {

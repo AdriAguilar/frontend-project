@@ -11,6 +11,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { SharedModule } from '../shared/shared.module';
 import { ShortDescriptionPipe } from './pipes/short-description.pipe';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
+import { MyProductsComponent } from './pages/my-products/my-products.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
     ProductDetailsComponent,
     ProductCreateComponent,
     ShortDescriptionPipe,
-    CapitalizePipe
+    CapitalizePipe,
+    MyProductsComponent
   ],
   imports: [
     CommonModule,
