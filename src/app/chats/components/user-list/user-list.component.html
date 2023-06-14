@@ -1,10 +1,11 @@
-<div *ngIf="!users">
+<div *ngIf="!(filteredUsers$ | async)">
     <app-loader></app-loader>
 </div>
-<div *ngIf="users">
-    <h2 class="text-lg font-bold pt-4 px-6">Usuarios</h2>
-    <ul class="p-4">
-        <li *ngFor="let user of users" class="flex items-center justify-between border-b py-3 pl-3 pr-6 cursor-pointer transition hover:bg-gray-50" (click)="sendUser(user)">
+<div>
+    <h2 class="text-lg font-bold py-4 px-6">Usuarios</h2>
+    <app-filter-searcher [array$]="users$" filterBy="username" placeholder="Busca un usuario..."></app-filter-searcher>
+    <ul *ngIf="(filteredUsers$ | async)" class="p-4">
+        <li *ngFor="let user of (filteredUsers$ | async)" class="flex items-center justify-between border-b py-3 pl-3 pr-6 cursor-pointer transition hover:bg-gray-50" (click)="sendUser(user)">
             <div class="flex items-center">
                 <img *ngIf="user.image; else default" src="" class="rounded-full w-12 h-12 object-cover mr-4">
                 <ng-template #default>
@@ -14,4 +15,7 @@
             </div>
         </li>
     </ul>
+    <div *ngIf="noUsersFound" class="flex justify-center pt-5">
+        <span class="text-sm text-gray-500">No se han encontrado usuarios</span>
+    </div>
 </div>
