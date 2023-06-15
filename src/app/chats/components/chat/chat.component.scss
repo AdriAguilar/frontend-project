@@ -26,3 +26,21 @@
 .date {
     font-size: .75rem;
 }
+
+.flecha-izquierda::before {
+    content: '\25c4';
+    position: absolute;
+    left: -10px;
+    top: 5px;
+    z-index: 10;
+    color: #e5e7eb;
+}
+
+.flecha-derecha::before {
+    content: '\25ba';
+    position: absolute;
+    left: 56px;
+    top: 5px;
+    z-index: 10;
+    color: #FDC7A2;
+}
