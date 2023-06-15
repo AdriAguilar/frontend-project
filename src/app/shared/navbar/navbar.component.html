@@ -67,7 +67,7 @@
     <!-- Menu Hamburguesa -->
     <div>
 
-      <div id="hb-icon">
+      <div id="hb-icon" (click)="toggleHamburgerMenu()">
         <span></span>
         <span></span>
         <span></span>
@@ -102,6 +102,7 @@
               <a class="menu-link rounded-full px-4 py-2 transition-all bg-gray-100 hover:bg-white hover:text-gray-800 text-center" routerLink="my-products" routerLinkActive="active" role="button">Mis productos</a>
               <a class="menu-link rounded-full px-4 py-2 transition-all bg-gray-100 hover:bg-white hover:text-gray-800 text-center" routerLink="chat" routerLinkActive="active" role="button">Mensajes</a>
               <a class="menu-link rounded-full px-4 py-2 transition-all bg-gray-100 hover:bg-white hover:text-gray-800 text-center" role="button">Modo oscuro/claro</a>
+              <a class="menu-link rounded-full px-4 py-2 transition-all bg-orange-600 hover:bg-orange-700 text-gray-800 text-center" (click)="logout()" routerLinkActive="active" role="button">Logout</a>
             </div>
             
           </div>

@@ -1,6 +1,6 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, map, filter, shareReplay } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { User } from 'src/app/interfaces/Response.interface';
 import { AuthService } from 'src/app/auth/services/auth.service';
@@ -10,10 +10,14 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   @ViewChild('menuButton') menuButton: ElementRef;
   menuVisible: boolean = false;
+  menuHbVisible: boolean = false;
   clickListenerAdded: boolean = false;
+  navIcon: HTMLElement;
+  menuContainer: HTMLElement;
+  menuLinks: NodeListOf<Element>;
   
   user$: Observable<User>;
 
@@ -52,21 +56,45 @@ export class NavbarComponent {
   }
 
   toggleHamburgerMenu(): void {
-    const navIcon = document.getElementById('hb-icon');
-    const menuContainer = document.getElementById('hb-menu');
-    const menuLinks = document.querySelectorAll('.menu-link');
-
-    navIcon.addEventListener('click', () => {
-      navIcon.classList.toggle('open');
-      menuContainer.classList.toggle('visible');
-    });
-
-    menuLinks.forEach( link => {
-      link.addEventListener('click', () => {
-        navIcon.classList.remove('open');
-        menuContainer.classList.remove('visible');
+    this.navIcon = document.getElementById('hb-icon');
+    this.menuContainer = document.getElementById('hb-menu');
+    this.menuLinks = document.querySelectorAll('.menu-link');
+  
+    this.navIcon.addEventListener('click', this.onNavIconClick.bind(this), { once: true });
+  
+    this.menuLinks.forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.stopPropagation();
+        this.onMenuLinkClick();
       });
-    })
+    });
+  
+    document.addEventListener('click', this.onMenuClick.bind(this));
+  }
+
+  onNavIconClick(): void {
+    this.menuVisible = !this.menuVisible;
+    this.navIcon.classList.toggle('open');
+    this.menuContainer.classList.toggle('visible');
+  }
+
+  onMenuLinkClick(): void {
+    this.menuVisible = false;
+    this.navIcon.classList.remove('open');
+    this.menuContainer.classList.remove('visible');
+  }
+
+  onMenuClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    if (
+      !target.closest('#hb-icon') &&
+      !target.closest('#hb-menu') &&
+      this.menuVisible
+    ) {
+      this.menuVisible = false;
+      this.navIcon.classList.remove('open');
+      this.menuContainer.classList.remove('visible');
+    }
   }
 
   onDocumentClick(event: MouseEvent) {
