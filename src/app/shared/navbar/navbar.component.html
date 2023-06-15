@@ -18,7 +18,7 @@
 
         <!-- Botón Dropdown -->
         <div class="flex items-center gap-2 md:gap-4 lg:gap-6">
-          <a class="flex items-center rounded-full px-4 py-2 transition-all text-md font-medium text-gray-600 hover:bg-gray-200 hover:text-gray-800" routerLink="product/create">
+          <a class="flex items-center rounded-full px-4 py-2 transition-all text-md font-medium text-gray-600 hover:bg-gray-200 hover:text-gray-800" routerLink="products/create">
             <svg class="w-4 h-4 mr-1" fill="#ea580c" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" id="memory-plus-circle"><g id="SVGRepo_bgCarrier" stroke-width="0"/><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/><g id="SVGRepo_iconCarrier"><path d="M21 7V15H20V17H19V18H18V19H17V20H15V21H7V20H5V19H4V18H3V17H2V15H1V7H2V5H3V4H4V3H5V2H7V1H15V2H17V3H18V4H19V5H20V7H21M17 6V5H16V4H14V3H8V4H6V5H5V6H4V8H3V14H4V16H5V17H6V18H8V19H14V18H16V17H17V16H18V14H19V8H18V6H17M10 6H12V10H16V12H12V16H10V12H6V10H10V6Z"/></g></svg>
             Crear Producto
           </a>
@@ -87,7 +87,7 @@
 
           <div *ngIf="(user$ | async) as user" class="flex flex-col justify-center w-1/2">
 
-            <div class="flex justify-center items-center my-10 py-8 px-5 border-y-2">
+            <div class="flex justify-center items-center gap-4 sm:gap-6 my-10 py-8 px-5 border-y-2">
               <div class="flex items-center gap-2 rounded-full px-4 py-2 bg-gray-100">
                 <img *ngIf="user.image; else default" src="" class="w-9 mr-3 rounded-full text-gray-700">
                 <ng-template #default>
@@ -95,6 +95,10 @@
                 </ng-template>
                 <span class="font-bold text-base text-gray-700">{{ user.username }}</span>
               </div>
+              <a class="menu-link flex items-center rounded-full px-4 py-2 transition-all bg-gray-100 hover:bg-white hover:text-gray-800 text-center" routerLink="products/create">
+                <svg class="w-4 h-4 mr-1" fill="#ea580c" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" id="memory-plus-circle"><g id="SVGRepo_bgCarrier" stroke-width="0"/><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/><g id="SVGRepo_iconCarrier"><path d="M21 7V15H20V17H19V18H18V19H17V20H15V21H7V20H5V19H4V18H3V17H2V15H1V7H2V5H3V4H4V3H5V2H7V1H15V2H17V3H18V4H19V5H20V7H21M17 6V5H16V4H14V3H8V4H6V5H5V6H4V8H3V14H4V16H5V17H6V18H8V19H14V18H16V17H17V16H18V14H19V8H18V6H17M10 6H12V10H16V12H12V16H10V12H6V10H10V6Z"/></g></svg>
+                Crear Producto
+              </a>
             </div>
 
             <div class="flex flex-col items-center w-full gap-4 sm:gap-6">
