@@ -36,11 +36,15 @@
     color: #e5e7eb;
 }
 
-.flecha-derecha::before {
+.flecha-derecha::after {
     content: '\25ba';
     position: absolute;
-    left: 56px;
+    right: -10px;
     top: 5px;
     z-index: 10;
     color: #FDC7A2;
+}
+
+.maxMsg {
+    max-width: 55%;
 }

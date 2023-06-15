@@ -29,7 +29,7 @@ export class ChatComponent implements OnInit ,AfterViewChecked {
     this.cs.getChatId().pipe(
       concatMap( chatId => {
         const load: boolean = chatId === null ? true : false;
-        this.load = load;
+        this.load = load || true;
         
         if( !load && chatId !== this.currentChatId ) {
           if( this.currentChatId ) {
@@ -49,7 +49,10 @@ export class ChatComponent implements OnInit ,AfterViewChecked {
               return of( null );
             })
           ).subscribe();
-          this.cs.getMessages( chatId ).subscribe( msgs => this.messages = msgs );
+          this.cs.getMessages( chatId ).subscribe( msgs => {
+            this.messages = msgs;
+            this.load = false;
+          });
           this.msgSub = this.ss.listenForMessages( chatId, this.authUser ).subscribe( msg => this.messages.push(msg) );
 
           this.currentChatId = chatId;
