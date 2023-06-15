@@ -29,7 +29,8 @@ export class ChatComponent implements OnInit ,AfterViewChecked {
     this.cs.getChatId().pipe(
       concatMap( chatId => {
         const load: boolean = chatId === null ? true : false;
-        this.load = load || true;
+        this.load = load;
+        this.load = chatId === this.currentChatId ? false : true;
         
         if( !load && chatId !== this.currentChatId ) {
           if( this.currentChatId ) {
