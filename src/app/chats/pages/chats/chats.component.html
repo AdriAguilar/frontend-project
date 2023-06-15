@@ -1,6 +1,10 @@
 
-<div class="flex justify-center h-screen pt-20 bg-gray-300">
-  <div class="sm:w-1/2 md:w-1/3 lg:w-1/4 bg-gray-100 md:block" [hidden]="userListVisible">
+<div class="flex justify-center h-screen pt-20 bg-gray-300 relative">
+  <div class="z-40 sm:w-1/2 md:w-1/3 lg:w-1/4 bg-gray-100 md:block"
+       [ngClass]="{
+          'absolute inset-y-0 left-0 pt-20 bg-opacity-70 backdrop-blur': applyClass,
+          'hidden': userListVisible
+        }">
     <app-user-list (userSelected)="openChat($event)"></app-user-list>
   </div>
   <div class="w-full md:w-2/3 lg:w-1/2 bg-white flex flex-col p-4">

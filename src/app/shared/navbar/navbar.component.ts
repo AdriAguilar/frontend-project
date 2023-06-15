@@ -44,7 +44,6 @@ export class NavbarComponent implements OnInit {
   // Dropdown Menu
   toggleMenu(): void {
     this.menuVisible = !this.menuVisible;
-    console.log(this.menuVisible);
     
     document.removeEventListener('click', this.onDocumentClick.bind(this));
     if (this.menuVisible) {

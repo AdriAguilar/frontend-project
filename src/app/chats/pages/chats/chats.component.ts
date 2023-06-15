@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { concatMap, of } from 'rxjs';
 
 import { UsersService } from '../../data/users.service';
@@ -14,6 +14,7 @@ export class ChatsComponent {
   selectedUser: User | null = null;
   userListVisible: boolean = true;
   btnContent: string = '>';
+  applyClass: boolean = false;
 
   constructor( private us: UsersService,
                private cs: ChatService ) { }
@@ -37,6 +38,11 @@ export class ChatsComponent {
       this.userListVisible = !this.userListVisible;
       this.btnContent = this.userListVisible ? '>' : '<';
     });
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize(event: any) {
+    this.applyClass = window.innerWidth < 768;
   }
 
   toggleUserList() {
