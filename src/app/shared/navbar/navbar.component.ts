@@ -23,6 +23,7 @@ export class NavbarComponent {
 
   ngOnInit(): void {
     this.user$ = this.as.user$;
+    this.toggleHamburgerMenu();
   }
 
   ngOnDestroy() {
@@ -39,6 +40,8 @@ export class NavbarComponent {
   // Dropdown Menu
   toggleMenu(): void {
     this.menuVisible = !this.menuVisible;
+    console.log(this.menuVisible);
+    
     document.removeEventListener('click', this.onDocumentClick.bind(this));
     if (this.menuVisible) {
       document.addEventListener('click', this.onDocumentClick.bind(this));
@@ -46,6 +49,24 @@ export class NavbarComponent {
     } else {
       document.querySelector('.menu-icon').classList.remove('open');
     }
+  }
+
+  toggleHamburgerMenu(): void {
+    const navIcon = document.getElementById('hb-icon');
+    const menuContainer = document.getElementById('hb-menu');
+    const menuLinks = document.querySelectorAll('.menu-link');
+
+    navIcon.addEventListener('click', () => {
+      navIcon.classList.toggle('open');
+      menuContainer.classList.toggle('visible');
+    });
+
+    menuLinks.forEach( link => {
+      link.addEventListener('click', () => {
+        navIcon.classList.remove('open');
+        menuContainer.classList.remove('visible');
+      });
+    })
   }
 
   onDocumentClick(event: MouseEvent) {
@@ -64,10 +85,3 @@ export class NavbarComponent {
     }
   }
 }
-
-
-
-
-
-
-
