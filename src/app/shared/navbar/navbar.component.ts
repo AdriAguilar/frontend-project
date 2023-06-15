@@ -73,13 +73,13 @@ export class NavbarComponent implements OnInit {
   }
 
   onNavIconClick(): void {
-    this.menuVisible = !this.menuVisible;
+    this.menuHbVisible = !this.menuVisible;
     this.navIcon.classList.toggle('open');
     this.menuContainer.classList.toggle('visible');
   }
 
   onMenuLinkClick(): void {
-    this.menuVisible = false;
+    this.menuHbVisible = false;
     this.navIcon.classList.remove('open');
     this.menuContainer.classList.remove('visible');
   }
@@ -89,9 +89,9 @@ export class NavbarComponent implements OnInit {
     if (
       !target.closest('#hb-icon') &&
       !target.closest('#hb-menu') &&
-      this.menuVisible
+      this.menuHbVisible
     ) {
-      this.menuVisible = false;
+      this.menuHbVisible = false;
       this.navIcon.classList.remove('open');
       this.menuContainer.classList.remove('visible');
     }
