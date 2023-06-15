@@ -6,6 +6,15 @@
     transform: rotate(180deg);
 }
 
+.ajustar {
+    justify-content: center;
+}
+
+@media (max-width: 560px) {
+    .ajustar {
+        flex-direction: column;
+    }
+}
 
 #hb-icon {
     width: 2rem;
