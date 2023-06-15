@@ -1,15 +1,10 @@
 
-<div class="flex h-screen pt-20">
-  <div class="w-1/4 bg-gray-100">
+<div class="flex justify-center h-screen pt-20 bg-gray-300">
+  <div class="sm:w-1/2 md:w-1/3 lg:w-1/4 bg-gray-100 md:block" [hidden]="userListVisible">
     <app-user-list (userSelected)="openChat($event)"></app-user-list>
   </div>
-  <div class="w-1/2 bg-white flex flex-col p-4">
+  <div class="w-full md:w-2/3 lg:w-1/2 bg-white flex flex-col p-4">
     <app-chat *ngIf="selectedUser" [chatUser]="selectedUser" class="flex flex-col h-full"></app-chat>
   </div>
-  <div class="w-1/4 bg-gray-100">
-    <h2 class="text-lg text-center font-bold py-4 px-6">Información del Usuario</h2>
-    <div class="p-4">
-      <!-- Aquí se mostraría la información del otro usuario -->
-    </div>
-  </div>
+  <button class="md:hidden bg-orange-600 rounded-md text-white px-4 py-2 fixed top-24 right-4" (click)="toggleUserList()">{{ btnContent }}</button>
 </div>

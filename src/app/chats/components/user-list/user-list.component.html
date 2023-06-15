@@ -3,7 +3,7 @@
 </div>
 <div>
     <h2 class="text-lg font-bold py-4 px-6 text-center">Usuarios</h2>
-    <app-filter-searcher [array$]="users$" filterBy="username" placeholder="Busca un usuario..." estilo="w-20 sm:w-32 md:w-44 lg:w-56 xl:w-80"></app-filter-searcher>
+    <app-filter-searcher [array$]="users$" filterBy="username" placeholder="Busca un usuario..." estilo="w-28 sm:w-36 md:w-44 lg:w-56 xl:w-80"></app-filter-searcher>
     <ul *ngIf="(filteredUsers$ | async)" class="p-4">
         <li *ngFor="let user of (filteredUsers$ | async)" class="flex items-center justify-between border-b py-3 pl-3 pr-6 cursor-pointer transition hover:bg-gray-50" (click)="sendUser(user)">
             <div class="flex items-center">

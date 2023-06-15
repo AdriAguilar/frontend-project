@@ -12,6 +12,8 @@ import { ChatService } from '../../services/chat.service';
 })
 export class ChatsComponent {
   selectedUser: User | null = null;
+  userListVisible: boolean = true;
+  btnContent: string = '>';
 
   constructor( private us: UsersService,
                private cs: ChatService ) { }
@@ -31,6 +33,15 @@ export class ChatsComponent {
 
         return of(chatId);
       })
-    ).subscribe();
+    ).subscribe( () => {
+      this.userListVisible = !this.userListVisible;
+      this.btnContent = this.userListVisible ? '>' : '<';
+    });
   }
+
+  toggleUserList() {
+    this.userListVisible = !this.userListVisible;
+    this.btnContent = this.userListVisible ? '>' : '<';
+  }
+  
 }
