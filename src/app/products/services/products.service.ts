@@ -62,5 +62,13 @@ export class ProductsService {
       }
     });
   }
+
+  deleteProduct( id: number ) {
+    return this.http.delete(`${this.baseUrl}/products/${id}`, {
+      headers: {
+        Authorization: `Bearer ${this.as.getToken()}`
+      }
+    });
+  }
   
 }

@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { ChatService } from 'src/app/chats/services/chat.service';
 import { User } from 'src/app/chats/interfaces/Chat.interface';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { PopupService } from '../../services/popup.service';
 
 @Component({
   selector: 'app-product-details',
@@ -25,7 +26,8 @@ export class ProductDetailsComponent {
                private router: Router,
                private ps: ProductsService,
                private cs: ChatService,
-               private as: AuthService ) { }
+               private as: AuthService,
+               private pop: PopupService ) { }
 
   ngOnInit(): void {
     this.getProductAndSeller();
@@ -48,6 +50,10 @@ export class ProductDetailsComponent {
   addUserToUserList(): void {
     this.cs.addUser( this.seller );
     this.router.navigate(['/chat']);
+  }
+
+  showPopup(): void {
+    this.pop.show();
   }
   
 }

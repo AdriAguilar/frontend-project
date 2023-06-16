@@ -13,6 +13,7 @@ import { ShortDescriptionPipe } from './pipes/short-description.pipe';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { MyProductsComponent } from './pages/my-products/my-products.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
+import { PopupComponent } from './components/popup/popup.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { ProductFormComponent } from './components/product-form/product-form.com
     CapitalizePipe,
     MyProductsComponent,
     ProductFormComponent,
+    PopupComponent,
   ],
   imports: [
     CommonModule,
