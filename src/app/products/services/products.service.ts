@@ -54,5 +54,13 @@ export class ProductsService {
       }
     });
   }
+
+  updateProduct( data: FormData, productId: number ) {
+    return this.http.post<Product>(`${this.baseUrl}/products/${productId}/edit`, data, {
+      headers: {
+        Authorization: `Bearer ${this.as.getToken()}`
+      }
+    });
+  }
   
 }

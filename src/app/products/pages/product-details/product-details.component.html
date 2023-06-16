@@ -24,7 +24,8 @@
                     <button (click)="addUserToUserList()" class="border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-medium py-2 px-4 rounded-full transition-colors duration-300 ease-in-out hover:shadow-md">Chat</button>
                 </div>
             </div>
-            <button class="bg-orange-600 hover:bg-orange-700 text-white font-bold self-stretch md:self-end lg:self-end mt-6 py-2 px-4 rounded-full transition-colors duration-300 ease-in-out">Comprar</button>
+            <button *ngIf="authUser.id !== seller.id" class="bg-orange-600 hover:bg-orange-700 text-white font-bold self-stretch md:self-end lg:self-end mt-6 py-2 px-4 rounded-full transition-colors duration-300 ease-in-out">Comprar</button>
+            <a *ngIf="authUser.id === seller.id" routerLink="edit" class="border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white self-stretch md:self-end lg:self-end font-medium py-2 px-4 rounded-full transition-colors duration-300 ease-in-out hover:shadow-md">Editar</a>
         </div>
         
     </div>

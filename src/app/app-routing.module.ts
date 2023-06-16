@@ -9,6 +9,7 @@ import { AboutUsComponent } from './games/pages/about-us/about-us.component';
 import { ShoppingComponent } from './games/pages/shopping/shopping.component';
 import { MyProductsComponent } from './products/pages/my-products/my-products.component';
 import { ProductDetailsComponent } from './products/pages/product-details/product-details.component';
+import { ProductFormComponent } from './products/components/product-form/product-form.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'my-products/:id',
     component: ProductDetailsComponent
+  },
+  {
+    path: 'my-products/:id/edit',
+    component: ProductFormComponent
   },
   {
     path: '',

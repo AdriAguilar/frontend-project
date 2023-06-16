@@ -12,6 +12,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ShortDescriptionPipe } from './pipes/short-description.pipe';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { MyProductsComponent } from './pages/my-products/my-products.component';
+import { ProductFormComponent } from './components/product-form/product-form.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { MyProductsComponent } from './pages/my-products/my-products.component';
     ProductCreateComponent,
     ShortDescriptionPipe,
     CapitalizePipe,
-    MyProductsComponent
+    MyProductsComponent,
+    ProductFormComponent,
   ],
   imports: [
     CommonModule,

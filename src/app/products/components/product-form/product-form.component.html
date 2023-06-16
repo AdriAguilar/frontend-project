@@ -1,19 +1,21 @@
-
-<div class="flex flex-col pt-28 md:flex-row max-w-4xl mx-auto items-center justify-center">
+<div *ngIf="!product">
+    <app-loader></app-loader>
+</div>
+<div *ngIf="product" class="flex flex-col pt-28 md:flex-row max-w-4xl mx-auto items-center justify-center">
     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-    [formGroup]="myForm"
+    [formGroup]="editForm"
     (submit)="submit()">
         <div class="w-full px-4 pb-4">
-            <h3 class="text-center pb-2 text-orange-600 font-bold text-lg border-b-2">Crear Producto</h3>
+            <h3 class="text-center pb-2 text-orange-600 font-bold text-lg border-b-2">Editar Producto</h3>
             <div class="my-4">
                 <label class="block text-gray-700 font-bold mb-2" for="name">
                     Nombre del producto
                 </label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                       id="name"
-                       formControlName="name"
-                       type="text"
-                       placeholder="Ingresa el nombre del producto">
+                    id="name"
+                    formControlName="name"
+                    type="text"
+                    placeholder="Ingresa el nombre del producto">
                 <span class="text-xs text-red-500"  *ngIf="notValid('name')">
                     El nombre es obligatorio
                 </span>
@@ -23,9 +25,9 @@
                     Descripción
                 </label>
                 <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                       id="description"
-                       formControlName="description"
-                       placeholder="Ingresa una descripción"></textarea>
+                    id="description"
+                    formControlName="description"
+                    placeholder="Ingresa una descripción"></textarea>
                 <span class="text-xs text-red-500"  *ngIf="notValid('description')">
                     La descripción es obligatoria
                 </span>
@@ -36,10 +38,10 @@
                         Precio
                     </label>
                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                           id="price"
-                           formControlName="price"
-                           type="number"
-                           placeholder="Ingresa el precio">
+                        id="price"
+                        formControlName="price"
+                        type="number"
+                        placeholder="Ingresa el precio">
                     <span class="text-xs text-red-500"  *ngIf="notValid('price')">
                         Debes agregar un precio para el producto
                     </span>
@@ -49,10 +51,10 @@
                         Cantidad
                     </label>
                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                           id="quantity"
-                           formControlName="quantity"
-                           type="number"
-                           placeholder="Ingresa la cantidad">
+                        id="quantity"
+                        formControlName="quantity"
+                        type="number"
+                        placeholder="Ingresa la cantidad">
                     <span class="text-xs text-red-500"  *ngIf="notValid('quantity')">
                         Debes agregar una cantidad de productos
                     </span>
@@ -67,7 +69,7 @@
                             id="category"
                             formControlName="category_id">
                         <option [ngValue]="null" disabled>Selecciona una categoría</option>
-                        <option *ngFor="let category of (categories$ | async)" 
+                        <option *ngFor="let category of categories" 
                                 [ngValue]="category.id">{{ category.name }}</option>
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
