@@ -5,7 +5,6 @@ import { NgxDropzoneChangeEvent } from 'ngx-dropzone';
 import { User } from 'src/app/interfaces/Response.interface';
 import { ProfilePopupService } from '../../services/profile-popup.service';
 import { UserService } from '../../services/user.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'profile-popup',
@@ -80,6 +79,7 @@ export class ProfilePopupComponent implements OnInit {
     this.us.updateUser( formData, this.user.id ).subscribe(
       () => {
         this.showPopup = false;
+        location.reload();
       }
     );
   }
