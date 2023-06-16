@@ -5,6 +5,7 @@ import { ChatService } from '../../services/chat.service';
 import { UsersService } from '../../data/users.service';
 import { Observable, of, startWith, switchMap } from 'rxjs';
 import { FilterSearcherService } from 'src/app/shared/filter-searcher/services/filter-searcher.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-user-list',
@@ -16,6 +17,7 @@ export class UserListComponent {
   users$: Observable<User[]>;
   filteredUsers$: Observable<User[]>;
   noUsersFound: boolean = false;
+  hostname: string = environment.hostname;
 
   constructor( private cs: ChatService,
                private us: UsersService,

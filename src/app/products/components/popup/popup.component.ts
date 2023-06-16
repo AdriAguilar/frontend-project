@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PopupService } from '../../services/popup.service';
 import { ProductsService } from '../../services/products.service';
 import { Router } from '@angular/router';
@@ -8,9 +8,9 @@ import { Router } from '@angular/router';
   templateUrl: './popup.component.html',
   styleUrls: ['./popup.component.scss']
 })
-export class PopupComponent {
+export class PopupComponent implements OnInit {
   @Input() productId: number; 
-  showPopup = false;
+  showPopup: boolean = false;
 
   constructor( private pop: PopupService,
                private ps: ProductsService,

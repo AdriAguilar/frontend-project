@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { User } from 'src/app/interfaces/Response.interface';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-navbar',
@@ -20,6 +21,7 @@ export class NavbarComponent implements OnInit {
   menuLinks: NodeListOf<Element>;
   
   user$: Observable<User>;
+  hostname: string = environment.hostname;
 
   constructor( private router: Router,
               private as: AuthService,

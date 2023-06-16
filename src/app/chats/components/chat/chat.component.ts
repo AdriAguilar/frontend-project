@@ -5,6 +5,7 @@ import { ChatService } from '../../services/chat.service';
 import { Message, User } from '../../../interfaces/Response.interface';
 import { SocketService } from '../../services/socket.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-chat',
@@ -20,6 +21,7 @@ export class ChatComponent implements OnInit ,AfterViewChecked {
   msg: string = '';
   messages: Message[] = [];
   currentChatId: number;
+  hostname: string = environment.hostname;
 
   constructor( private ss: SocketService,
                private cs: ChatService,
