@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
 import { concatMap, Observable } from 'rxjs';
 import { io } from "socket.io-client";
-import { Message } from '../interfaces/Chat.interface';
 import { ChatService } from './chat.service';
-import { User } from 'src/app/interfaces/Response.interface';
+import { Message, User } from 'src/app/interfaces/Response.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SocketService {
   private socket;
-  messages: Message[] = [];
 
   constructor( private cs: ChatService ) {
     this.socket = io('http://localhost:3000');
@@ -19,21 +17,28 @@ export class SocketService {
     });
   }
 
-  sendMessage(message: string, chatId: number) {
+  sendMessage(message: string, chatId: number, username: string, date: string, userId: number) {
     return this.cs.sendMessage(message, chatId).pipe(
-      concatMap(async () => this.socket.emit('sendMessage', chatId, message))
+      concatMap(async () => this.socket.emit('sendMessage', chatId, message, username, date, userId))
     );
   }
 
-  listenForMessages(chatId: number): Observable<any> {
+  listenForMessages( chatId: number, loggedInUser: User ): Observable<Message> {
     return new Observable((observer) => {
-      this.socket.on('receiveMessage', (message: any) => {
-        observer.next(message);
+      this.socket.on('receiveMessage', (message: Message) => {
+        if( message.chat === chatId ) {
+          message.isMyMessage = message.user === loggedInUser;
+          observer.next(message);
+        }
       });
     });
   }
 
   joinChat(chatId: number, username: string) {
     this.socket.emit( 'join', chatId, username );
+  }
+
+  leaveChat(chatId: number, username: string) {
+    this.socket.emit( 'leave', chatId, username );
   }
 }

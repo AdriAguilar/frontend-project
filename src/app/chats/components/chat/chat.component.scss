@@ -1,3 +1,7 @@
+.orange-bg {
+    background: #ea580c;
+}
+
 .scrollbar-w-2::-webkit-scrollbar {
     width: 0.25rem;
     height: 0.25rem;
@@ -21,4 +25,26 @@
 
 .date {
     font-size: .75rem;
+}
+
+.flecha-izquierda::before {
+    content: '\25c4';
+    position: absolute;
+    left: -10px;
+    top: 5px;
+    z-index: 10;
+    color: #e5e7eb;
+}
+
+.flecha-derecha::after {
+    content: '\25ba';
+    position: absolute;
+    right: -10px;
+    top: 5px;
+    z-index: 10;
+    color: #FDC7A2;
+}
+
+.maxMsg {
+    max-width: 55%;
 }

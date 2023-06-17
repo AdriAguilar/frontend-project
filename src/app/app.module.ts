@@ -11,26 +11,30 @@ import { HomeComponent } from './home/home.component';
 
 import { ShoppingComponent } from './games/pages/shopping/shopping.component';
 import { MatIconModule } from '@angular/material/icon';
+import { UsersComponent } from './users/users.component';
+import { ProductsModule } from "./products/products.module";
 
 
 
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    ShoppingComponent,
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    FormsModule,
-    SharedModule,
-    MatIconModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        ShoppingComponent,
+        UsersComponent,
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        FormsModule,
+        SharedModule,
+        MatIconModule,
+        ProductsModule
+    ]
 })
 export class AppModule { }
