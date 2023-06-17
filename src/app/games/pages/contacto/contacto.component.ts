@@ -17,15 +17,20 @@ export class ContactoComponent {
     this.formulario = this.formBuilder.group({
       nombre: ['', Validators.required],
       correo: ['', [Validators.required, Validators.email]],
-      numero: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
       mensaje: ['', Validators.required],
       aceptar: [false, Validators.requiredTrue],
       archivos: [null]
     });
   }
 
+  notValid( field: string ) {
+    return this.formulario.controls[ field ].errors
+        && this.formulario.controls[ field ].touched;
+  }
+
   onSubmit() {
     if (this.formulario.invalid) {
+      this.formulario.markAllAsTouched();
       return;
     }
 

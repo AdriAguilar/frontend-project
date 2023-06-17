@@ -5,7 +5,7 @@
     <div class="flex items-center gap-2 md:gap-4 lg:gap-6 text-md font-medium text-gray-600">
       <a routerLink=""><img src="assets/logo/logo-white.png" class="w-24"></a>
       <a routerLink="products" class="rounded-full px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800">Productos</a>
-      <a routerLink="games" class="rounded-full px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800">Juegos</a>
+      <a routerLink="games" class="rounded-full px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800">Claves</a>
       <a href="https://discord.gg/4CjeaVBMzZ" class="rounded-full px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800">Discord</a>
       <a routerLink="aboutUs" class="rounded-full px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800">About Us</a>
       <a routerLink="shopping" class="relative rounded-full flex items-center px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800">
@@ -82,10 +82,13 @@
         <div class="fixed bg-gray-400 bg-opacity-90 backdrop-blur right-0 top-20 flex flex-col items-center pt-10 w-full h-screen">
           <div class="flex ajustar items-center w-full gap-4 sm:gap-6">
             <a routerLink="products" class="menu-link rounded-full px-4 py-2 transition-all bg-gray-200 hover:bg-white hover:text-gray-800 text-center">Productos</a>
-            <a routerLink="games" class="menu-link rounded-full px-4 py-2 transition-all bg-gray-200 hover:bg-white hover:text-gray-800 text-center">Juegos</a>
+            <a routerLink="games" class="menu-link rounded-full px-4 py-2 transition-all bg-gray-200 hover:bg-white hover:text-gray-800 text-center">Claves</a>
             <a href="https://discord.gg/4CjeaVBMzZ" class="menu-link rounded-full px-4 py-2 transition-all bg-gray-200 hover:bg-white hover:text-gray-800 text-center">Discord</a>
             <a routerLink="aboutUs" class="menu-link rounded-full px-4 py-2 transition-all bg-gray-200 hover:bg-white hover:text-gray-800 text-center">About Us</a>
-            <a routerLink="shopping" class="menu-link rounded-full px-4 py-2 transition-all bg-gray-200 hover:bg-white hover:text-gray-800 flex justify-center items-center "><mat-icon>shopping_cart</mat-icon></a>
+            <a routerLink="shopping" class="relative menu-link rounded-full px-4 py-2 transition-all bg-gray-200 hover:bg-white hover:text-gray-800 text-center">
+              <mat-icon>shopping_cart</mat-icon>
+              <span class="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 bg-red-400 text-black text-xs font-bold rounded-full game-count">{{ totalGameCount }}</span>
+            </a> 
           </div>
 
           <div *ngIf="(user$ | async) as user" class="flex flex-col justify-center w-full">
