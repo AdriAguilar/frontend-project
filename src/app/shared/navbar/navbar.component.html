@@ -8,7 +8,10 @@
       <a routerLink="games" class="rounded-full px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800">Juegos</a>
       <a href="https://discord.gg/4CjeaVBMzZ" class="rounded-full px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800">Discord</a>
       <a routerLink="aboutUs" class="rounded-full px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800">About Us</a>
-      <a routerLink="shopping" class="rounded-full flex items-center px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800"><mat-icon>shopping_cart</mat-icon></a>
+      <a routerLink="shopping" class="rounded-full flex items-center px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800">
+        <mat-icon>shopping_cart</mat-icon>
+        <span class="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 bg-red-400 text-black text-xs font-bold rounded-full game-count">{{ totalGameCount }}</span>
+      </a> 
     </div>
 
     <div class="text-gray-700 ">

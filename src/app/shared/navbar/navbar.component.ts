@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 
 import { User } from 'src/app/interfaces/Response.interface';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { GamesService } from '../../games/services/games.service';
+import { Result } from '../../games/interfaces/Games.interface';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -16,19 +18,27 @@ export class NavbarComponent implements OnInit {
   menuVisible: boolean = false;
   menuHbVisible: boolean = false;
   clickListenerAdded: boolean = false;
+
   navIcon: HTMLElement;
   menuContainer: HTMLElement;
   menuLinks: NodeListOf<Element>;
-  
   user$: Observable<User>;
   hostname: string = environment.hostname;
 
+  myCart$ = this.gamesService.myCart$
+  gameList: Result[];
+  gameCount: number;
+  totalGameCount: number;
+
   constructor( private router: Router,
-              private as: AuthService,
-              ) { }
+               private as: AuthService,
+               private gamesService: GamesService) { }
 
   ngOnInit(): void {
     this.user$ = this.as.user$;
+    this.gameList = this.gamesService.myList;
+    this.gameCount = this.gamesService.gameCount;
+    this.totalGameCount = this.gamesService.getTotalGameCount();
     this.toggleHamburgerMenu();
   }
 
@@ -42,7 +52,7 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  
+
   // Dropdown Menu
   toggleMenu(): void {
     this.menuVisible = !this.menuVisible;
@@ -113,4 +123,19 @@ export class NavbarComponent implements OnInit {
       }
     }
   }
+
+  addGame(game: Result): void {
+    this.gamesService.addGame(game);
+  }
+
+  deleteGames(id: number): void {
+    this.gamesService.deleteGames(id);
+  }
+
+  transaction(operation: string, id: number): void {
+    this.gamesService.transaction(operation, id);
+  }
 }
+
+
+
