@@ -33,6 +33,10 @@ import { PopupComponent } from './components/popup/popup.component';
     ReactiveFormsModule,
     NgxDropzoneModule,
     SharedModule
+  ],
+  exports: [
+    CapitalizePipe,
+    ShortDescriptionPipe
   ]
 })
 export class ProductsModule { }
