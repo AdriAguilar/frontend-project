@@ -15,6 +15,7 @@ import { FilterSearcherService } from 'src/app/shared/filter-searcher/services/f
 export class ProductListComponent implements OnInit {
   products$: Observable<Product[]>;
   filteredProducts$: Observable<Product[]>;
+  noProductsFound: boolean = false;
   defaultImg: string;
   hostname: string = environment.hostname;
 
@@ -27,8 +28,10 @@ export class ProductListComponent implements OnInit {
       startWith(null),
       switchMap( filteredArray => {
         if (filteredArray) {
+          this.noProductsFound = filteredArray.length === 0;
           return of(filteredArray);
         } else {
+          this.noProductsFound = false;
           return this.products$;
         }
       })

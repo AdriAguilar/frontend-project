@@ -15,6 +15,7 @@ import { FilterSearcherService } from 'src/app/shared/filter-searcher/services/f
 export class MyProductsComponent implements OnInit {
   products$: Observable<Product[]>;
   filteredProducts$: Observable<Product[]>;
+  noProductsFound: boolean = false;
   hostname: string = environment.hostname;
 
   constructor( private ps: ProductsService,
@@ -33,8 +34,10 @@ export class MyProductsComponent implements OnInit {
       startWith(null),
       switchMap( filteredArray => {
         if (filteredArray) {
+          this.noProductsFound = filteredArray.length === 0;
           return of(filteredArray);
         } else {
+          this.noProductsFound = false;
           return this.products$;
         }
       })

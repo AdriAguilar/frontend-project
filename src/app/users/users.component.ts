@@ -21,6 +21,7 @@ export class UsersComponent implements OnInit {
   user$: Observable<User>;
   products$: Observable<Product[]>;
   filteredProducts$: Observable<Product[]>;
+  noProductsFound: boolean = false;
   usernames: string[];
   username: string;
   hostname: string = environment.hostname;
@@ -55,8 +56,10 @@ export class UsersComponent implements OnInit {
       startWith(null),
       switchMap( filteredArray => {
         if (filteredArray) {
+          this.noProductsFound = filteredArray.length === 0;
           return of(filteredArray);
         } else {
+          this.noProductsFound = false;
           return this.products$;
         }
       })
