@@ -1,0 +1,50 @@
+.orange-bg {
+    background: #ea580c;
+}
+
+.scrollbar-w-2::-webkit-scrollbar {
+    width: 0.25rem;
+    height: 0.25rem;
+}
+   
+.scrollbar-track-lighter::-webkit-scrollbar-track {
+    --bg-opacity: 1;
+    background-color: #eeeeee;
+    background-color: rgba(247, 250, 252, var(--bg-opacity));
+}
+   
+.scrollbar-thumb::-webkit-scrollbar-thumb {
+    --bg-opacity: 1;
+    background-color: rgba(237, 242, 247, var(--bg-opacity));
+    background-color: #d1d1d1;
+}
+   
+.scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
+    border-radius: 0.25rem;
+}
+
+.date {
+    font-size: .75rem;
+}
+
+.flecha-izquierda::before {
+    content: '\25c4';
+    position: absolute;
+    left: -10px;
+    top: 5px;
+    z-index: 10;
+    color: #e5e7eb;
+}
+
+.flecha-derecha::after {
+    content: '\25ba';
+    position: absolute;
+    right: -10px;
+    top: 5px;
+    z-index: 10;
+    color: #FDC7A2;
+}
+
+.maxMsg {
+    max-width: 55%;
+}

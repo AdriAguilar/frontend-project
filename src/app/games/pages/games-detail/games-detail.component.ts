@@ -12,6 +12,7 @@ import { Location } from '@angular/common';
 })
 export class GamesDetailComponent implements OnInit {
   @Input() game?: Result;
+  gamebuy: any[] = [];
   constructor(
     private route: ActivatedRoute,
     private gamesService: GamesService,
@@ -30,5 +31,4 @@ export class GamesDetailComponent implements OnInit {
   addToCart(game:Result){
     return this.gamesService.addGame(game);
   }
-
 }

@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { Component, HostListener } from '@angular/core';
+import { concatMap, of } from 'rxjs';
 
 import { UsersService } from '../../data/users.service';
 import { User } from 'src/app/interfaces/Response.interface';
-import { SocketService } from '../../services/socket.service';
+import { ChatService } from '../../services/chat.service';
 
 @Component({
   selector: 'app-chats',
@@ -12,25 +11,43 @@ import { SocketService } from '../../services/socket.service';
   styleUrls: ['./chats.component.scss']
 })
 export class ChatsComponent {
-  users$: Observable<User[]>;
+  selectedUser: User | null = null;
+  userListVisible: boolean = true;
+  btnContent: string = '>';
+  applyClass: boolean = false;
 
   constructor( private us: UsersService,
-               private router: Router ) { }
+               private cs: ChatService ) { }
 
-  ngOnInit(): void {
-    this.us.init();
-    this.users$ = this.us.users$;
-  }
-  
-  openChat( userId: number ): void {
-    this.us.createChat(userId).subscribe( (chat) => {
-      const chatId = chat.id
-      let chats = JSON.parse( localStorage.getItem('chats') ) || [];
-      if (!chats.includes(chatId)) {
-        chats.push(chatId);
-      }
-      localStorage.setItem('chats', JSON.stringify( chats ));
-      this.router.navigate([`chat/${chatId}`]);
+  openChat( user: User ): void {
+    this.selectedUser = user;    
+    this.us.createChat(user.id).pipe(
+      concatMap( chat => {
+        const chatId = chat.id;
+        this.cs.setChatId( chatId );
+        
+        let chats = JSON.parse( localStorage.getItem('chats') ) || [];
+        if (!chats.includes(chatId)) {
+          chats.push(chatId);
+        }
+        localStorage.setItem('chats', JSON.stringify( chats ));
+
+        return of(chatId);
+      })
+    ).subscribe( () => {
+      this.userListVisible = !this.userListVisible;
+      this.btnContent = this.userListVisible ? '>' : '<';
     });
   }
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize(event: any) {
+    this.applyClass = window.innerWidth < 768;
+  }
+
+  toggleUserList() {
+    this.userListVisible = !this.userListVisible;
+    this.btnContent = this.userListVisible ? '>' : '<';
+  }
+  
 }

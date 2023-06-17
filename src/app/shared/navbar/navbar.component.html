@@ -1,64 +1,128 @@
-<nav class="bg-gray-100 bg-opacity-80 backdrop-blur py-4 fixed top-0 w-full z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-      <!-- Logo -->
-      <div class=" flex items-center gap-8 text-md font-medium text-gray-600 hover:text-gray-800">
-        <a routerLink=""><img src="assets/logo/logo-white.png" alt="" class="w-24"></a>
-        <a routerLink="games" class="ml-6">Juegos</a>
-        <a href="https://discord.gg/4CjeaVBMzZ" class="ml-6">Discord</a>
-        <a routerLink="aboutUs" class="ml-6">About Us</a>
-        <a routerLink="shopping" class="ml-6">
-          <div class="relative inline-block">
-            <i class="text-gray-800 fas fa-gamepad mr-2"><mat-icon>shopping_cart</mat-icon></i>
-            <span class="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 bg-red-400 text-black text-xs font-bold rounded-full game-count">{{ totalGameCount }}</span>
+<nav class="bg-gray-100 bg-opacity-80 backdrop-blur py-4 px-8 fixed top-0 w-full z-50">
+  <!-- Navbar desktop/laptop -->
+  <div class="mx-auto hidden lg:flex lg:justify-between lg:items-center">
+    <!-- Logo -->
+    <div class="flex items-center gap-2 md:gap-4 lg:gap-6 text-md font-medium text-gray-600">
+      <a routerLink=""><img src="assets/logo/logo-white.png" class="w-24"></a>
+      <a routerLink="products" class="rounded-full px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800">Productos</a>
+      <a routerLink="games" class="rounded-full px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800">Juegos</a>
+      <a href="https://discord.gg/4CjeaVBMzZ" class="rounded-full px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800">Discord</a>
+      <a routerLink="aboutUs" class="rounded-full px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800">About Us</a>
+      <a routerLink="shopping" class="rounded-full flex items-center px-4 py-2 transition-all hover:bg-gray-200 hover:text-gray-800">
+        <mat-icon>shopping_cart</mat-icon>
+        <span class="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 bg-red-400 text-black text-xs font-bold rounded-full game-count">{{ totalGameCount }}</span>
+      </a> 
+    </div>
+
+    <div class="text-gray-700 ">
+
+      <!-- Autenticado -->
+      <div *ngIf="(user$ | async) as user">
+
+        <!-- Botón Dropdown -->
+        <div class="flex items-center gap-2 md:gap-4 lg:gap-6">
+          <a class="flex items-center rounded-full px-4 py-2 transition-all text-md font-medium text-gray-600 hover:bg-gray-200 hover:text-gray-800" routerLink="products/create">
+            <svg class="w-4 h-4 mr-1" fill="#ea580c" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" id="memory-plus-circle"><g id="SVGRepo_bgCarrier" stroke-width="0"/><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/><g id="SVGRepo_iconCarrier"><path d="M21 7V15H20V17H19V18H18V19H17V20H15V21H7V20H5V19H4V18H3V17H2V15H1V7H2V5H3V4H4V3H5V2H7V1H15V2H17V3H18V4H19V5H20V7H21M17 6V5H16V4H14V3H8V4H6V5H5V6H4V8H3V14H4V16H5V17H6V18H8V19H14V18H16V17H17V16H18V14H19V8H18V6H17M10 6H12V10H16V12H12V16H10V12H6V10H10V6Z"/></g></svg>
+            Crear Producto
+          </a>
+          <button #menuButton (click)="toggleMenu()" class="flex items-center p-1.5 text-sm font-medium text-gray-900 transition-all hover:bg-gray-200 rounded-full md:mr-0 dark:text-white" type="button">
+              <img *ngIf="user.image; else default" src="{{ hostname + user.image }}" class="w-9 h-9 object-cover mr-3 rounded-full text-gray-700">
+              <ng-template #default>
+                <svg class="w-9 mr-3" fill="#f3f4f6" viewBox="-8.96 -8.96 81.92 81.92" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;" stroke="#f3f4f6" stroke-width="0.00064"><g id="SVGRepo_bgCarrier" stroke-width="0"><path transform="translate(-8.96, -8.96), scale(5.12)" fill="#ea580c" d="M9.166.33a2.25 2.25 0 00-2.332 0l-5.25 3.182A2.25 2.25 0 00.5 5.436v5.128a2.25 2.25 0 001.084 1.924l5.25 3.182a2.25 2.25 0 002.332 0l5.25-3.182a2.25 2.25 0 001.084-1.924V5.436a2.25 2.25 0 00-1.084-1.924L9.166.33z" strokewidth="0"></path></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g transform="matrix(1,0,0,1,-1216,-192)"> <rect id="Icons" x="0" y="0" width="1280" height="800" style="fill:none;"></rect> <g id="Icons1" serif:id="Icons"> <g id="Strike"> </g> <g id="H1"> </g> <g id="H2"> </g> <g id="H3"> </g> <g id="list-ul"> </g> <g id="hamburger-1"> </g> <g id="hamburger-2"> </g> <g id="list-ol"> </g> <g id="list-task"> </g> <g id="trash"> </g> <g id="vertical-menu"> </g> <g id="horizontal-menu"> </g> <g id="sidebar-2"> </g> <g id="Pen"> </g> <g id="Pen1" serif:id="Pen"> </g> <g id="clock"> </g> <g id="external-link"> </g> <g id="hr"> </g> <g id="info"> </g> <g id="warning"> </g> <g id="plus-circle"> </g> <g id="minus-circle"> </g> <g id="vue"> </g> <g id="cog"> </g> <g id="logo"> </g> <g id="radio-check"> </g> <g id="eye-slash"> </g> <g id="eye"> </g> <g id="toggle-off"> </g> <g id="shredder"> </g> <g id="spinner--loading--dots-" serif:id="spinner [loading, dots]"> </g> <g id="react"> </g> <g id="check-selected"> </g> <g id="turn-off"> </g> <g id="code-block"> </g> <g id="user" transform="matrix(1.03318,0,0,1.03318,-20.8457,199.979)"> <g transform="matrix(0.909091,0,0,0.909091,1182.28,-18.6364)"> <path d="M50,46.5C42.8,46.5 37,40.7 37,33.5C37,26.3 42.8,20.5 50,20.5C57.2,20.5 63,26.3 63,33.5C63,40.7 57.2,46.5 50,46.5ZM50,24.5C45,24.5 41,28.5 41,33.5C41,38.5 45,42.5 50,42.5C55,42.5 59,38.5 59,33.5C59,28.5 55,24.5 50,24.5Z" style="fill-rule:nonzero;"></path> </g> <g transform="matrix(1,0,0,1,1177.7,-20.5)"> <path d="M34.036,58.5L34.036,67L30.4,67L30.4,58.5C30.4,51.318 39.218,45.773 50.4,45.773C61.582,45.773 70.4,51.318 70.4,58.5L70.4,67L66.764,67L66.764,58.5C66.764,53.591 59.309,49.409 50.4,49.409C41.491,49.409 34.036,53.591 34.036,58.5Z" style="fill-rule:nonzero;"></path> </g> </g> <g id="coffee-bean"> </g> <g transform="matrix(0.638317,0.368532,-0.368532,0.638317,785.021,-208.975)"> <g id="coffee-beans"> <g id="coffee-bean1" serif:id="coffee-bean"> </g> </g> </g> <g id="coffee-bean-filled"> </g> <g transform="matrix(0.638317,0.368532,-0.368532,0.638317,913.062,-208.975)"> <g id="coffee-beans-filled"> <g id="coffee-bean2" serif:id="coffee-bean"> </g> </g> </g> <g id="clipboard"> </g> <g transform="matrix(1,0,0,1,128.011,1.35415)"> <g id="clipboard-paste"> </g> </g> <g id="clipboard-copy"> </g> <g id="Layer1"> </g> </g> </g> </g></svg>
+              </ng-template>
+              <div class="flex items-center">
+                <span class="font-bold text-base text-gray-700">{{ user.username }}</span>
+                <svg class="w-5 mx-0.5 text-orange-500 menu-icon" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              </div>
+          </button>
+        </div>
+
+        <!-- Menu Dropdown -->
+        <div id="menu-dropdown" class="relative" *ngIf="menuVisible">
+          <div class="absolute right-0 z-50 mt-2 py-2 w-48 bg-white rounded-md shadow-lg">
+            <a class="block px-4 py-2 text-gray-800 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-gray-900 hover:font-medium" routerLink="auth/profile" routerLinkActive="active" role="button">Perfil</a>
+            <a class="block px-4 py-2 text-gray-800 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-gray-900 hover:font-medium" routerLink="my-products" routerLinkActive="active" role="button">Mis productos</a>
+            <a class="block px-4 py-2 text-gray-800 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-gray-900 hover:font-medium" routerLink="chat" routerLinkActive="active" role="button">Mensajes</a>
+            <a class="block px-4 py-2 text-gray-800 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-gray-900 hover:font-medium" role="button">Modo oscuro/claro</a>
+            <div class="h-px w-11/12 mx-auto my-2 bg-gray-200"></div>
+            <a class="block px-4 py-2 font-medium text-orange-600 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-orange-700" (click)="logout()" routerLinkActive="active" role="button">Logout</a>
           </div>
-        </a>
+        </div>
+
+      </div>
+      <!-- Sin Autenticar -->
+      <div *ngIf="!(user$ | async)">
+        <div class="text-sm">
+          <div class="flex items-center">
+            <a class="mr-6 text-orange-600 hover:text-orange-700 " routerLink="./auth/login" routerLinkActive="active" role="button">Iniciar sesión</a>
+            <a class="text-orange-600 hover:text-orange-700" routerLink="./auth/register" routerLinkActive="active" role="button">Registrarse</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar tablet/mobile -->
+  <div class="flex justify-between items-center pt-1 lg:hidden">
+
+    <a routerLink=""><img src="assets/logo/logo-white.png" class="w-24"></a>
+
+    <!-- Menu Hamburguesa -->
+    <div>
+
+      <div id="hb-icon" (click)="toggleHamburgerMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
 
-      <div class="text-gray-700 ">
+      <div id="hb-menu" class="show relative text-md font-medium text-gray-600">
 
-        <!-- Autenticado -->
-        <div *ngIf="(user$ | async) as user; else Auth">
-
-          <!-- Botón Dropdown -->
-          <div class="flex items-center gap-8">
-            <a class="flex items-center rounded-full px-4 py-2 transition-all text-md font-medium text-gray-600 hover:bg-gray-200 hover:text-gray-800" routerLink="product/create">
-              <svg class="w-4 h-4 mr-1" fill="#ea580c" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" id="memory-plus-circle"><g id="SVGRepo_bgCarrier" stroke-width="0"/><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/><g id="SVGRepo_iconCarrier"><path d="M21 7V15H20V17H19V18H18V19H17V20H15V21H7V20H5V19H4V18H3V17H2V15H1V7H2V5H3V4H4V3H5V2H7V1H15V2H17V3H18V4H19V5H20V7H21M17 6V5H16V4H14V3H8V4H6V5H5V6H4V8H3V14H4V16H5V17H6V18H8V19H14V18H16V17H17V16H18V14H19V8H18V6H17M10 6H12V10H16V12H12V16H10V12H6V10H10V6Z"/></g></svg>
-              Crear Producto
-            </a>
-            <button #menuButton (click)="toggleMenu()" class="flex items-center p-1.5 text-sm font-medium text-gray-900 transition-all hover:bg-gray-200 rounded-full md:mr-0 dark:text-white" type="button">
-                <img *ngIf="user.image; else default" src="" class="w-9 mr-3 rounded-full text-gray-700">
-                <ng-template #default>
-                  <svg class="w-9 mr-3" fill="#f3f4f6" viewBox="-8.96 -8.96 81.92 81.92" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;" stroke="#f3f4f6" stroke-width="0.00064"><g id="SVGRepo_bgCarrier" stroke-width="0"><path transform="translate(-8.96, -8.96), scale(5.12)" fill="#ea580c" d="M9.166.33a2.25 2.25 0 00-2.332 0l-5.25 3.182A2.25 2.25 0 00.5 5.436v5.128a2.25 2.25 0 001.084 1.924l5.25 3.182a2.25 2.25 0 002.332 0l5.25-3.182a2.25 2.25 0 001.084-1.924V5.436a2.25 2.25 0 00-1.084-1.924L9.166.33z" strokewidth="0"></path></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g transform="matrix(1,0,0,1,-1216,-192)"> <rect id="Icons" x="0" y="0" width="1280" height="800" style="fill:none;"></rect> <g id="Icons1" serif:id="Icons"> <g id="Strike"> </g> <g id="H1"> </g> <g id="H2"> </g> <g id="H3"> </g> <g id="list-ul"> </g> <g id="hamburger-1"> </g> <g id="hamburger-2"> </g> <g id="list-ol"> </g> <g id="list-task"> </g> <g id="trash"> </g> <g id="vertical-menu"> </g> <g id="horizontal-menu"> </g> <g id="sidebar-2"> </g> <g id="Pen"> </g> <g id="Pen1" serif:id="Pen"> </g> <g id="clock"> </g> <g id="external-link"> </g> <g id="hr"> </g> <g id="info"> </g> <g id="warning"> </g> <g id="plus-circle"> </g> <g id="minus-circle"> </g> <g id="vue"> </g> <g id="cog"> </g> <g id="logo"> </g> <g id="radio-check"> </g> <g id="eye-slash"> </g> <g id="eye"> </g> <g id="toggle-off"> </g> <g id="shredder"> </g> <g id="spinner--loading--dots-" serif:id="spinner [loading, dots]"> </g> <g id="react"> </g> <g id="check-selected"> </g> <g id="turn-off"> </g> <g id="code-block"> </g> <g id="user" transform="matrix(1.03318,0,0,1.03318,-20.8457,199.979)"> <g transform="matrix(0.909091,0,0,0.909091,1182.28,-18.6364)"> <path d="M50,46.5C42.8,46.5 37,40.7 37,33.5C37,26.3 42.8,20.5 50,20.5C57.2,20.5 63,26.3 63,33.5C63,40.7 57.2,46.5 50,46.5ZM50,24.5C45,24.5 41,28.5 41,33.5C41,38.5 45,42.5 50,42.5C55,42.5 59,38.5 59,33.5C59,28.5 55,24.5 50,24.5Z" style="fill-rule:nonzero;"></path> </g> <g transform="matrix(1,0,0,1,1177.7,-20.5)"> <path d="M34.036,58.5L34.036,67L30.4,67L30.4,58.5C30.4,51.318 39.218,45.773 50.4,45.773C61.582,45.773 70.4,51.318 70.4,58.5L70.4,67L66.764,67L66.764,58.5C66.764,53.591 59.309,49.409 50.4,49.409C41.491,49.409 34.036,53.591 34.036,58.5Z" style="fill-rule:nonzero;"></path> </g> </g> <g id="coffee-bean"> </g> <g transform="matrix(0.638317,0.368532,-0.368532,0.638317,785.021,-208.975)"> <g id="coffee-beans"> <g id="coffee-bean1" serif:id="coffee-bean"> </g> </g> </g> <g id="coffee-bean-filled"> </g> <g transform="matrix(0.638317,0.368532,-0.368532,0.638317,913.062,-208.975)"> <g id="coffee-beans-filled"> <g id="coffee-bean2" serif:id="coffee-bean"> </g> </g> </g> <g id="clipboard"> </g> <g transform="matrix(1,0,0,1,128.011,1.35415)"> <g id="clipboard-paste"> </g> </g> <g id="clipboard-copy"> </g> <g id="Layer1"> </g> </g> </g> </g></svg>
-                </ng-template>
-                <div class="flex items-center">
-                  <span class="font-bold text-base text-gray-700">{{ user.username }}</span>
-                  <svg class="w-5 mx-0.5 text-orange-500 menu-icon" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                </div>
-            </button>
+        <div class="fixed bg-gray-400 bg-opacity-90 backdrop-blur right-0 top-20 flex flex-col items-center pt-10 w-full h-screen">
+          <div class="flex ajustar items-center w-full gap-4 sm:gap-6">
+            <a routerLink="products" class="menu-link rounded-full px-4 py-2 transition-all bg-gray-200 hover:bg-white hover:text-gray-800 text-center">Productos</a>
+            <a routerLink="games" class="menu-link rounded-full px-4 py-2 transition-all bg-gray-200 hover:bg-white hover:text-gray-800 text-center">Juegos</a>
+            <a href="https://discord.gg/4CjeaVBMzZ" class="menu-link rounded-full px-4 py-2 transition-all bg-gray-200 hover:bg-white hover:text-gray-800 text-center">Discord</a>
+            <a routerLink="aboutUs" class="menu-link rounded-full px-4 py-2 transition-all bg-gray-200 hover:bg-white hover:text-gray-800 text-center">About Us</a>
+            <a routerLink="shopping" class="menu-link rounded-full px-4 py-2 transition-all bg-gray-200 hover:bg-white hover:text-gray-800 flex justify-center items-center "><mat-icon>shopping_cart</mat-icon></a>
           </div>
 
-          <!-- Menu Dropdown -->
-          <div id="menu-dropdown" class="relative" *ngIf="menuVisible">
-            <div class="absolute right-0 z-50 mt-2 py-2 w-48 bg-white rounded-md shadow-lg">
-              <a class="block px-4 py-2 text-gray-800 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-gray-900 hover:font-medium" routerLink="auth/profile" routerLinkActive="active" role="button">Perfil</a>
-              <a class="block px-4 py-2 text-gray-800 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-gray-900 hover:font-medium" routerLink="chat" routerLinkActive="active" role="button">Chats</a>
-              <a class="block px-4 py-2 text-gray-800 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-gray-900 hover:font-medium" role="button">Modo oscuro/claro</a>
-              <div class="h-px w-11/12 mx-auto my-2 bg-gray-200"></div>
-              <a class="block px-4 py-2 font-medium text-orange-600 rounded-md transition-all hover:px-2 hover:mx-3 hover:bg-gray-100 hover:text-orange-700" (click)="logout()" routerLinkActive="active" role="button">Logout</a>
+          <div *ngIf="(user$ | async) as user" class="flex flex-col justify-center w-full">
+
+            <div class="flex justify-center items-center gap-4 sm:gap-6 my-10 mx-10 sm:mx-32 py-4 sm:py-8 sm:px-5 border-y-2">
+              <div class="flex items-center gap-2 rounded-full px-4 py-2 bg-gray-100">
+                <img *ngIf="user.image; else default" src="{{ hostname + user.image }}" class="w-9 rounded-full text-gray-700">
+                <ng-template #default>
+                  <svg class="w-9" fill="#f3f4f6" viewBox="-8.96 -8.96 81.92 81.92" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;" stroke="#f3f4f6" stroke-width="0.00064"><g id="SVGRepo_bgCarrier" stroke-width="0"><path transform="translate(-8.96, -8.96), scale(5.12)" fill="#ea580c" d="M9.166.33a2.25 2.25 0 00-2.332 0l-5.25 3.182A2.25 2.25 0 00.5 5.436v5.128a2.25 2.25 0 001.084 1.924l5.25 3.182a2.25 2.25 0 002.332 0l5.25-3.182a2.25 2.25 0 001.084-1.924V5.436a2.25 2.25 0 00-1.084-1.924L9.166.33z" strokewidth="0"></path></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g transform="matrix(1,0,0,1,-1216,-192)"> <rect id="Icons" x="0" y="0" width="1280" height="800" style="fill:none;"></rect> <g id="Icons1" serif:id="Icons"> <g id="Strike"> </g> <g id="H1"> </g> <g id="H2"> </g> <g id="H3"> </g> <g id="list-ul"> </g> <g id="hamburger-1"> </g> <g id="hamburger-2"> </g> <g id="list-ol"> </g> <g id="list-task"> </g> <g id="trash"> </g> <g id="vertical-menu"> </g> <g id="horizontal-menu"> </g> <g id="sidebar-2"> </g> <g id="Pen"> </g> <g id="Pen1" serif:id="Pen"> </g> <g id="clock"> </g> <g id="external-link"> </g> <g id="hr"> </g> <g id="info"> </g> <g id="warning"> </g> <g id="plus-circle"> </g> <g id="minus-circle"> </g> <g id="vue"> </g> <g id="cog"> </g> <g id="logo"> </g> <g id="radio-check"> </g> <g id="eye-slash"> </g> <g id="eye"> </g> <g id="toggle-off"> </g> <g id="shredder"> </g> <g id="spinner--loading--dots-" serif:id="spinner [loading, dots]"> </g> <g id="react"> </g> <g id="check-selected"> </g> <g id="turn-off"> </g> <g id="code-block"> </g> <g id="user" transform="matrix(1.03318,0,0,1.03318,-20.8457,199.979)"> <g transform="matrix(0.909091,0,0,0.909091,1182.28,-18.6364)"> <path d="M50,46.5C42.8,46.5 37,40.7 37,33.5C37,26.3 42.8,20.5 50,20.5C57.2,20.5 63,26.3 63,33.5C63,40.7 57.2,46.5 50,46.5ZM50,24.5C45,24.5 41,28.5 41,33.5C41,38.5 45,42.5 50,42.5C55,42.5 59,38.5 59,33.5C59,28.5 55,24.5 50,24.5Z" style="fill-rule:nonzero;"></path> </g> <g transform="matrix(1,0,0,1,1177.7,-20.5)"> <path d="M34.036,58.5L34.036,67L30.4,67L30.4,58.5C30.4,51.318 39.218,45.773 50.4,45.773C61.582,45.773 70.4,51.318 70.4,58.5L70.4,67L66.764,67L66.764,58.5C66.764,53.591 59.309,49.409 50.4,49.409C41.491,49.409 34.036,53.591 34.036,58.5Z" style="fill-rule:nonzero;"></path> </g> </g> <g id="coffee-bean"> </g> <g transform="matrix(0.638317,0.368532,-0.368532,0.638317,785.021,-208.975)"> <g id="coffee-beans"> <g id="coffee-bean1" serif:id="coffee-bean"> </g> </g> </g> <g id="coffee-bean-filled"> </g> <g transform="matrix(0.638317,0.368532,-0.368532,0.638317,913.062,-208.975)"> <g id="coffee-beans-filled"> <g id="coffee-bean2" serif:id="coffee-bean"> </g> </g> </g> <g id="clipboard"> </g> <g transform="matrix(1,0,0,1,128.011,1.35415)"> <g id="clipboard-paste"> </g> </g> <g id="clipboard-copy"> </g> <g id="Layer1"> </g> </g> </g> </g></svg>
+                </ng-template>
+                <span class="font-bold text-base text-gray-700">{{ user.username }}</span>
+              </div>
+              <a class="menu-link flex items-center rounded-full px-4 py-2 transition-all bg-gray-100 hover:bg-white hover:text-gray-800 text-center" routerLink="products/create">
+                <svg class="w-4 h-4 mr-1" fill="#ea580c" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" id="memory-plus-circle"><g id="SVGRepo_bgCarrier" stroke-width="0"/><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/><g id="SVGRepo_iconCarrier"><path d="M21 7V15H20V17H19V18H18V19H17V20H15V21H7V20H5V19H4V18H3V17H2V15H1V7H2V5H3V4H4V3H5V2H7V1H15V2H17V3H18V4H19V5H20V7H21M17 6V5H16V4H14V3H8V4H6V5H5V6H4V8H3V14H4V16H5V17H6V18H8V19H14V18H16V17H17V16H18V14H19V8H18V6H17M10 6H12V10H16V12H12V16H10V12H6V10H10V6Z"/></g></svg>
+                Crear Producto
+              </a>
             </div>
+
+            <div class="flex flex-col items-center w-full gap-4 sm:gap-6">
+              <a class="menu-link rounded-full px-4 py-2 transition-all bg-gray-100 hover:bg-white hover:text-gray-800 text-center" routerLink="auth/profile" routerLinkActive="active" role="button">Perfil</a>
+              <a class="menu-link rounded-full px-4 py-2 transition-all bg-gray-100 hover:bg-white hover:text-gray-800 text-center" routerLink="my-products" routerLinkActive="active" role="button">Mis productos</a>
+              <a class="menu-link rounded-full px-4 py-2 transition-all bg-gray-100 hover:bg-white hover:text-gray-800 text-center" routerLink="chat" routerLinkActive="active" role="button">Mensajes</a>
+              <a class="menu-link rounded-full px-4 py-2 transition-all bg-gray-100 hover:bg-white hover:text-gray-800 text-center" role="button">Modo oscuro/claro</a>
+              <a class="menu-link rounded-full px-4 py-2 transition-all bg-orange-600 hover:bg-orange-700 text-gray-800 text-center" (click)="logout()" routerLinkActive="active" role="button">Logout</a>
+            </div>
+            
+          </div>
+
+          <div *ngIf="!(user$ | async)" class="mt-10 pt-8 px-5 border-t-2 flex gap-2">
+            <a class="menu-link rounded-full px-4 py-2 transition-all bg-gray-100 hover:bg-white hover:text-gray-800 text-center" routerLink="./auth/login" role="button">Iniciar sesión</a>
+            <a class="menu-link rounded-full px-4 py-2 transition-all bg-gray-100 hover:bg-white hover:text-gray-800 text-center" routerLink="./auth/register" role="button">Registrarse</a>
           </div>
 
         </div>
-        <!-- Sin Autenticar -->
-        <ng-template #Auth>
-          <div class="text-sm">
-            <div class="flex items-center  fixed right-0 ">
-              <a class="mr-6 text-orange-600 hover:text-orange-700 " routerLink="./auth/login" routerLinkActive="active" role="button">Iniciar sesión</a>
-              <a class="text-orange-600 hover:text-orange-700" routerLink="./auth/register" routerLinkActive="active" role="button">Registrarse</a>
-            </div>
-          </div>
-        </ng-template>
       </div>
+      
     </div>
-  </nav>
 
+  </div>
+</nav>

@@ -16,9 +16,12 @@ export class GamesService {
   arca = `?key=2d592714bd91467cad84f2655700199e&dates=2019-09-01,2019-09-30&platforms=18,1,7&page_size=${this.NUM_GAMES}`;
   api = `?key=2d592714bd91467cad84f2655700199e&page_size=${this.NUM_GAMES}`;
   prueba = `?key=2d592714bd91467cad84f2655700199e&page=4666&page_size=5`;
-  prueba3 = `https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199e`;
+  prueba3 = `https://api.rawg.io/api/games?key=2d592714bd91467cad84f655700199e`;
   urlSearch = "https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199e&search={term}&page_size=5";
   prueba2 = "https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199e";
+
+
+
   public total: number = 0;
 
   
@@ -42,6 +45,7 @@ export class GamesService {
         map((response) => response.results )
       );
     }
+    
     getOneTag(): Observable<Result[]> {
       const url = `${this.prueba2}&page_size=1`;
       return this.http.get<GamesResponse>(url).pipe(
@@ -72,7 +76,6 @@ export class GamesService {
     getGames(id: number): Observable<Result> {
       const url = `${this.url}/${id}${this.api}`;
       return this.http.get<Result>(url);
-
     }
 
 
@@ -81,8 +84,8 @@ export class GamesService {
       return this.http.get<GamesResponse>(urlPag).pipe(
         map((response) => response.results )
       );
-
     }
+
     getGamesFilter(tags: string): Observable<Result[]> {
       const url = `${this.prueba2}&tags=${tags}&page_size=40`;
       return this.http.get<GamesResponse>(url)
@@ -90,8 +93,21 @@ export class GamesService {
         map((response) => response.results )
       );
     }
+  
+    getJuegoPorId(id: string) {
+      return this.http.get(`${this.url}/${id}${this.api}`);
+    }
 
-    myList:Result[]=[];
+    getPlatforms(): Observable<any> {
+      return this.http.get<any>('https://api.rawg.io/api/platforms?key=2d592714bd91467cad84f2655700199e');
+    }
+    
+    getGamesByPlatform(platformId: string): Observable<any> {
+      return this.http.get<any>(`https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199eplatforms=${platformId}`);
+    }
+    
+    private myList:Result[]=[];
+
     private myCart = new BehaviorSubject<Result[]>([]);
     myCart$ = this.myCart.asObservable();
     private cartKey = 'cart';

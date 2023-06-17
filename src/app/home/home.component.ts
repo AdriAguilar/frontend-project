@@ -7,6 +7,7 @@ import { GamesService } from '../games/services/games.service';
 import { Result } from '../games/interfaces/Games.interface';
 import { Observable } from 'rxjs';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -16,6 +17,7 @@ export class HomeComponent {
   daily : number;
   games$: Observable<Result[]>;
   game$: Observable<Result[]>;
+  temp: Date = new Date();
   
   constructor(private gamesService: GamesService) { }
 
@@ -36,4 +38,7 @@ export class HomeComponent {
     this.daily = Math.floor(Math.random() * 5000) + 1;
 
   }
+
+
+
 } 
