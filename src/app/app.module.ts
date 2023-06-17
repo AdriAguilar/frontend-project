@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 
 import { ShoppingComponent } from './games/pages/shopping/shopping.component';
 import { MatIconModule } from '@angular/material/icon';
+import { UsersComponent } from './users/users.component';
 
 
 
@@ -21,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
     AppComponent,
     HomeComponent,
     ShoppingComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,

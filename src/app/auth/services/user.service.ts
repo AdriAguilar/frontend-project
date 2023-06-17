@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { User } from 'src/app/interfaces/Response.interface';
 import { environment } from 'src/environments/environment';
+import { map, Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +22,24 @@ export class UserService {
         Authorization: `Bearer ${this.as.getToken()}`
       }
     });
+  }
+
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseUrl}/users`, {
+      headers: {
+        Authorization: `Bearer ${this.as.getToken()}`
+      }
+    });
+  }
+
+  getAllUsersUsernames(): Observable<string[]> {
+    return this.http.get<User[]>(`${this.baseUrl}/users`, {
+      headers: {
+        Authorization: `Bearer ${this.as.getToken()}`
+      }
+    }).pipe(
+      map( (users: User[]) => users.map( user => user.username )),
+      catchError( () => of([]) )
+    );
   }
 }

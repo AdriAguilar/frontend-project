@@ -74,16 +74,20 @@ export class ChatService {
     this.userListSubject.next( userList );
   }
 
-  addUser( user: User ): void {
+  addUser(user: User): void {
+    const userList = this.userListSubject.value.slice();
+  
+    const existingUser = userList.find(userData => userData.id === user.id);
+    if (existingUser) return;
+  
     const userData: UserStorageData = {
       id: user.id,
       username: user.username
-    }
-    
-    const userList = this.userListSubject.value.slice();
-    userList.push( userData );
-    this.userListSubject.next( userList );
-    this.saveUserList( userList );
+    };
+    userList.push(userData);
+  
+    this.userListSubject.next(userList);
+    this.saveUserList(userList);
   }
 
   saveUserList( userList: User[] ): void {

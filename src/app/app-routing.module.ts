@@ -10,6 +10,7 @@ import { ShoppingComponent } from './games/pages/shopping/shopping.component';
 import { MyProductsComponent } from './products/pages/my-products/my-products.component';
 import { ProductDetailsComponent } from './products/pages/product-details/product-details.component';
 import { ProductFormComponent } from './products/components/product-form/product-form.component';
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'my-products/:id/edit',
     component: ProductFormComponent
+  },
+  {
+    path: 'user/:username',
+    component: UsersComponent
   },
   {
     path: '',
