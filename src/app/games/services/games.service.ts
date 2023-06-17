@@ -116,7 +116,7 @@ export class GamesService {
       return this.http.get<any>(`https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199eplatforms=${platformId}`);
     }
     
-    private myList:Result[]=[];
+    myList:Result[]=[];
 
     private myCart = new BehaviorSubject<Result[]>([]);
     myCart$ = this.myCart.asObservable();
