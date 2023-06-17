@@ -1,7 +1,10 @@
 <div class="flex flex-wrap">
   <article class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-4" *ngFor="let game of myCart$ | async">
+
     <div class="bg-white shadow rounded-lg overflow-hidden">
-      <img src="{{ game.background_image }}" alt="" class="w-full h-44">
+      <div routerLink="{{game.id}}">
+        <img src="{{ game.background_image }}" alt="" class="w-full h-44">
+      </div>
       <div class="p-4">
         <h3 class="text-xl font-semibold mb-2">{{ game.name }}</h3>
         <p class="mb-2">{{ game.rating }}/{{ game.rating_top }} <img src="assets/ratings/icons8-pixel-star-48.png" alt="" class="inline-block w-4 h-4"></p>

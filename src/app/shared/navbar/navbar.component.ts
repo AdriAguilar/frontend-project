@@ -1,27 +1,40 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map, filter, shareReplay } from 'rxjs';
 
 import { User } from 'src/app/interfaces/Response.interface';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { GamesService } from '../../games/services/games.service';
+
+import { Result } from '../../games/interfaces/Games.interface';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   @ViewChild('menuButton') menuButton: ElementRef;
   menuVisible: boolean = false;
   clickListenerAdded: boolean = false;
-  
+
   user$: Observable<User>;
 
+  myCart$ = this.gamesService.myCart$
+  gameList: Result[];
+  gameCount: number;
+  totalGameCount: number;
+
   constructor( private router: Router,
-               private as: AuthService ) { }
+               private as: AuthService,
+               private gamesService: GamesService) { }
 
   ngOnInit(): void {
     this.user$ = this.as.user$;
+
+    this.gameList = this.gamesService.myList;
+    this.gameCount = this.gamesService.gameCount;
+    this.totalGameCount = this.gamesService.getTotalGameCount();
   }
 
   ngOnDestroy() {
@@ -34,7 +47,7 @@ export class NavbarComponent {
     });
   }
 
-  
+
   // Dropdown Menu
   toggleMenu(): void {
     this.menuVisible = !this.menuVisible;
@@ -61,5 +74,17 @@ export class NavbarComponent {
         document.querySelector('.menu-icon').classList.remove('open');
       }
     }
+  }
+
+  addGame(game: Result): void {
+    this.gamesService.addGame(game);
+  }
+
+  deleteGames(id: number): void {
+    this.gamesService.deleteGames(id);
+  }
+
+  transaction(operation: string, id: number): void {
+    this.gamesService.transaction(operation, id);
   }
 }

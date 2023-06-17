@@ -6,7 +6,12 @@
         <a routerLink="games" class="ml-6">Juegos</a>
         <a href="https://discord.gg/4CjeaVBMzZ" class="ml-6">Discord</a>
         <a routerLink="aboutUs" class="ml-6">About Us</a>
-        <a routerLink="shopping" class="ml-6"><mat-icon>shopping_cart</mat-icon></a>
+        <a routerLink="shopping" class="ml-6">
+          <div class="relative inline-block">
+            <i class="text-gray-800 fas fa-gamepad mr-2"><mat-icon>shopping_cart</mat-icon></i>
+            <span class="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 bg-red-400 text-black text-xs font-bold rounded-full game-count">{{ totalGameCount }}</span>
+          </div>
+        </a>
       </div>
 
       <div class="text-gray-700">
