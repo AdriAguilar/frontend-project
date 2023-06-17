@@ -7,6 +7,8 @@ import { HomeComponent } from './home/home.component';
 import { ChatsComponent } from './chats/pages/chats/chats.component';
 import { AboutUsComponent } from './games/pages/about-us/about-us.component';
 import { ShoppingComponent } from './games/pages/shopping/shopping.component';
+import { ContactoComponent } from './games/pages/contacto/contacto.component';
+
 
 const routes: Routes = [
   {
@@ -22,6 +24,7 @@ const routes: Routes = [
     path: 'product',
     loadChildren: () => import('./products/products.module').then( m => m.ProductsModule ),
   },
+  
   {
     path: '',
     component: HomeComponent
@@ -29,6 +32,10 @@ const routes: Routes = [
   {
     path: 'games',
     loadChildren: () => import('./games/games.module').then( m => m.GamesModule ),
+  },
+  {
+    path: 'contacto',
+    component: ContactoComponent 
   },
   {
     path: 'aboutUs',

@@ -12,6 +12,8 @@ import { HomeComponent } from './home/home.component';
 import { ShoppingComponent } from './games/pages/shopping/shopping.component';
 import { MatIconModule } from '@angular/material/icon';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 
 
@@ -21,6 +23,8 @@ import { MatIconModule } from '@angular/material/icon';
     AppComponent,
     HomeComponent,
     ShoppingComponent,
+    
+    
   ],
   imports: [
     BrowserModule,
@@ -28,8 +32,10 @@ import { MatIconModule } from '@angular/material/icon';
     AppRoutingModule,
     FormsModule,
     SharedModule,
-    MatIconModule
+    MatIconModule,
+    ReactiveFormsModule
   ],
+  
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,14 +1,19 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, map, filter, shareReplay } from 'rxjs';
+import { Observable, map, filter, shareReplay, take } from 'rxjs';
 
 import { User } from 'src/app/interfaces/Response.interface';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
+  
+  template: `
+    <button (click)="toggleDarkMode()">Toggle Dark Mode</button>
+  `
 })
 export class NavbarComponent {
   @ViewChild('menuButton') menuButton: ElementRef;
@@ -63,9 +68,13 @@ export class NavbarComponent {
       }
     }
   }
+
+
+  // DarkMode
+
+
+
 }
-
-
 
 
 

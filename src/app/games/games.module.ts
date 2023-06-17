@@ -11,6 +11,8 @@ import { SearcherComponent } from './searcher/searcher.component';
 import { GamesDetailComponent } from './pages/games-detail/games-detail.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { SharedModule } from "../shared/shared.module";
+import { RouterModule } from '@angular/router';
+import { ContactoComponent } from './pages/contacto/contacto.component';
 
 @NgModule({
     declarations: [
@@ -18,6 +20,7 @@ import { SharedModule } from "../shared/shared.module";
         GamesDetailComponent,
         SearcherComponent,
         AboutUsComponent,
+        ContactoComponent
     ],
     imports: [
         CommonModule,
@@ -25,7 +28,8 @@ import { SharedModule } from "../shared/shared.module";
         MatPaginatorModule,
         ReactiveFormsModule,
         MatIconModule,
-        SharedModule
+        SharedModule,
+        RouterModule
     ]
 })
 export class GamesModule { }

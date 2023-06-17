@@ -1,36 +1,38 @@
 <app-searcher></app-searcher>
+<div class="flex justify-center items-center space-x-4">
 
-<div class="mt-6 mb-6">
-<form (submit)="submit()" [formGroup]="myForm" class="flex items-center justify-center">
-    <select
-        formControlName="tags"
-        class="appearance-none bg-gray-300 border-none hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-        <option [defaultSelected]="true">Filtro</option>
-        <option value="open-world">Mundo Abierto</option>
-        <option value="steam-achievements">Archivos de Steam</option>
-        <option value="rpg">Rpg</option>
-        <option value="singleplayer">Un jugador</option>
-        <option value="multiplayer">MultiJugador</option>
-        <option value="co-op">Cooperativo</option>
-        <option value="sandbox">Sandbox</option>
-        <option value="war">War</option>
-        <option value="short">Short</option>
-        <option value="horror">Horror</option>
-        <option value="survival">Survival</option>
-        <option value="female-protagonist">Protagonista Femenino</option>
-        <option value="e-sports">E-sports</option>
-        <option value="third-person-shooter">Shoter 3ºPersona</option>
-        <option value="first-person-shooter">Shoter 1ºPersona</option>
-        <option value="vr-mod">Vr Mod</option>
-    </select>
-    
-    <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-black font-bold py-2 px-4 rounded-full transition-colors duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-md ml-4">Aplicar Filtros</button>
-</form>
-</div>
-
-
-
-<app-searcher></app-searcher>
+  <div class="mr-2">
+    <app-searcher></app-searcher>
+  </div>
+    <div class="mt-10 mb-6">
+    <form (submit)="submit()" [formGroup]="myForm" class="flex items-center justify-center">
+      <select
+          formControlName="tags"
+          class="appearance-none bg-gray-300 border-none hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+          <option [defaultSelected]="true">Filtro</option>
+          <option value="open-world">Mundo Abierto</option>
+          <option value="steam-achievements">Archivos de Steam</option>
+          <option value="rpg">Rpg</option>
+          <option value="singleplayer">Un jugador</option>
+          <option value="multiplayer">MultiJugador</option>
+          <option value="co-op">Cooperativo</option>
+          <option value="sandbox">Sandbox</option>
+          <option value="war">War</option>
+          <option value="short">Short</option>
+          <option value="horror">Horror</option>
+          <option value="survival">Survival</option>
+          <option value="female-protagonist">Protagonista Femenino</option>
+          <option value="e-sports">E-sports</option>
+          <option value="third-person-shooter">Shoter 3ºPersona</option>
+          <option value="first-person-shooter">Shoter 1ºPersona</option>
+          <option value="vr-mod">Vr Mod</option>
+      </select>
+      
+      <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-black font-bold py-2 px-4 rounded-full transition-colors duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-md ml-4">Aplicar Filtros</button>
+    </form>
+    </div>
+  
+  </div>
 <div class="px-6 py-4 ">
     <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         <li *ngFor="let game of (games$ | async)"   class="shadow-md rounded-md overflow-hidden transition-all hover:bg-gray-200 hover:scale-95 hover:border-gray-500 hover:border">

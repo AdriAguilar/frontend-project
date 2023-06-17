@@ -21,7 +21,7 @@ export class GamesListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   
   constructor( private gamesService: GamesService,
-               private fb: FormBuilder ) { }
+              private fb: FormBuilder ) { }
 
   ngOnInit(): void {
     this.games$ = this.gamesService.getAllGames();

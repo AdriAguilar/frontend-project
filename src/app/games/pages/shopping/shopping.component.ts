@@ -9,6 +9,7 @@ import { GamesService } from '../../services/games.service';
 })
 export class ShoppingComponent implements OnInit {
   myCart$ = this.gamesService.myCart$
+  
 
   constructor(private gamesService:GamesService){}
   ngOnInit(): void {
@@ -30,6 +31,10 @@ export class ShoppingComponent implements OnInit {
         this.deleteGames(id);
       }
     }
+  }
+
+  reloadPage() {
+    window.location.reload();
   }
 
 }

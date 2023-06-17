@@ -8,6 +8,7 @@ import { GamesResponse, Result } from '../interfaces/Games.interface';
   providedIn: 'root'
 })
 export class GamesService {
+
   
   NUM_GAMES = 40;
   pageSize = 40;
@@ -19,8 +20,8 @@ export class GamesService {
   prueba3 = `https://api.rawg.io/api/games?key=2d592714bd91467cad84f655700199e`;
   urlSearch = "https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199e&search={term}&page_size=5";
   prueba2 = "https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199e";
-
-
+  urlrelac = "https://api.rawg.io/api/games?key=2d592714bd91467cad84f2655700199e&search={term}&page_size=3";
+  prueba4 = "/game-series?key=2d592714bd91467cad84f2655700199e&search={term}&page_size=3"
 
   public total: number = 0;
 
@@ -38,6 +39,15 @@ export class GamesService {
       return this.http.get<GamesResponse>(this.url + this.api).pipe(
         map((response) => response.results )
       );
+    }
+    
+    getGameSeries(id: number): Observable<Result[]> {
+      const url = `${this.url}/${id}/game-series?key=2d592714bd91467cad84f2655700199e&page_size=3`;
+  
+      return this.http.get(url)
+        .pipe(
+          map((response: any) => response.results as Result[])
+        );
     }
     
     getOneTag(): Observable<Result[]> {

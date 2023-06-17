@@ -5,3 +5,19 @@
 .menu-icon.open {
     transform: rotate(180deg);
 }
+
+
+$logo-size: 90px;
+
+
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-container img {
+    height: auto;
+    width: $logo-size;
+    margin-right: auto;
+}
