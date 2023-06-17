@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { of, switchMap } from 'rxjs';
+import { Component, HostListener } from '@angular/core';
+import { concatMap, of } from 'rxjs';
 
 import { UsersService } from '../../data/users.service';
 import { User } from 'src/app/interfaces/Response.interface';
@@ -12,6 +12,9 @@ import { ChatService } from '../../services/chat.service';
 })
 export class ChatsComponent {
   selectedUser: User | null = null;
+  userListVisible: boolean = true;
+  btnContent: string = '>';
+  applyClass: boolean = false;
 
   constructor( private us: UsersService,
                private cs: ChatService ) { }
@@ -19,7 +22,7 @@ export class ChatsComponent {
   openChat( user: User ): void {
     this.selectedUser = user;    
     this.us.createChat(user.id).pipe(
-      switchMap( chat => {
+      concatMap( chat => {
         const chatId = chat.id;
         this.cs.setChatId( chatId );
         
@@ -31,8 +34,20 @@ export class ChatsComponent {
 
         return of(chatId);
       })
-    ).subscribe( chatId => {
-      console.log('Suscribe:', chatId);
+    ).subscribe( () => {
+      this.userListVisible = !this.userListVisible;
+      this.btnContent = this.userListVisible ? '>' : '<';
     });
   }
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize(event: any) {
+    this.applyClass = window.innerWidth < 768;
+  }
+
+  toggleUserList() {
+    this.userListVisible = !this.userListVisible;
+    this.btnContent = this.userListVisible ? '>' : '<';
+  }
+  
 }

@@ -36,14 +36,14 @@ export class ProductCreateComponent implements OnInit {
 
   private createForm(): FormGroup {
     return this.fb.group({
-      name: [ , [ Validators.required, Validators.min(2) ]],
-      description: [ , [ Validators.required, Validators.max(512) ]],
+      name: [ , [ Validators.required, Validators.minLength(3), Validators.maxLength(32) ]],
+      description: [ , [ Validators.required, Validators.minLength(256), Validators.maxLength(1024) ]],
       price: [ , Validators.required ],
       quantity: [ , Validators.required ],
       category_id: [ , Validators.required ],
       user_id: [],
       images: [],
-    })
+    });
   }
 
   notValid( field: string ) {
@@ -84,7 +84,7 @@ submit() {
 
   this.ps.createProduct(formData).subscribe(
     () => {
-      this.router.navigate(['/product']);
+      this.router.navigate(['/products']);
     }
   );
 }

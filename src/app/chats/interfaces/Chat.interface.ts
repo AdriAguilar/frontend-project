@@ -18,14 +18,19 @@ export interface Chat {
 
 export interface User {
     id:                number;
-    role_id:           number;
-    name:              string;
+    role_id?:           number;
+    name?:              string;
     username:          string;
-    email:             string;
-    email_verified_at: null;
-    image:             null;
-    created_at:        Date;
-    updated_at:        Date;
+    email?:             string;
+    email_verified_at?: Date;
+    image?:             string;
+    created_at?:        Date;
+    updated_at?:        Date;
+}
+
+export interface UserStorageData {
+    id:       number;
+    username: string;
 }
 
 export interface Message {

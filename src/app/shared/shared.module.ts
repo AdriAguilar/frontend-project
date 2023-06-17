@@ -10,6 +10,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoaderComponent } from './loader/loader.component';
 import { FooterComponent } from './footer/footer.component';
+import { FilterSearcherComponent } from './filter-searcher/filter-searcher.component';
 
 
 @NgModule({
@@ -18,12 +19,14 @@ import { FooterComponent } from './footer/footer.component';
     LoaderComponent,
     NavbarComponent,
     FooterComponent,
+    FilterSearcherComponent,
   ],
   exports: [
     ErrorPageComponent,
     LoaderComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    FilterSearcherComponent,
   ],
   imports: [
     CommonModule,

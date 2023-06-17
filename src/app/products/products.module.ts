@@ -9,13 +9,23 @@ import { ProductDetailsComponent } from './pages/product-details/product-details
 import { ProductCreateComponent } from './pages/product-create/product-create.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { SharedModule } from '../shared/shared.module';
+import { ShortDescriptionPipe } from './pipes/short-description.pipe';
+import { CapitalizePipe } from './pipes/capitalize.pipe';
+import { MyProductsComponent } from './pages/my-products/my-products.component';
+import { ProductFormComponent } from './components/product-form/product-form.component';
+import { PopupComponent } from './components/popup/popup.component';
 
 
 @NgModule({
   declarations: [
     ProductListComponent,
     ProductDetailsComponent,
-    ProductCreateComponent
+    ProductCreateComponent,
+    ShortDescriptionPipe,
+    CapitalizePipe,
+    MyProductsComponent,
+    ProductFormComponent,
+    PopupComponent,
   ],
   imports: [
     CommonModule,
@@ -23,6 +33,10 @@ import { SharedModule } from '../shared/shared.module';
     ReactiveFormsModule,
     NgxDropzoneModule,
     SharedModule
+  ],
+  exports: [
+    CapitalizePipe,
+    ShortDescriptionPipe
   ]
 })
 export class ProductsModule { }

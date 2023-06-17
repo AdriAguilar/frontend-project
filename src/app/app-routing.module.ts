@@ -4,11 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/guards/auth.guard';
 import { ErrorPageComponent } from './shared/error-page/error-page.component';
 import { HomeComponent } from './home/home.component';
-import { ChatsComponent } from './chats/pages/chats/chats.component';
 import { AboutUsComponent } from './games/pages/about-us/about-us.component';
 import { ShoppingComponent } from './games/pages/shopping/shopping.component';
 import { ContactoComponent } from './games/pages/contacto/contacto.component';
-
+import { MyProductsComponent } from './products/pages/my-products/my-products.component';
+import { ProductDetailsComponent } from './products/pages/product-details/product-details.component';
+import { ProductFormComponent } from './products/components/product-form/product-form.component';
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
   {
@@ -21,10 +23,26 @@ const routes: Routes = [
     canLoad: [ AuthGuard ],
   },
   {
-    path: 'product',
+    path: 'products',
     loadChildren: () => import('./products/products.module').then( m => m.ProductsModule ),
   },
   
+  {
+    path: 'my-products',
+    component: MyProductsComponent
+  },
+  {
+    path: 'my-products/:id',
+    component: ProductDetailsComponent
+  },
+  {
+    path: 'my-products/:id/edit',
+    component: ProductFormComponent
+  },
+  {
+    path: 'user/:username',
+    component: UsersComponent
+  },
   {
     path: '',
     component: HomeComponent
