@@ -11,6 +11,7 @@
 
         <div class="flex flex-col px-2">
             <h3>{{ product.name | titlecase }}</h3>
+            <span class="py-2 font-medium text-gray-700 text-lg">{{ product.price }}€</span>
             <p>{{ product.description }}</p>
             <div class="flex items-center justify-between my-5 py-4 border-y">
                 <a class="flex items-center" routerLink="../../user/{{ seller.username }}">
